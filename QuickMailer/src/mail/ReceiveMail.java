@@ -24,6 +24,7 @@ public class ReceiveMail {
 		receiveEmail(mailPop3Host, mailStoreType, mailUser, mailPassword);
 	}
 
+	 
 	public static void receiveEmail(String pop3Host, String storeType, String user, String password) {
 
 		try {
