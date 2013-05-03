@@ -1,5 +1,5 @@
 package mail;
-
+import javax.swing.SwingWorker;
 import javax.mail.MessagingException;
 
 public class MailCom {

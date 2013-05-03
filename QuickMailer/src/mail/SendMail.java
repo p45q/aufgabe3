@@ -38,7 +38,7 @@ public class SendMail{
         
         message.setText(mailobj.body);
         
-        //transport.sendMessage(message, addresses);
+        transport.sendMessage(message, addresses);
         
         transport.close();
         return "Message sent";
