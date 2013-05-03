@@ -32,7 +32,7 @@ public class QuickmailGui extends JFrame {
 	private JList<String> mailList;
 	public boolean debug = false;
 
-	public quickmailgui() {
+	public QuickmailGui() {
 		super("QuickMailer");
 		setContentPane(createContentPane());
 		addListeners();
@@ -82,7 +82,7 @@ public class QuickmailGui extends JFrame {
 		JPanel content = new JPanel(new BorderLayout(5,5));
 		JPanel content1 = new JPanel(new BorderLayout());
 		JPanel content2 = new JPanel(new BorderLayout());
-		mailTree = new JList<>(new DefaultListModel<String>());
+		mailTree = new JList<String>(new DefaultListModel<String>());
 		JScrollPane leftScroll = new JScrollPane(mailTree);
 		leftScroll.setPreferredSize(new Dimension(200, 200)); 
 		content1.add(leftScroll, BorderLayout.WEST);
@@ -126,7 +126,7 @@ public class QuickmailGui extends JFrame {
 
 
 
-		mailList = new JList<>(new DefaultListModel<String>());
+		mailList = new JList<String>(new DefaultListModel<String>());
 		JScrollPane rightScroll = new JScrollPane(mailList);
 		rightScroll.setPreferredSize(new Dimension(200, 200)); 
 		content.add(rightScroll, BorderLayout.CENTER);
