@@ -18,20 +18,20 @@ import com.sun.mail.pop3.POP3Store;
 
 public class ReceiveMail {
 
-	private MailAccount mailAccount;
+	private mail.MailAccount mailAccount;
 	private Session session = null;
 	private Store store = null;
 	private String username, password;
 	private Folder folder;
 	    
-	public ReceiveMail(MailAccount mailAccount)
+	public ReceiveMail(mail.MailAccount mailAccount)
 	{
 		this.mailAccount = mailAccount;
-		
+
 	     try {
 	    	 connect();
             openFolder("INBOX");
-             
+
             int totalMessages = getMessageCount();
             int newMessages = getNewMessageCount();
              
@@ -46,6 +46,7 @@ public class ReceiveMail {
         } catch(Exception e) {
             e.printStackTrace();
            // System.exit(-1);
+
         }
 	}
 	
