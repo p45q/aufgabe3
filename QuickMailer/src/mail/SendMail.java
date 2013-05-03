@@ -3,39 +3,44 @@ package mail;
 import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Message;
+import javax.mail.MessagingException;
+
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-public class SendMail
-{
-    public static void main(String[] args) throws Exception
+public class SendMail{
+	public SendMail()
+	{
+		
+	}
+	MailObj mailobj;
+    public String SendEMail(MailObj mailobj) throws MessagingException
     {
-        String host="smtp.gmail.com";
-        int port=587;
-        String user="quickmailerffhs@gmail.com";
-        String pass="x14l27x14l27";
-        
+    	this.mailobj = mailobj;
+    	MailAccount mailaccount = mailobj.getMailaccount();
+    	// TODO get from account
+    	
         Properties props=new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         
         Session session=Session.getInstance(props);
         Transport transport=session.getTransport("smtp");
-        transport.connect(host, port, user, pass);
+        transport.connect(mailaccount.getSmtpHost(), mailaccount.getSmtpPort(), mailaccount.getEmailadress(), mailaccount.getPassword());
         
-        Address[] addresses=InternetAddress.parse("p45q@p45q.net");
+        Address[] addresses=InternetAddress.parse(mailobj.to);
         
         Message message=new MimeMessage(session);
-        message.setFrom(new InternetAddress(user));
+        message.setFrom(new InternetAddress(mailaccount.getEmailadress()));
         message.setRecipients(Message.RecipientType.TO, addresses);
-        message.setSubject("TEST SUBJECT");
+        message.setSubject(mailobj.subject);
         
-        message.setText("text/plain BODY");
+        message.setText(mailobj.body);
         
-        transport.sendMessage(message, addresses);
-        System.out.println("SEND");
+        //transport.sendMessage(message, addresses);
         
         transport.close();
+        return "Message sent";
     }
 }
