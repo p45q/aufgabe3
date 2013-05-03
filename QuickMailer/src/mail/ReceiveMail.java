@@ -140,8 +140,7 @@ public class ReceiveMail {
         Message[] messages = folder.getMessages();
 		for (int i = 0; i < messages.length; i++) {
 			Message message = messages[i];
-		
-			
+
 			System.out.println("==============================");
 			System.out.println("Email #" + (i + 1));
 			System.out.println("Subject: " + message.getSubject());
