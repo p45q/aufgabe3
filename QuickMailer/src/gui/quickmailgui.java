@@ -11,20 +11,19 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.*;
 
 public class quickmailgui extends JFrame {
-	private JButton fileButton;
-	private JButton editButton;
-	private JButton helpButton;
 	private JButton settingsButton;
 	private JButton newmailButton;
 	private JButton readButton;
 	private JButton replyButton;
 	private JButton forewardButton;
 	private JButton replyallButton;
+	
 	Border blackline;
 	
 
@@ -34,6 +33,7 @@ public class quickmailgui extends JFrame {
 
 	public quickmailgui() {
 		super("QuickMailer");
+		
 		setContentPane(createContentPane());
 		addListeners();
 	}
@@ -43,33 +43,7 @@ public class quickmailgui extends JFrame {
 	}
 
 	private void addListeners() {
-		fileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Test");
-			}
-		});
 		
-		editButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Test");
-			}
-		});
-		
-		helpButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Test");
-			}
-		});
-		
-		settingsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Test");
-			}
-		});
 		
 		
 		
@@ -88,15 +62,6 @@ public class quickmailgui extends JFrame {
 		content1.add(leftScroll, BorderLayout.WEST);
 		
 		
-		JPanel contextPanel = new JPanel(new FlowLayout(0));
-		fileButton = new JButton("File");
-		contextPanel.add(fileButton);
-		editButton = new JButton("Edit");
-		contextPanel.add(editButton);
-		settingsButton = new JButton("Settings");
-		contextPanel.add(settingsButton);
-		helpButton = new JButton("Help");
-		contextPanel.add(helpButton);
 
 		
 		
@@ -133,10 +98,69 @@ public class quickmailgui extends JFrame {
 		content.add(actionPanel, BorderLayout.NORTH);
 		content.setBorder(black);
 
-		content1.add(contextPanel, BorderLayout.NORTH);
 		content1.add(content, BorderLayout.CENTER);
 		content2.add(content1,BorderLayout.CENTER);
+		
+		
+		
+		
+		// MENUBAR
+		// Creates a menubar for a JFrame
+        JMenuBar menuBar = new JMenuBar();
+        
+        // Add the menubar to the frame
+        setJMenuBar(menuBar);
+        
+        // Define and add two drop down menu to the menubar
+        JMenu fileMenu = new JMenu("File");
+        JMenu editMenu = new JMenu("Edit");
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        
+        // Create and add simple menu item to one of the drop down menu
+        JMenuItem newAction = new JMenuItem("New");
+        JMenuItem openAction = new JMenuItem("Open");
+        JMenuItem exitAction = new JMenuItem("Exit");
+        JMenuItem cutAction = new JMenuItem("Cut");
+        JMenuItem copyAction = new JMenuItem("Copy");
+        JMenuItem pasteAction = new JMenuItem("Paste");
+        
+        // Create and add CheckButton as a menu item to one of the drop down
+        // menu
+        JCheckBoxMenuItem checkAction = new JCheckBoxMenuItem("Check Action");
+        // Create and add Radio Buttons as simple menu items to one of the drop
+        // down menu
+        JRadioButtonMenuItem radioAction1 = new JRadioButtonMenuItem(
+                "Radio Button1");
+        JRadioButtonMenuItem radioAction2 = new JRadioButtonMenuItem(
+                "Radio Button2");
+        // Create a ButtonGroup and add both radio Button to it. Only one radio
+        // button in a ButtonGroup can be selected at a time.
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(radioAction1);
+        bg.add(radioAction2);
+        fileMenu.add(newAction);
+        fileMenu.add(openAction);
+        fileMenu.add(checkAction);
+        fileMenu.addSeparator();
+        fileMenu.add(exitAction);
+        editMenu.add(cutAction);
+        editMenu.add(copyAction);
+        editMenu.add(pasteAction);
+        editMenu.addSeparator();
+        editMenu.add(radioAction1);
+        editMenu.add(radioAction2);
+        // Add a listener to the New menu item. actionPerformed() method will
+        // invoked, if user triggred this menu item
+        newAction.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
 		return content2;
 	}	
+	
+	
+
 }
 
