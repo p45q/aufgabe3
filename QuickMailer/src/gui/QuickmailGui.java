@@ -23,9 +23,9 @@ public class QuickmailGui extends JFrame {
 	private JButton replyButton;
 	private JButton forewardButton;
 	private JButton replyallButton;
-	
+
 	Border blackline;
-	
+
 
 	private JList<String> mailTree;
 	private JList<String> mailList;
@@ -33,22 +33,22 @@ public class QuickmailGui extends JFrame {
 
 	public QuickmailGui() {
 		super("QuickMailer");
-		
+
 		setContentPane(createContentPane());
 		addListeners();
 	}
-	
+
 	private DefaultListModel<String> getModel(JList<String> list){
 		return ((DefaultListModel<String>) list.getModel());
 	}
 
 	private void addListeners() {
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 
 	}
 
@@ -60,11 +60,11 @@ public class QuickmailGui extends JFrame {
 		JScrollPane leftScroll = new JScrollPane(mailTree);
 		leftScroll.setPreferredSize(new Dimension(200, 200)); 
 		content1.add(leftScroll, BorderLayout.WEST);
-		
-		
 
-		
-		
+
+
+
+
 		JPanel actionPanel = new JPanel(new FlowLayout(0));
 		newmailButton = new JButton("Compose");
 		actionPanel.add(newmailButton);
@@ -76,21 +76,21 @@ public class QuickmailGui extends JFrame {
 		actionPanel.add(forewardButton);
 		replyallButton = new JButton("Replyall");
 		actionPanel.add(replyallButton);
-		
 
-		
-		
+
+
+
 		TitledBorder black;
 		blackline = BorderFactory.createLineBorder(Color.black);
 		black = BorderFactory.createTitledBorder(
                 blackline);
-		
-		
-		
 
 
 
-		
+
+
+
+
 		mailList = new JList<>(new DefaultListModel<String>());
 		JScrollPane rightScroll = new JScrollPane(mailList);
 		rightScroll.setPreferredSize(new Dimension(200, 200)); 
@@ -100,10 +100,10 @@ public class QuickmailGui extends JFrame {
 
 		content1.add(content, BorderLayout.CENTER);
 		content2.add(content1,BorderLayout.CENTER);
-		
-		
-		
-		
+
+
+
+
 		// MENUBAR
 		// Creates a menubar for a JFrame
         JMenuBar menuBar = new JMenuBar();
@@ -159,8 +159,7 @@ public class QuickmailGui extends JFrame {
         });
 		return content2;
 	}	
-	
-	
+
+
 
 }
-
