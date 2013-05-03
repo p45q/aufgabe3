@@ -40,7 +40,7 @@ public class ReceiveMail {
             System.out.println("-------------------------------");
              
             //gmail.printAllMessageEnvelopes();
-            printAllMessages();
+            getAllMessages();
             closeFolder();
 	             
         } catch(Exception e) {
@@ -105,20 +105,9 @@ public class ReceiveMail {
     public void disconnect() throws Exception {
         store.close();
     }
-    /*
-    public void printMessage(int messageNo) throws Exception {
-        System.out.println("Getting message number: " + messageNo);
-         
-        Message m = null;
-         
-        try {
-            m = folder.getMessage(messageNo);
-            dumpPart(m);
-        } catch (IndexOutOfBoundsException iex) {
-            System.out.println("Message number out of range");
-        }
-    }
-	     
+    
+    
+    /*   
     public void printAllMessageEnvelopes() throws Exception {
          
         // Attributes & Flags for all messages ..
@@ -138,7 +127,7 @@ public class ReceiveMail {
          
     }*/
 	     
-    public void printAllMessages() throws Exception {
+    public void getAllMessages() throws Exception {
       
         // Attributes & Flags for all messages ..
         Message[] msgs = folder.getMessages();
@@ -151,6 +140,8 @@ public class ReceiveMail {
         Message[] messages = folder.getMessages();
 		for (int i = 0; i < messages.length; i++) {
 			Message message = messages[i];
+		
+			
 			System.out.println("==============================");
 			System.out.println("Email #" + (i + 1));
 			System.out.println("Subject: " + message.getSubject());
