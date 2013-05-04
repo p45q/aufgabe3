@@ -3,7 +3,7 @@ package quickmailer;
 import gui.QuickmailGui;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
+
 
 public class Main {
 

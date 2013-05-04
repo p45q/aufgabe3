@@ -1,27 +1,26 @@
 package mail;
 
 
-import java.io.IOException;
+
 import java.util.Properties;
 
 import javax.mail.FetchProfile;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
+
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
 
 import com.sun.mail.pop3.POP3SSLStore;
-import com.sun.mail.pop3.POP3Store;
+
 
 public class ReceiveMail {
 
 	private mail.MailAccount mailAccount;
 	private Session session = null;
 	private Store store = null;
-	private String username, password;
 	private Folder folder;
 	    
 	public ReceiveMail(mail.MailAccount mailAccount)

@@ -1,14 +1,14 @@
 package mail;
-import javax.swing.SwingWorker;
+
 import javax.mail.MessagingException;
 
 public class MailCom {
-	MailObj mailobj;
+	Mail mailobj;
 	SendMail sendmailobj;
 	public MailCom(){
 		
 	}
-	public String sendEmail(MailObj mailobj)
+	public String sendEmail(Mail mailobj)
 	{
 		this.sendmailobj = new SendMail();
 		this.mailobj = mailobj;
