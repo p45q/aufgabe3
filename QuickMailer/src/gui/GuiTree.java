@@ -15,33 +15,59 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-public class GuiTree extends JPanel {
+public class GuiTree extends JTree {
   protected DefaultMutableTreeNode rootNode;
   protected DefaultTreeModel treeModel;
   protected JTree tree;
   private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
   public GuiTree() {
-    super(new GridLayout(1, 0));
-
-    rootNode = new DefaultMutableTreeNode("Root Node");
+	rootNode = new DefaultMutableTreeNode("Root Node");
     treeModel = new DefaultTreeModel(rootNode);
 
-    tree = new JTree(treeModel);
+    
+    
+    setModel(treeModel);
+    setShowsRootHandles(true);
+    
+    // Wurzel aufklappen
+    //  expandPath(rootNode);
+    
+    // und so ...
+ //   getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+    
+    
+    
+    
+   /* tree = new JTree(treeModel);
     tree.setEditable(true);
-    tree.getSelectionModel().setSelectionMode(
-        TreeSelectionModel.SINGLE_TREE_SELECTION);
+    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     tree.setShowsRootHandles(true);
 
     JScrollPane scrollPane = new JScrollPane(tree);
     add(scrollPane);
+    */
+    
+    
+   // populateTree();
+    
   }
 
-  /** Remove all nodes except the root node. */
-  public void clear() {
-    rootNode.removeAllChildren();
-    treeModel.reload();
+  
+
+  public void populateTree() {
+	
+    String p1Name = new String("Parent 1");
+    String p2Name = new String("Parent 2");
+
+    DefaultMutableTreeNode p1, p2;
+
+    p1 = addObject(null, p1Name);
+    p2 = addObject(null, p2Name);
   }
+
+  
+ 
 
   /** Remove the currently selected node. */
   public void removeCurrentNode() {
@@ -60,6 +86,9 @@ public class GuiTree extends JPanel {
     toolkit.beep();
   }
 
+  
+  
+  
   /** Add child to the currently selected node. */
   public DefaultMutableTreeNode addObject(Object child) {
     DefaultMutableTreeNode parentNode = null;
@@ -74,13 +103,26 @@ public class GuiTree extends JPanel {
     return addObject(parentNode, child, true);
   }
 
-  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-      Object child) {
+  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent, Object child) {
     return addObject(parent, child, false);
   }
 
-  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-      Object child, boolean shouldBeVisible) {
+  
+  
+  public DefaultMutableTreeNode addFolder(DefaultMutableTreeNode parent, Folder folder) {
+	    DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(folder.getLabel());
+
+	    // It is key to invoke this on the TreeModel, and NOT DefaultMutableTreeNode
+	    treeModel.insertNodeInto(childNode, parent, parent.getChildCount());
+
+	    tree.scrollPathToVisible(new TreePath(childNode.getPath()));
+	    
+	    return childNode;
+	  }
+  
+  
+  
+  public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent, Object child, boolean shouldBeVisible) {
     DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(child);
 
     if (parent == null) {
@@ -97,31 +139,4 @@ public class GuiTree extends JPanel {
     return childNode;
   }
 
-  class MyTreeModelListener implements TreeModelListener {
-    public void treeNodesChanged(TreeModelEvent e) {
-      DefaultMutableTreeNode node;
-      node = (DefaultMutableTreeNode) (e.getTreePath().getLastPathComponent());
-
-      /*
-       * If the event lists children, then the changed node is the child of the
-       * node we've already gotten. Otherwise, the changed node and the
-       * specified node are the same.
-       */
-
-      int index = e.getChildIndices()[0];
-      node = (DefaultMutableTreeNode) (node.getChildAt(index));
-
-      System.out.println("The user has finished editing the node.");
-      System.out.println("New value: " + node.getUserObject());
-    }
-
-    public void treeNodesInserted(TreeModelEvent e) {
-    }
-
-    public void treeNodesRemoved(TreeModelEvent e) {
-    }
-
-    public void treeStructureChanged(TreeModelEvent e) {
-    }
-  }
 }

@@ -17,8 +17,7 @@ public class Mail {
 
 	MailAccount mailaccount;
 	
-	public Mail(String messageId, String from, String to, String subject, String body, MailAccount mailaccount) {
-		this.messageId = messageId;
+	public Mail(String from, String to, String subject, String body, MailAccount mailaccount) {
 		this.from = from;
 		this.to = to;
 		this.subject = subject;
@@ -26,6 +25,10 @@ public class Mail {
 		this.mailaccount = mailaccount;
 	}
 	
+	public void setMessageId(String messageId)
+	{
+		this.messageId = messageId;
+	}
 	public String getMessageId() {
 		return messageId;
 	}

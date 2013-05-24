@@ -138,8 +138,10 @@ public class ReceiveMail {
 	                }
 	            }
 	            
-	            Mail tempMail = new Mail(messageId, message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
+	            Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
+	            tempMail.setMessageId(messageId);
 	            tempMail.setReceiveDate(message.getSentDate());
+
 	            mailList.add(tempMail);
 	 		 }     
 	 		 

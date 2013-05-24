@@ -79,10 +79,7 @@ public class FolderMailTree extends JPanel implements ActionListener {
 	    } else if (REMOVE_COMMAND.equals(command)) {
 	      // Remove button clicked
 	      treePanel.removeCurrentNode();
-	    } else if (CLEAR_COMMAND.equals(command)) {
-	      // Clear button clicked.
-	      treePanel.clear();
-	    }
+	    } 
 	  }
 
 	  /**

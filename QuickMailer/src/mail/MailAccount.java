@@ -1,15 +1,21 @@
 package mail;
 
+import java.util.ArrayList;
+
+import gui.Folder;
+
 public class MailAccount {
-	String emailadress;
-	String password;
-	String smtpHost;
+	private String emailadress;
+	private String password;
+	private String smtpHost;
 	private Integer smtpPort;
-	String pop3Host;
+	private String pop3Host;
 	private Integer pop3Port;
 	
 	private final Integer DEFAULTPOP3PORT = 123;
 	private final Integer DEFAULTSMTPPORT = 123;
+	
+	private ArrayList<Folder> folders;
 	
 	public MailAccount(String emailadress, String password, String smtpHost, Integer smtpPort, String pop3Host, Integer pop3Port) {
 		if(pop3Port == null) {
@@ -75,4 +81,21 @@ public class MailAccount {
 	public void setSmtpHost(String smtphost) {
 		this.smtpHost = smtphost;
 	}	
+	
+	public ArrayList<Folder> getFolders()
+	{
+		return folders;
+	}
+	
+	public void addFolder(Folder folder)
+	{
+		folders.add(folder);
+	}
+	
+	public void removeFolder(Folder folder)
+	{
+		if(!folder.isRestricted()) {
+			folders.remove(folder);
+		}
+	}
 }

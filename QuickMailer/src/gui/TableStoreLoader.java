@@ -35,6 +35,8 @@ public class TableStoreLoader extends SwingWorker<MailTableModel, Mail>{
 		for(Mail mailObj : mailList){
 		    mailTableModel.addMail(mailObj);
 		}
+		
+		updateProgress("Posteingang wurde erfolgreich aktualisiert. " + receiveMailObj.getMessageCount() +  " neue E-Mails");
 	}
 
 	@Override

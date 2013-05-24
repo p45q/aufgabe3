@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -67,7 +68,14 @@ public class QuickmailGui extends JFrame {
 		JPanel leftCol = new JPanel(new BorderLayout());
 		
 		// tree erstellen
-		FolderMailTree mailFolders = new FolderMailTree(200, 200);
+		//	FolderMailTree mailFolders = new FolderMailTree(200, 200);
+		
+		GuiTree mailFolders = new GuiTree();
+		
+	
+		
+		new TreeLoader(mailFolders).execute();
+
 		
 		JScrollPane treeScroll = new JScrollPane(mailFolders);
 		treeScroll.setPreferredSize(new Dimension(200, 200)); 
@@ -104,7 +112,7 @@ public class QuickmailGui extends JFrame {
 		
 		// dummy inhalt TODO: weg von hier...
 		for (int i = 0; i < 10; i++) {
-			Mail mailTemp = new Mail("id" + i, "from" + i, "to" + i, "subject" + i, "body" + i, null);
+			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i, null);
 			mailTableModel.addMail(mailTemp);
 		}		
 		
