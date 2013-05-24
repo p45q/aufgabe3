@@ -336,6 +336,12 @@ public class QuickmailGui extends JFrame {
      				Mail selectedMailObj = mailTableModel.getMailObjAt(c);
      				mailPreview.setText(selectedMailObj.getBody());
      				System.out.println("Doubleclick"+ selectedMailObj.getBody());
+     				
+     				JFrame f = new MailDetail(selectedMailObj);
+
+     				f.setSize(1200, 800); // oder: f.pack();
+     				f.setVisible(true);
+     				
      			}
                  
              } 
