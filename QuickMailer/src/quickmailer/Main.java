@@ -16,7 +16,7 @@ public class Main {
 	 * @throws ClassNotFoundException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		
 		JFrame f = new QuickmailGui();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // wichtig!

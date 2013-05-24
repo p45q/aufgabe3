@@ -100,7 +100,7 @@ public class QuickmailGui extends JFrame {
 		
 		// dummy inhalt TODO: weg von hier...
 		for (int i = 0; i < 10; i++) {
-			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i, null);
+			Mail mailTemp = new Mail("id" + i, "from" + i, "to" + i, "subject" + i, "body" + i, null);
 			mailTableModel.addMail(mailTemp);
 		}		
 		

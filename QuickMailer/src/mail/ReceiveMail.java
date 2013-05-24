@@ -1,11 +1,14 @@
 package mail;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.mail.FetchProfile;
 import javax.mail.Folder;
+import javax.mail.Header;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -18,12 +21,12 @@ import com.sun.mail.pop3.POP3SSLStore;
 
 public class ReceiveMail {
 
-	private mail.MailAccount mailAccount;
+	private MailAccount mailAccount;
 	private Session session = null;
 	private Store store = null;
 	private Folder folder;
 	    
-	public ReceiveMail(mail.MailAccount mailAccount)
+	public ReceiveMail(MailAccount mailAccount)
 	{
 		this.mailAccount = mailAccount;
 	}
@@ -123,12 +126,21 @@ public class ReceiveMail {
 	         
 	         Message[] messages = folder.getMessages();
 	 		 for (int i = 0; i < messages.length; i++) {
-	 			
 	 			Message message = messages[i];
-	 			
-	 			Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
-	 			
-	 			mailList.add(tempMail);
+	            String messageId = null;
+	       	 			
+	            Enumeration headers = message.getAllHeaders();
+	            while (headers.hasMoreElements()) {
+	                Header h = (Header) headers.nextElement();
+	                String mID = h.getName();                
+	                if(mID.contains("Message-ID")){
+	                	messageId = h.getValue();    	
+	                }
+	            }
+	            
+	            Mail tempMail = new Mail(messageId, message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
+	            tempMail.setReceiveDate(message.getSentDate());
+	            mailList.add(tempMail);
 	 		 }     
 	 		 
 	         closeFolder();
