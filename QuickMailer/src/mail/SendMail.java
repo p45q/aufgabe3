@@ -9,15 +9,19 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-public class SendMail{
-	public SendMail()
+import javax.swing.SwingWorker;
+public class SendMail extends SwingWorker{
+	private Mail mailobj;
+	public SendMail(Mail mailobj)
 	{
+		this.mailobj = mailobj;
 		
 	}
-	Mail mailobj;
-    public String SendEMail(Mail mailobj) throws MessagingException
-    {
-    	this.mailobj = mailobj;
+	
+
+	@Override
+	protected Object doInBackground() throws MessagingException {
+		
     	MailAccount mailaccount = mailobj.getMailaccount();
     	// TODO get from account
     	
@@ -42,5 +46,5 @@ public class SendMail{
         
         transport.close();
         return "Message sent";
-    }
+	}
 }
