@@ -60,7 +60,7 @@ public class QuickmailGui extends JFrame {
 		newmailButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				Mail dummyMail = new Mail(null, null, null, null, null, null);
+				Mail dummyMail = new Mail(null, null, null, null, null);
 				
 				
 				JFrame f = new SendMail(dummyMail);
