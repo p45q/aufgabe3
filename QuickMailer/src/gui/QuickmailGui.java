@@ -58,8 +58,34 @@ public class QuickmailGui extends JFrame {
 			};
 			
 		});
+		newmailButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				Mail dummyMail = new Mail(null, null, null, null, null);
+				
+				
+				JFrame f = new SendMail(dummyMail);
+				f.setSize(1200, 800); // oder: f.pack();
+				f.setVisible(true);
+			};
+			
+		});
+		replyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				for (int c : mailTable.getSelectedRows()) {
+					Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+				
+				JFrame f = new SendMail(selectedMailObj);
+				f.setSize(1200, 800); // oder: f.pack();
+				f.setVisible(true);
+				}
+			};
+			
+		});
 
 	}
+	
 
 	
 	private JPanel createContentPane() {
@@ -344,6 +370,12 @@ public class QuickmailGui extends JFrame {
      				Mail selectedMailObj = mailTableModel.getMailObjAt(c);
      				mailPreview.setText(selectedMailObj.getBody());
      				System.out.println("Doubleclick"+ selectedMailObj.getBody());
+     				
+     				JFrame f = new MailDetail(selectedMailObj);
+
+     				f.setSize(1200, 800); // oder: f.pack();
+     				f.setVisible(true);
+     				
      			}
                  
              } 

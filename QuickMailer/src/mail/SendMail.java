@@ -29,14 +29,14 @@ public class SendMail{
         Transport transport=session.getTransport("smtp");
         transport.connect(mailaccount.getSmtpHost(), mailaccount.getSmtpPort(), mailaccount.getEmailadress(), mailaccount.getPassword());
         
-        Address[] addresses=InternetAddress.parse(mailobj.to);
+        Address[] addresses=InternetAddress.parse(mailobj.getTo());
         
         Message message=new MimeMessage(session);
         message.setFrom(new InternetAddress(mailaccount.getEmailadress()));
         message.setRecipients(Message.RecipientType.TO, addresses);
-        message.setSubject(mailobj.subject);
+        message.setSubject(mailobj.getSubject());
         
-        message.setText(mailobj.body);
+        message.setText(mailobj.getBody());
         
         transport.sendMessage(message, addresses);
         

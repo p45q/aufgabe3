@@ -1,7 +1,9 @@
 package quickmailer;
 
+import mail.MailService;
+
 public class RunTest {
-	mail.MailCom mailcomobj;
+	MailService mailcomobj;
 	
 	/**
 	 * @param args
@@ -29,7 +31,7 @@ public class RunTest {
 	}
 	
 	public void sendtestmail(){
-		mailcomobj = new mail.MailCom();
+		mailcomobj = new mail.MailService();
 		mail.MailAccount mailaccount = new mail.MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
 		mail.Mail mailobj = new mail.Mail("quickmailerffhs@gmail.com","quickmailerffhs@gmail.com","TestMail","Test text from supermailclient",mailaccount);
 		System.out.println(mailcomobj.sendEmail(mailobj));
