@@ -43,43 +43,39 @@ public class MailDetail extends JFrame{
 		JPanel firstWrapper = new JPanel();
 		firstWrapper.setLayout(new BorderLayout());
 		// actionpanel erstellen
-				JPanel actionPanel = new JPanel(new FlowLayout(0));
-				replyButton = new JButton("Reply");
-				actionPanel.add(replyButton);
-				forewardButton = new JButton("Forward");
-				actionPanel.add(forewardButton);
-				replyallButton = new JButton("Replyall");
-				actionPanel.add(replyallButton);
+		JPanel actionPanel = new JPanel(new FlowLayout(0));
+		replyButton = new JButton("Reply");
+		actionPanel.add(replyButton);
+		forewardButton = new JButton("Forward");
+		actionPanel.add(forewardButton);
+		replyallButton = new JButton("Replyall");
+		actionPanel.add(replyallButton);
 
-				
-				textArea = new JTextArea(5, 20);
-				JScrollPane scrollPane = new JScrollPane(textArea); 
-				textArea.setEditable(false);
-				textArea.setText(MailObj.getBody());
-				
-				
-				
-	
-				
-				
-				JPanel infopane = new JPanel();
-				infopane.setLayout(new BoxLayout(infopane, BoxLayout.Y_AXIS));
+		
+		textArea = new JTextArea(5, 20);
+		JScrollPane scrollPane = new JScrollPane(textArea); 
+		textArea.setEditable(false);
+		textArea.setText(MailObj.getBody());
+		
 
-				
-				labelSubject = new JLabel("Betreff: "+ MailObj.getSubject());
-				infopane.add(labelSubject);
-				
-				
-				labelFrom = new JLabel("From: " + MailObj.getFrom());
-				infopane.add(labelFrom);
-				labelTo = new JLabel("TO: "+MailObj.getTo());
-				infopane.add(labelTo);
-				
-				labelReceivedate = new JLabel("Erhalten um: " + MailObj.getFormatedReceiveDate());
-				infopane.add(labelReceivedate);
-				JPanel goleft = new JPanel();
-				goleft.setLayout(new BorderLayout());
-				goleft.add(infopane, BorderLayout.WEST);
+		JPanel infopane = new JPanel();
+		infopane.setLayout(new BoxLayout(infopane, BoxLayout.Y_AXIS));
+
+		
+		labelSubject = new JLabel("Betreff: "+ MailObj.getSubject());
+		infopane.add(labelSubject);
+		
+		
+		labelFrom = new JLabel("From: " + MailObj.getFrom());
+		infopane.add(labelFrom);
+		labelTo = new JLabel("TO: "+MailObj.getTo());
+		infopane.add(labelTo);
+		
+		labelReceivedate = new JLabel("Erhalten um: " + MailObj.getFormatedReceiveDate());
+		infopane.add(labelReceivedate);
+		JPanel goleft = new JPanel();
+		goleft.setLayout(new BorderLayout());
+		goleft.add(infopane, BorderLayout.WEST);
 
 				
 		// alles zusammenführen
