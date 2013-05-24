@@ -58,6 +58,12 @@ public class MailDetail extends JFrame{
 		textArea.setText(MailObj.getBody());
 		
 
+
+		
+		
+		
+		
+
 		JPanel infopane = new JPanel();
 		infopane.setLayout(new BoxLayout(infopane, BoxLayout.Y_AXIS));
 
