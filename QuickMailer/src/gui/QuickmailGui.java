@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import mail.Mail;
+import mail.MailAccount;
 
 
 public class QuickmailGui extends JFrame {
@@ -34,7 +35,9 @@ public class QuickmailGui extends JFrame {
 	private JTable mailTable;
 	private JTextArea mailPreview;
 	private MailTableModel mailTableModel;
-
+	private GuiTree mailFolders;
+	
+	
 	public QuickmailGui(){
 		super("QuickMailer");
 
@@ -51,6 +54,9 @@ public class QuickmailGui extends JFrame {
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
+				
+				//mailFolders.addAcount( new MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995));
+				//mailFolders.addFolder(null, new Folder("test"));
 				new TableStoreLoader(123, mailTableModel, progressLabel).execute();
 				
 				
@@ -96,9 +102,7 @@ public class QuickmailGui extends JFrame {
 		// tree erstellen
 		//	FolderMailTree mailFolders = new FolderMailTree(200, 200);
 		
-		GuiTree mailFolders = new GuiTree();
-		
-	
+		mailFolders = new GuiTree();
 		
 		new TreeLoader(mailFolders).execute();
 
@@ -143,8 +147,10 @@ public class QuickmailGui extends JFrame {
 		}		
 		
  		JPanel tableWrapper = new JPanel(new BorderLayout());
+		JScrollPane tableScroll = new JScrollPane(mailTable);
+
 		tableWrapper.add(mailTable.getTableHeader(), BorderLayout.PAGE_START);
-		tableWrapper.add(mailTable, BorderLayout.CENTER);
+		tableWrapper.add(tableScroll, BorderLayout.CENTER);
 		
 		rightCol.add(tableWrapper, BorderLayout.NORTH);
 	

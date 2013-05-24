@@ -18,16 +18,23 @@ public class TreeLoader extends SwingWorker<JTree, Folder>{
 	
 	public TreeLoader(GuiTree tree) {
 		this.tree = tree;
+
 	}
 
 	@Override
 	protected JTree doInBackground() throws Exception {
 		
+		System.out.println(tree + "asdasda");
+
 		MailAccount mailaccount = new MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
 		
 		Folder mailaccFolder = new Folder(mailaccount.getEmailadress(), true);
 		DefaultMutableTreeNode parentaccfolder = tree.addFolder(null, mailaccFolder);
+
+		System.out.println("folders2: " + parentaccfolder);
 		
+		return tree;
+		/*
 		Folder posteingang = new Folder("Posteingang", true);
 		mailaccount.addFolder(posteingang);
 		
@@ -40,7 +47,9 @@ public class TreeLoader extends SwingWorker<JTree, Folder>{
 			tree.addFolder(parentaccfolder, child);	
 		}
 		
-		return tree;
+		System.out.println("folders: " + accountFolders);
+		
+		return tree;*/
 	}
 
 }

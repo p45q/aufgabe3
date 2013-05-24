@@ -15,6 +15,8 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import mail.MailAccount;
+
 public class GuiTree extends JTree {
   protected DefaultMutableTreeNode rootNode;
   protected DefaultTreeModel treeModel;
@@ -108,6 +110,20 @@ public class GuiTree extends JTree {
   }
 
   
+  
+
+  public void addAcount(MailAccount mailAccount) {
+	  
+	  DefaultMutableTreeNode accountNode = new DefaultMutableTreeNode(mailAccount.getEmailadress());
+	  DefaultTreeModel accountModel = new DefaultTreeModel(accountNode);
+
+	  setModel(accountModel);
+ 
+	 //tree.scrollPathToVisible(new TreePath(childNode.getPath()));
+	    
+//    return childNode;
+  }
+
   
   public DefaultMutableTreeNode addFolder(DefaultMutableTreeNode parent, Folder folder) {
 	    DefaultMutableTreeNode childNode = new DefaultMutableTreeNode(folder.getLabel());
