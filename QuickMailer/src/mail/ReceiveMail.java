@@ -1,6 +1,7 @@
 package mail;
 
 
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.mail.FetchProfile;
@@ -11,6 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
+
 
 import com.sun.mail.pop3.POP3SSLStore;
 
@@ -24,30 +26,9 @@ public class ReceiveMail {
 	public ReceiveMail(mail.MailAccount mailAccount)
 	{
 		this.mailAccount = mailAccount;
-
-	     try {
-	    	 connect();
-            openFolder("INBOX");
-
-            int totalMessages = getMessageCount();
-            int newMessages = getNewMessageCount();
-             
-            System.out.println("Total messages = " + totalMessages);
-            System.out.println("New messages = " + newMessages);
-            System.out.println("-------------------------------");
-             
-            //gmail.printAllMessageEnvelopes();
-            getAllMessages();
-            closeFolder();
-	             
-        } catch(Exception e) {
-            e.printStackTrace();
-           // System.exit(-1);
-
-        }
 	}
 	
-	 public void connect() throws Exception {
+	 private void connect() throws Exception {
 		 String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";    
 		 Properties pop3Props = new Properties();
 	     
@@ -65,7 +46,7 @@ public class ReceiveMail {
 	     store.connect();   
 	 }
 	     
-	 public void openFolder(String folderName) throws Exception {
+	 private void openFolder(String folderName) throws Exception {
 	    // Open the Folder
 	    folder = store.getDefaultFolder();
 	     
@@ -87,7 +68,7 @@ public class ReceiveMail {
 	    }
     }
 	     
-    public void closeFolder() throws Exception {
+    private void closeFolder() throws Exception {
         folder.close(false);
     }
 	     
@@ -99,7 +80,7 @@ public class ReceiveMail {
         return folder.getNewMessageCount();
     }
      
-    public void disconnect() throws Exception {
+    private void disconnect() throws Exception {
         store.close();
     }
     
@@ -124,26 +105,41 @@ public class ReceiveMail {
          
     }*/
 	     
-    public void getAllMessages() throws Exception {
-      
-        // Attributes & Flags for all messages ..
-        Message[] msgs = folder.getMessages();
-         
-        // Use a suitable FetchProfile
-        FetchProfile fp = new FetchProfile();
-        fp.add(FetchProfile.Item.ENVELOPE);        
-        folder.fetch(msgs, fp);
-         
-        Message[] messages = folder.getMessages();
-		for (int i = 0; i < messages.length; i++) {
-			Message message = messages[i];
+    public ArrayList<Mail> getAllMessages() throws Exception {
+        ArrayList<Mail> mailList = new ArrayList<Mail>();
+        
+        try {
+	    	 connect();
+	         openFolder("INBOX");
+	         
+	         // Attributes & Flags for all messages ..
+	         Message[] msgs = folder.getMessages();
+	          
+	         // Use a suitable FetchProfile
+	         FetchProfile fp = new FetchProfile();
+	         fp.add(FetchProfile.Item.ENVELOPE);        
+	         folder.fetch(msgs, fp);
+	          
+	         
+	         Message[] messages = folder.getMessages();
+	 		 for (int i = 0; i < messages.length; i++) {
+	 			
+	 			Message message = messages[i];
+	 			
+	 			Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
+	 			
+	 			mailList.add(tempMail);
+	 		 }     
+	 		 
+	         closeFolder();
+	             
+	     } catch(Exception e) {
+	         e.printStackTrace();
+	        // System.exit(-1);
+	    }
+    	  
+   		return mailList;
 
-			System.out.println("==============================");
-			System.out.println("Email #" + (i + 1));
-			System.out.println("Subject: " + message.getSubject());
-			System.out.println("From: " + message.getFrom()[0]);
-			System.out.println("Text: " + message.getContent().toString());
-		}     
     }
 	     
 	     /*

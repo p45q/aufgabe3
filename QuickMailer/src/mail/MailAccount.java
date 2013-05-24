@@ -4,11 +4,22 @@ public class MailAccount {
 	String emailadress;
 	String password;
 	String smtpHost;
-	int smtpPort;
+	private Integer smtpPort;
 	String pop3Host;
-	int pop3Port;
+	private Integer pop3Port;
 	
-	public MailAccount(String emailadress, String password, String smtpHost, int smtpPort, String pop3Host, int pop3Port) {
+	private final Integer DEFAULTPOP3PORT = 123;
+	private final Integer DEFAULTSMTPPORT = 123;
+	
+	public MailAccount(String emailadress, String password, String smtpHost, Integer smtpPort, String pop3Host, Integer pop3Port) {
+		if(pop3Port == null) {
+			smtpPort = DEFAULTPOP3PORT;
+		}
+		
+		if(smtpPort == null) {
+			smtpPort = DEFAULTSMTPPORT;
+		}
+		
 		this.emailadress = emailadress;
 		this.password = password;
 		this.smtpHost = smtpHost;
@@ -17,11 +28,11 @@ public class MailAccount {
 		this.pop3Port = pop3Port;
 	}
 
-	public int getSmtpPort() {
+	public Integer getSmtpPort() {
 		return smtpPort;
 	}
 
-	public void setSmtpPort(int smtpPort) {
+	public void setSmtpPort(Integer smtpPort) {
 		this.smtpPort = smtpPort;
 	}
 
@@ -33,11 +44,11 @@ public class MailAccount {
 		this.pop3Host = pop3Host;
 	}
 
-	public int getPop3Port() {
+	public Integer getPop3Port() {
 		return pop3Port;
 	}
 
-	public void setPop3Port(int pop3Port) {
+	public void setPop3Port(Integer pop3Port) {
 		this.pop3Port = pop3Port;
 	}
 
