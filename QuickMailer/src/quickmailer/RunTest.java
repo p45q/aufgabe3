@@ -31,7 +31,7 @@ public class RunTest {
 	public void sendtestmail(){
 		mailcomobj = new mail.MailCom();
 		mail.MailAccount mailaccount = new mail.MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
-		mail.MailObj mailobj = new mail.MailObj("quickmailerffhs@gmail.com","quickmailerffhs@gmail.com","TestMail","Test text from supermailclient",mailaccount);
+		mail.Mail mailobj = new mail.Mail("quickmailerffhs@gmail.com","quickmailerffhs@gmail.com","TestMail","Test text from supermailclient",mailaccount);
 		System.out.println(mailcomobj.sendEmail(mailobj));
 		
 	}

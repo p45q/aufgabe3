@@ -14,8 +14,8 @@ public class SendMail{
 	{
 		
 	}
-	MailObj mailobj;
-    public String SendEMail(MailObj mailobj) throws MessagingException
+	Mail mailobj;
+    public String SendEMail(Mail mailobj) throws MessagingException
     {
     	this.mailobj = mailobj;
     	MailAccount mailaccount = mailobj.getMailaccount();
