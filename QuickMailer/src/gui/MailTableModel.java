@@ -1,5 +1,7 @@
 package gui;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.event.TableModelEvent;
@@ -28,7 +30,7 @@ public class MailTableModel implements TableModel{
  
 	// die anzahl columns
 	public int getColumnCount() {
-		return 3;
+		return 4;
 	}
  
 	// die anzahl mails
@@ -42,6 +44,7 @@ public class MailTableModel implements TableModel{
 			case 0: return "From";
 			case 1: return "To";
 			case 2: return "Subject";
+			case 3: return "Received";
 			default: return null;
 		}
 	}
@@ -59,6 +62,7 @@ public class MailTableModel implements TableModel{
 			case 0: return mailObj.getFrom();
 			case 1: return mailObj.getTo();
 			case 2: return mailObj.getSubject();
+			case 3: return mailObj.getFormatedReceiveDate();
 			default: return null;
 		}
 	}
@@ -69,6 +73,7 @@ public class MailTableModel implements TableModel{
 			case 0: return String.class;
 			case 1: return String.class;
 			case 2: return String.class;
+			case 3: return String.class;
 			default: return null;
 		}	
 	}

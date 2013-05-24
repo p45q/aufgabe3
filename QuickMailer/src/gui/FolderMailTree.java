@@ -27,7 +27,7 @@ public class FolderMailTree extends JPanel implements ActionListener {
 	    populateTree(treePanel);
 
 
-	    JButton addButton = new JButton("Add");
+	   /* JButton addButton = new JButton("Add");
 	    addButton.setActionCommand(ADD_COMMAND);
 	    addButton.addActionListener(this);
 
@@ -38,15 +38,15 @@ public class FolderMailTree extends JPanel implements ActionListener {
 	    JButton clearButton = new JButton("Clear");
 	    clearButton.setActionCommand(CLEAR_COMMAND);
 	    clearButton.addActionListener(this);
-
+*/
 	    // Lay everything out.
 	    treePanel.setPreferredSize(new Dimension(width,height));
 	    add(treePanel, BorderLayout.CENTER);
 
 	    JPanel panel = new JPanel(new GridLayout(0, 3));
-	    panel.add(addButton);
+	/*    panel.add(addButton);
 	    panel.add(removeButton);
-	    panel.add(clearButton);
+	    panel.add(clearButton);*/
 	    panel.setPreferredSize(new Dimension(20, 20));
 	    
 	    add(panel, BorderLayout.SOUTH);
