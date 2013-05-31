@@ -79,15 +79,58 @@ public class QuickmailGui extends JFrame {
 		buildMenu();
 		
 		addListeners();
+		
 	}
 
 	
 	private void addListeners() {
 		newFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+                System.out.println("new folder");
+                
+                if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
+				{
+					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
+					
+					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
+					parrentFolder.getMailAccount().addFolder(new Folder("jada"));
+				}
+                
+                mailFolders.reloadTree();
+            }
+        });
+		newMail.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
                 System.out.println("You have clicked on the new action");
             }
         });
+		newMailAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+		
+	    editAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    removeAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    editFolder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    removeFolder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+		
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){

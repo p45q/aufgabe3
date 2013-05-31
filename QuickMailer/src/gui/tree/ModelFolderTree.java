@@ -46,7 +46,12 @@ public class ModelFolderTree implements TreeModel
         
         fireTreeStructureChanged();
     }
-   
+    public void clear()
+    {
+    	
+    	mailAccounts.remove(getRoot());
+    }
+    
     public void clean()
     {
         mailAccounts.clear();
