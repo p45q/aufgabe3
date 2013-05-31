@@ -89,20 +89,13 @@ public class QuickmailGui extends JFrame {
 		newFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 System.out.println("new folder");
-                
-                JFrame f = new RenameFolder();
-				f.pack();
-				f.setVisible(true);
-                
-                if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
-				{
-					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
-					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
-					parrentFolder.getMailAccount().addFolder(new Folder("jada"));
-				}
-                
-                mailFolders.reloadTree();
-                
+                if (mailFolders.getSelectedAccount() != null)
+                {
+                	JFrame f = new RenameFolder(null, mailFolders.getSelectedAccount());
+                	f.pack();
+                	f.setVisible(true);
+                	
+                }
             }
         });
 		newMail.addActionListener(new ActionListener() {
@@ -137,10 +130,13 @@ public class QuickmailGui extends JFrame {
         });
 	    editFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-                JFrame f = new RenameFolder();
-				f.pack();
-				f.setVisible(true);
+            	if(mailFolders.getSelectedFolder() != null)
+            	{
+            		System.out.println("You have clicked on the new action");
+            		JFrame f = new RenameFolder(mailFolders.getSelectedFolder(),mailFolders.getSelectedAccount());
+            		f.pack();
+            		f.setVisible(true);
+            	}
             }
         });
 	    removeFolder.addActionListener(new ActionListener() {
