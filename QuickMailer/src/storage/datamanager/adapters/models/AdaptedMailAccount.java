@@ -1,52 +1,21 @@
-package mail;
-
+package storage.datamanager.adapters.models;
 
 import gui.tree.Folder;
 
 import java.util.concurrent.CopyOnWriteArrayList;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import storage.datamanager.adapters.MailAccountAdapter;
+public class AdaptedMailAccount {
 
-@XmlJavaTypeAdapter(MailAccountAdapter.class)
-public class MailAccount {
 	private String emailadress;
 	private String password;
 	private String smtpHost;
 	private Integer smtpPort;
 	private String pop3Host;
 	private Integer pop3Port;
+	 
 	private CopyOnWriteArrayList<Folder> folders;
 
-	private final Integer DEFAULTPOP3PORT = 123;
-	private final Integer DEFAULTSMTPPORT = 123;
-	
 	private static final String DEFAULT_FOLDERLABEL = "Posteingang";
-	
-	@SuppressWarnings("serial")
-	public MailAccount(String emailadress, String password, String smtpHost, Integer smtpPort, String pop3Host, Integer pop3Port) {
-		if(pop3Port == null) {
-			smtpPort = DEFAULTPOP3PORT;
-		}
-		
-		if(smtpPort == null) {
-			smtpPort = DEFAULTSMTPPORT;
-		}
-		
-		this.emailadress = emailadress;
-		this.password = password;
-		this.smtpHost = smtpHost;
-		this.smtpPort = smtpPort;
-		this.pop3Host = pop3Host;
-		this.pop3Port = pop3Port;
-
-		folders = new CopyOnWriteArrayList<Folder>(){ {
-	        add(new Folder("Posteingang", true));
-	        add(new Folder("Postausgang", true));
-	    }};
-
-		
-	}
 
 	public Integer getSmtpPort() {
 		return smtpPort;

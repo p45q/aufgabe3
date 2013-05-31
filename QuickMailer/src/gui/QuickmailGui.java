@@ -1,8 +1,14 @@
 package gui;
 
+import gui.table.ModelEmailTable;
+import gui.table.EmailTableStoreLoader;
+import gui.tree.AccountFolder;
+import gui.tree.Folder;
+import gui.tree.FolderTree;
+import gui.tree.TreeLoader;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,17 +16,35 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
+
+import storage.StorageService;
 
 import mail.Mail;
 import mail.MailAccount;
 
 
+@SuppressWarnings("serial")
 public class QuickmailGui extends JFrame {
-	private JButton settingsButton;
 	private JButton newmailButton;
 	private JButton readButton;
 	private JButton replyButton;
@@ -30,19 +54,23 @@ public class QuickmailGui extends JFrame {
 
 	private JLabel progressLabel;
 
-	Border blackline;
+	private Border blackline;
 
 	private JTable mailTable;
 	private JTextArea mailPreview;
-	private MailTableModel mailTableModel;
-	private GuiTree mailFolders;
+	private ModelEmailTable mailTableModel;
+	private FolderTree mailFolders;
 	
-	
-	public QuickmailGui(){
+	private StorageService storageObj; 
+
+	public QuickmailGui(StorageService storageObj){
 		super("QuickMailer");
+		
+		this.storageObj = storageObj;
 
 		setContentPane(createContentPane());
 		
+
 		buildMenu();
 		
 		addListeners();
@@ -54,20 +82,21 @@ public class QuickmailGui extends JFrame {
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				
-				//mailFolders.addAcount( new MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995));
-				//mailFolders.addFolder(null, new Folder("test"));
-				new TableStoreLoader(123, mailTableModel, progressLabel).execute();
-				
-				
-				
+				if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
+				{
+					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
+					
+					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
+					tableStoreLoader.setMailAccount(parrentFolder.getMailAccount());
+					tableStoreLoader.execute();				
+				}
 			};
 			
 		});
 		newmailButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				Mail dummyMail = new Mail(null, null, null, null, null);
+				Mail dummyMail = new Mail(null, null, null, null);
 				
 				
 				JFrame f = new SendMail(dummyMail);
@@ -102,9 +131,10 @@ public class QuickmailGui extends JFrame {
 		// tree erstellen
 		//	FolderMailTree mailFolders = new FolderMailTree(200, 200);
 		
-		mailFolders = new GuiTree();
-		
-		new TreeLoader(mailFolders).execute();
+		mailFolders = new FolderTree();
+		mailFolders.getSelectionModel().addTreeSelectionListener(new TreeSelection());
+        
+		new TreeLoader(mailFolders, true).execute();
 
 		
 		JScrollPane treeScroll = new JScrollPane(mailFolders);
@@ -132,17 +162,26 @@ public class QuickmailGui extends JFrame {
 		
 		// mail tabelle erstellen
 		// tablemodel für mails 
-		mailTableModel = new MailTableModel();
+		mailTableModel = new ModelEmailTable();
  
 		// JTable mit model initialisieren
 		mailTable = new JTable(mailTableModel);
 		
 		mailTable.getSelectionModel().addListSelectionListener(new RowListener());
 		mailTable.addMouseListener(new MouseAdapter());
+		// progresslabel 
+				progressLabel = new JLabel();
+				rightCol.add(progressLabel, BorderLayout.PAGE_END);
+		
+		//TEST ****		
+		MailAccount defaultAccount = storageObj.getDefaultAccount();
+		
+		new EmailTableStoreLoader(defaultAccount.getDefaultFolder(), mailTableModel, progressLabel).execute();
+		// *************
 		
 		// dummy inhalt TODO: weg von hier...
 		for (int i = 0; i < 10; i++) {
-			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i, null);
+			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i);
 			mailTableModel.addMail(mailTemp);
 		}		
 		
@@ -154,9 +193,7 @@ public class QuickmailGui extends JFrame {
 		
 		rightCol.add(tableWrapper, BorderLayout.NORTH);
 	
-		// progresslabel 
-		progressLabel = new JLabel();
-		rightCol.add(progressLabel, BorderLayout.PAGE_END);
+		
 		
 		// mail preview 
 		mailPreview = new JTextArea();
@@ -368,6 +405,28 @@ public class QuickmailGui extends JFrame {
 			}
         }
     }
+    
+    
+    private class TreeSelection implements TreeSelectionListener {
+        public void valueChanged(TreeSelectionEvent e) {
+            TreePath path = e.getPath();                
+            int pathCount = path.getPathCount();
+            
+            for (int i = 0; i < pathCount; i++) {
+                if(path.getPathComponent(i) instanceof Folder)
+                {
+//                	AccountFolder parrentFolder = (AccountFolder) path.getParentPath().getLastPathComponent();
+
+                	Folder selectedfolder = (Folder) path.getPathComponent(i);
+                	
+                	new EmailTableStoreLoader(selectedfolder, mailTableModel, progressLabel).execute();
+                }
+            }
+            
+            
+			//new TableStoreLoader(new Folder("Postausgang"), mailTableModel, progressLabel).execute();
+        }
+    };
     
     private class MouseAdapter implements MouseListener{
     	 public void mouseClicked(MouseEvent e) {

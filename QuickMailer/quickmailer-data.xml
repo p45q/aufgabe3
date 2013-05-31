@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:quickmailerData xmlns:ns2="storage">
+    <mailAccounts>
+        <emailadress>quickmailerffhs@gmail.com</emailadress>
+        <folders>
+            <mails/>
+            <label>Posteingang</label>
+        </folders>
+        <folders>
+            <mails/>
+            <label>Postausgang</label>
+        </folders>
+        <folders>
+            <mails>
+                <mailList>
+                    <body>body0</body>
+                    <from>Meine 1 from0</from>
+                    <subject>subject0</subject>
+                    <to>to0</to>
+                </mailList>
+                <mailList>
+                    <body>body1</body>
+                    <from>Meine 1 from1</from>
+                    <subject>subject1</subject>
+                    <to>to1</to>
+                </mailList>
+                <mailList>
+                    <body>body2</body>
+                    <from>Meine 1 from2</from>
+                    <subject>subject2</subject>
+                    <to>to2</to>
+                </mailList>
+                <mailList>
+                    <body>body3</body>
+                    <from>Meine 1 from3</from>
+                    <subject>subject3</subject>
+                    <to>to3</to>
+                </mailList>
+                <mailList>
+                    <body>body4</body>
+                    <from>Meine 1 from4</from>
+                    <subject>subject4</subject>
+                    <to>to4</to>
+                </mailList>
+                <mailList>
+                    <body>body5</body>
+                    <from>Meine 1 from5</from>
+                    <subject>subject5</subject>
+                    <to>to5</to>
+                </mailList>
+                <mailList>
+                    <body>body6</body>
+                    <from>Meine 1 from6</from>
+                    <subject>subject6</subject>
+                    <to>to6</to>
+                </mailList>
+                <mailList>
+                    <body>body7</body>
+                    <from>Meine 1 from7</from>
+                    <subject>subject7</subject>
+                    <to>to7</to>
+                </mailList>
+                <mailList>
+                    <body>body8</body>
+                    <from>Meine 1 from8</from>
+                    <subject>subject8</subject>
+                    <to>to8</to>
+                </mailList>
+                <mailList>
+                    <body>body9</body>
+                    <from>Meine 1 from9</from>
+                    <subject>subject9</subject>
+                    <to>to9</to>
+                </mailList>
+            </mails>
+            <label>Meine Mails</label>
+        </folders>
+        <password>ffhs12345</password>
+        <pop3Host>pop.gmail.com</pop3Host>
+        <pop3Port>995</pop3Port>
+        <smtpHost>smtp.gmail.com</smtpHost>
+        <smtpPort>587</smtpPort>
+    </mailAccounts>
+    <mailAccounts>
+        <emailadress>quickmailer2ffhs@gmail.com</emailadress>
+        <folders>
+            <mails/>
+            <label>Posteingang</label>
+        </folders>
+        <folders>
+            <mails/>
+            <label>Postausgang</label>
+        </folders>
+        <folders>
+            <mails>
+                <mailList>
+                    <body>body0</body>
+                    <from>Deine 2 from0</from>
+                    <subject>subject0</subject>
+                    <to>to0</to>
+                </mailList>
+                <mailList>
+                    <body>body1</body>
+                    <from>Deine 2 from1</from>
+                    <subject>subject1</subject>
+                    <to>to1</to>
+                </mailList>
+                <mailList>
+                    <body>body2</body>
+                    <from>Deine 2 from2</from>
+                    <subject>subject2</subject>
+                    <to>to2</to>
+                </mailList>
+                <mailList>
+                    <body>body3</body>
+                    <from>Deine 2 from3</from>
+                    <subject>subject3</subject>
+                    <to>to3</to>
+                </mailList>
+                <mailList>
+                    <body>body4</body>
+                    <from>Deine 2 from4</from>
+                    <subject>subject4</subject>
+                    <to>to4</to>
+                </mailList>
+                <mailList>
+                    <body>body5</body>
+                    <from>Deine 2 from5</from>
+                    <subject>subject5</subject>
+                    <to>to5</to>
+                </mailList>
+                <mailList>
+                    <body>body6</body>
+                    <from>Deine 2 from6</from>
+                    <subject>subject6</subject>
+                    <to>to6</to>
+                </mailList>
+                <mailList>
+                    <body>body7</body>
+                    <from>Deine 2 from7</from>
+                    <subject>subject7</subject>
+                    <to>to7</to>
+                </mailList>
+                <mailList>
+                    <body>body8</body>
+                    <from>Deine 2 from8</from>
+                    <subject>subject8</subject>
+                    <to>to8</to>
+                </mailList>
+                <mailList>
+                    <body>body9</body>
+                    <from>Deine 2 from9</from>
+                    <subject>subject9</subject>
+                    <to>to9</to>
+                </mailList>
+            </mails>
+            <label>Deine Mails</label>
+        </folders>
+        <password>ffhs12345</password>
+        <pop3Host>pop.asd.com</pop3Host>
+        <pop3Port>995</pop3Port>
+        <smtpHost>smtp.asd.com</smtpHost>
+        <smtpPort>587</smtpPort>
+    </mailAccounts>
+</ns2:quickmailerData>

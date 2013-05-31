@@ -3,8 +3,9 @@ package quickmailer;
 import gui.QuickmailGui;
 
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import storage.StorageService;
 
 public class Main {
 
@@ -17,8 +18,12 @@ public class Main {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		System.out.println("FIRST");
+
+		StorageService storageObj = new StorageService();
+		storageObj.loadMailAccounts();
 		
-		JFrame f = new QuickmailGui();
+		JFrame f = new QuickmailGui(storageObj);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // wichtig!
 		f.setSize(1200, 800); // oder: f.pack();
 		f.setVisible(true);

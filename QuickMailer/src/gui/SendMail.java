@@ -125,8 +125,8 @@ private void addListeners() {
 				public void run() {
 					MailService mailcomobj = new mail.MailService();
 					mail.MailAccount mailaccount = new mail.MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
-					Mail mailobj1 = new Mail("quickmailerffhs@gmail.com",textto.getText(),textSubject.getText(),textArea.getText(),mailaccount);
-					mailcomobj.sendMail(mailobj1);
+					Mail mailobj1 = new Mail("quickmailerffhs@gmail.com",textto.getText(),textSubject.getText(),textArea.getText());
+					mailcomobj.sendMail(mailobj1, mailaccount);
 				}
 			});
 			

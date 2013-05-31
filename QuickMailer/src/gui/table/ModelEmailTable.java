@@ -1,31 +1,37 @@
-package gui;
+package gui.table;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
 
 import mail.Mail;
 
-public class MailTableModel implements TableModel{
-	private Vector<Mail> mails = new Vector<Mail>();
-	private Vector<TableModelListener> listeners = new Vector<TableModelListener>();
+public class ModelEmailTable extends AbstractTableModel{
+	private CopyOnWriteArrayList<Mail> mails;
+	private Vector<TableModelListener> listeners;
  
+	public ModelEmailTable()
+	{		
+		super();
+	
+		mails = new CopyOnWriteArrayList<Mail>();
+		listeners = new Vector<TableModelListener>();
+	}
+	
 	public void addMail(Mail mailObj){
 		int index = mails.size();
-		//neues mailobj zur vecot liste hinzufügen
+		
+		//neues mailobj zur arrayliste hinzufügen
 		mails.add(mailObj);
  
 		// zuerst ein event, "neue row an der stelle index" herstellen
-		TableModelEvent e = new TableModelEvent(this, index, index, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT);
- 
+		TableModelEvent event = new TableModelEvent(this, index, index, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT);
+		
 		// nun das event verschicken
-		for( int i = 0, n = listeners.size(); i<n; i++ ){
-			((TableModelListener)listeners.get(i)).tableChanged(e);
-		}
+		fireAllListeners(event);
 	}
  
 	// die anzahl columns
@@ -68,7 +74,7 @@ public class MailTableModel implements TableModel{
 	}
  
 	// eine angabe, welchen typ von objekten in den columns angezeigt werden soll
-	public Class getColumnClass(int columnIndex) {
+	public Class<String> getColumnClass(int columnIndex) {
 		switch( columnIndex ){
 			case 0: return String.class;
 			case 1: return String.class;
@@ -78,6 +84,19 @@ public class MailTableModel implements TableModel{
 		}	
 	}
  
+	public void clearTable()
+	{
+		mails.clear();
+		fireAllListeners(null);
+	}
+	
+	private void fireAllListeners(TableModelEvent event)
+	{
+		for( int i = 0, n = listeners.size(); i<n; i++ ){
+			((TableModelListener)listeners.get(i)).tableChanged(event);
+		}
+	}
+	
 	public void addTableModelListener(TableModelListener l) {
 		listeners.add(l);
 	}

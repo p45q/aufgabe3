@@ -1,14 +1,13 @@
 package mail;
 
-import javax.mail.MessagingException;
 
 public class MailService {
 	public MailService(){
 		
 	}
-	public void sendMail(Mail mailobj)
+	public void sendMail(Mail mailobj, MailAccount mailAccount)
 	{
-			new SendMail(mailobj).execute();
+			new SendMail(mailobj, mailAccount).execute();
 
 	}
 }

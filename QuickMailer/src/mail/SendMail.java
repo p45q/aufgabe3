@@ -12,17 +12,18 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.SwingWorker;
 public class SendMail extends SwingWorker{
 	private Mail mailobj;
-	public SendMail(Mail mailobj)
+	private MailAccount mailAccount;
+	
+	public SendMail(Mail mailobj, MailAccount mailAccount)
 	{
 		this.mailobj = mailobj;
-		
+		this.mailAccount = mailAccount;
 	}
 	
 
 	@Override
 	protected Object doInBackground() throws MessagingException {
 		
-    	MailAccount mailaccount = mailobj.getMailaccount();
     	// TODO get from account
     	
         Properties props=new Properties();
@@ -31,12 +32,12 @@ public class SendMail extends SwingWorker{
         
         Session session=Session.getInstance(props);
         Transport transport=session.getTransport("smtp");
-        transport.connect(mailaccount.getSmtpHost(), mailaccount.getSmtpPort(), mailaccount.getEmailadress(), mailaccount.getPassword());
+        transport.connect(mailAccount.getSmtpHost(), mailAccount.getSmtpPort(), mailAccount.getEmailadress(), mailAccount.getPassword());
         
         Address[] addresses=InternetAddress.parse(mailobj.getTo());
         
         Message message=new MimeMessage(session);
-        message.setFrom(new InternetAddress(mailaccount.getEmailadress()));
+        message.setFrom(new InternetAddress(mailAccount.getEmailadress()));
         message.setRecipients(Message.RecipientType.TO, addresses);
         message.setSubject(mailobj.getSubject());
         

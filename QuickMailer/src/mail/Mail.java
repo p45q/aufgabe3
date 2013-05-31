@@ -1,9 +1,12 @@
 package mail;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import storage.datamanager.adapters.MailAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+@XmlJavaTypeAdapter(MailAdapter.class)
 public class Mail {
 	String messageId;
 
@@ -17,12 +20,11 @@ public class Mail {
 
 	MailAccount mailaccount;
 	
-	public Mail(String from, String to, String subject, String body, MailAccount mailaccount) {
+	public Mail(String from, String to, String subject, String body) {
 		this.from = from;
 		this.to = to;
 		this.subject = subject;
 		this.body = body;
-		this.mailaccount = mailaccount;
 	}
 	
 	public void setMessageId(String messageId)
@@ -85,12 +87,6 @@ public class Mail {
 	}
 	public void setBody(String body) {
 		this.body = body;
-	}
-	public MailAccount getMailaccount() {
-		return mailaccount;
-	}
-	public void setMailaccount(MailAccount mailaccount) {
-		this.mailaccount = mailaccount;
 	}
 
 }

@@ -1,7 +1,6 @@
 package mail;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -83,7 +82,7 @@ public class ReceiveMail {
         return folder.getNewMessageCount();
     }
      
-    private void disconnect() throws Exception {
+	private void disconnect() throws Exception {
         store.close();
     }
     
@@ -138,7 +137,7 @@ public class ReceiveMail {
 	                }
 	            }
 	            
-	            Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString(), mailAccount);
+	            Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString()); //, mailAccount);
 	            tempMail.setMessageId(messageId);
 	            tempMail.setReceiveDate(message.getSentDate());
 
@@ -150,6 +149,7 @@ public class ReceiveMail {
 	     } catch(Exception e) {
 	         e.printStackTrace();
 	        // System.exit(-1);
+	         System.out.println("FUCK: " + mailAccount.getEmailadress());
 	    }
     	  
    		return mailList;
