@@ -65,7 +65,6 @@ public class QuickmailGui extends JFrame {
 
 	public QuickmailGui(StorageService storageObj){
 		super("QuickMailer");
-		
 		this.storageObj = storageObj;
 
 		setContentPane(createContentPane());
@@ -344,12 +343,39 @@ public class QuickmailGui extends JFrame {
         // Add the menubar to the frame
         setJMenuBar(menuBar);
         
-        // Define and add two drop down menu to the menubar
-        JMenu fileMenu = new JMenu("File");
-        JMenu editMenu = new JMenu("Edit");
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
         
+        // file menu 
+        JMenu fileMenu = new JMenu("File");
+        menuBar.add(fileMenu);
+        // file menu children
+        JMenuItem newMail = new JMenuItem("New Mail");
+        JMenuItem newMailAccount = new JMenuItem("New Mail-Account");
+        JMenuItem newFolder = new JMenuItem("New Folder");
+        // add children to file menu
+        fileMenu.add(newMail);
+        fileMenu.add(newMailAccount);
+        fileMenu.add(newFolder);
+        
+        // edit menu
+        JMenu editMenu = new JMenu("Edit");
+        menuBar.add(editMenu);
+        // edit menu children
+        JMenuItem editAccount = new JMenuItem("Edit Mail-Account");
+        JMenuItem removeAccount = new JMenuItem("Remove Mail-Account");
+        JMenuItem editFolder = new JMenuItem("Edit Folder");
+        JMenuItem removeFolder = new JMenuItem("Remove Folder");
+        // add children to edit menu
+        editMenu.add(editAccount);
+        editMenu.add(removeAccount);
+        // add sperator
+        editMenu.addSeparator();
+        editMenu.add(editFolder);
+        editMenu.add(removeFolder);
+        
+        
+
+
+        /*
         // Create and add simple menu item to one of the drop down menu
         JMenuItem newAction = new JMenuItem("New");
         JMenuItem openAction = new JMenuItem("Open");
@@ -390,6 +416,7 @@ public class QuickmailGui extends JFrame {
                 System.out.println("You have clicked on the new action");
             }
         });
+        */
 	}
 
 	
