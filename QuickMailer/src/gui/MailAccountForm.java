@@ -15,6 +15,8 @@ import javax.swing.border.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import storage.StorageService;
+
 import mail.Mail;
 import mail.MailAccount;
 import mail.MailService;
@@ -32,20 +34,27 @@ public class MailAccountForm extends JFrame{
 	
 	private JButton saveButton;
 	private JButton deleteButton;
-	
-	
-	private JButton sendButton;
-	private JTextField textSubject;
-	private JTextField textto;
-	private JTextArea textArea;
-	private boolean isreply;
 
 	public MailAccountForm(MailAccount editMailAccount){
 		super("MailAccount");
 		this.editMailAccount = editMailAccount;
 		
 		setContentPane(createContentPane());
-	//	addListeners();
+		
+		if(editMailAccount != null) {
+			setEditContent();
+		}
+		
+		addListeners();
+	}
+	
+	private void setEditContent() {
+		mailAdress.setText(editMailAccount.getEmailadress());
+		password.setText(editMailAccount.getEmailadress());
+		smtpHost.setText(editMailAccount.getSmtpHost());
+		smtpPort.setText(editMailAccount.getSmtpPort().toString());
+		pop3Host.setText(editMailAccount.getPop3Host());
+		pop3Port.setText(editMailAccount.getPop3Port().toString());
 	}
 	
 	private JPanel createContentPane() {
@@ -97,6 +106,43 @@ public class MailAccountForm extends JFrame{
 		
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
 		return mainWrapper;
+	}
+	
+	private void addListeners() {
+		saveButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				
+				if(editMailAccount != null) {
+					// edit selected mailaccount
+					editMailAccount.setEmailadress(mailAdress.getText());
+					editMailAccount.setPassword(password.getText());
+					editMailAccount.setSmtpHost(smtpHost.getText());
+					editMailAccount.setSmtpPort(Integer.parseInt(smtpPort.getText()));
+					editMailAccount.setPop3Host(pop3Host.getText());
+					editMailAccount.setPop3Port(Integer.parseInt(pop3Port.getText()));
+				}
+				else {
+					// save new mailaccount
+					MailAccount newMailAccount = new MailAccount(mailAdress.getText(), password.getText(), smtpHost.getText(), Integer.parseInt(smtpPort.getText()), pop3Host.getText(), Integer.parseInt(pop3Port.getText()));
+					
+					StorageService storageObj = new StorageService();
+					storageObj.addMailAccount(newMailAccount);
+				}
+					
+				
+				
+				/*SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						MailService mailcomobj = new mail.MailService();
+						mail.MailAccount mailaccount = new mail.MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
+						Mail mailobj1 = new Mail("quickmailerffhs@gmail.com",textto.getText(),textSubject.getText(),textArea.getText());
+						mailcomobj.sendMail(mailobj1, mailaccount);
+					}
+				});*/
+			};		
+		});
 	}
 	
 }

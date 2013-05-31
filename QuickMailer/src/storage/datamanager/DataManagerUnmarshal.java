@@ -21,12 +21,12 @@ public class DataManagerUnmarshal {
 	
 	public ArrayList<MailAccount> getMailAccounts()
 	{
-	    QuickmailerData settings = unmarshalSettings(); 
+	    QuickmailerData settings = unmarshalData(); 
 	    
 	    return settings.getMailAccounts();
 	}
 	
-	private QuickmailerData unmarshalSettings()
+	private QuickmailerData unmarshalData()
 	{
 		try {
 			// JAXB context erstellen und initialisierung des marshaller

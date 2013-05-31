@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -59,7 +61,7 @@ public class QuickmailGui extends JFrame {
 	private JTable mailTable;
 	private JTextArea mailPreview;
 	private ModelEmailTable mailTableModel;
-	private FolderTree mailFolders;
+	private FolderTree folderTree;
 	private JMenuItem newFolder;
 	private JMenuItem newMail;
     private JMenuItem newMailAccount;
@@ -94,14 +96,14 @@ public class QuickmailGui extends JFrame {
 				f.pack();
 				f.setVisible(true);
                 
-                if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
+                if(folderTree.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
 				{
-					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
+					AccountFolder parrentFolder = (AccountFolder) folderTree.getSelectionPath().getPathComponent(1);
 					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
 					parrentFolder.getMailAccount().addFolder(new Folder("jada"));
 				}
                 
-                mailFolders.reloadTree();
+                folderTree.reloadTree();
                 
             }
         });
@@ -115,16 +117,18 @@ public class QuickmailGui extends JFrame {
 				JFrame f = new MailAccountForm(null);
 				f.pack();
 				f.setVisible(true);
+				
+				System.out.println("JUO");
             }
         });
 		
 	    editAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             	
-            	AccountFolder selectedAccount = mailFolders.getSelectedAccount();
+            	AccountFolder selectedAccount = folderTree.getSelectedAccount();
             	if(selectedAccount != null)
    				{   					
-   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount());
+   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount(), folderTree);
    					f.pack();
    					f.setVisible(true);
    				}
@@ -152,9 +156,9 @@ public class QuickmailGui extends JFrame {
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
+				if(folderTree.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
 				{
-					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
+					AccountFolder parrentFolder = (AccountFolder) folderTree.getSelectionPath().getPathComponent(1);
 					
 					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
 					tableStoreLoader.setMailAccount(parrentFolder.getMailAccount());
@@ -202,13 +206,13 @@ public class QuickmailGui extends JFrame {
 		// tree erstellen
 		//	FolderMailTree mailFolders = new FolderMailTree(200, 200);
 		
-		mailFolders = new FolderTree();
-		mailFolders.getSelectionModel().addTreeSelectionListener(new TreeSelection());
+		folderTree = new FolderTree();
+		folderTree.getSelectionModel().addTreeSelectionListener(new TreeSelection());
         
-		new TreeLoader(mailFolders, true).execute();
+		new TreeLoader(folderTree, true).execute();
 
 		
-		JScrollPane treeScroll = new JScrollPane(mailFolders);
+		JScrollPane treeScroll = new JScrollPane(folderTree);
 		treeScroll.setPreferredSize(new Dimension(200, 200)); 
 		
 		leftCol.add(treeScroll, BorderLayout.WEST);

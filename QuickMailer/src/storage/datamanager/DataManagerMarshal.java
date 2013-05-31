@@ -1,10 +1,13 @@
 package storage.datamanager;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+
+import mail.MailAccount;
 
 
 public class DataManagerMarshal {
@@ -15,7 +18,13 @@ private final String outputXml;
 		this.outputXml = outputXml;
 	}
 	
-	public void marshalSettings(QuickmailerData settings) {
+	
+	public void setQuickmailerData(QuickmailerData quickmailerData)
+	{
+		marshalQuickmailerData(quickmailerData);
+	}
+	
+	public void marshalQuickmailerData(QuickmailerData settings) {
    		try {
 			// JAXB context erstellen und initialisierung des marshaller
 		   JAXBContext jaxbContext = JAXBContext.newInstance(QuickmailerData.class);

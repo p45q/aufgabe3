@@ -162,4 +162,36 @@
         <smtpHost>smtp.asd.com</smtpHost>
         <smtpPort>587</smtpPort>
     </mailAccounts>
+    <mailAccounts>
+        <emailadress>test</emailadress>
+        <folders>
+            <mails/>
+            <label>Posteingang</label>
+        </folders>
+        <folders>
+            <mails/>
+            <label>Postausgang</label>
+        </folders>
+        <password>test</password>
+        <pop3Host>test</pop3Host>
+        <pop3Port>213</pop3Port>
+        <smtpHost>test</smtpHost>
+        <smtpPort>2134</smtpPort>
+    </mailAccounts>
+    <mailAccounts>
+        <emailadress>bieri</emailadress>
+        <folders>
+            <mails/>
+            <label>Posteingang</label>
+        </folders>
+        <folders>
+            <mails/>
+            <label>Postausgang</label>
+        </folders>
+        <password>asdasd</password>
+        <pop3Host>asd1</pop3Host>
+        <pop3Port>123</pop3Port>
+        <smtpHost>asd</smtpHost>
+        <smtpPort>123</smtpPort>
+    </mailAccounts>
 </ns2:quickmailerData>
