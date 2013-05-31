@@ -18,14 +18,12 @@ public class FolderTree extends JTree {
 
   public FolderTree() {
 	treeModel = new ModelFolderTree("mails");
-
     setRootVisible(false);
     setCellRenderer(new FolderCellRenderer(getCellRenderer()));
 	setModel(treeModel);
 	setShowsRootHandles(true);
-	 
     getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-
+    
     // Wurzel aufklappen 
     //expandAll();
   }
@@ -48,9 +46,14 @@ public class FolderTree extends JTree {
 	  {
 		  treeModel.addFolder(accountFolder, folder);	
 	  }	
-
 	  // Wurzel aufklappen 
 	  expandAll();
+  }
+  
+  public void reloadTree()
+  {
+	  treeModel.clean();
+	  new TreeLoader(this, true).execute();
   }
   
   static class FolderCellRenderer implements TreeCellRenderer {

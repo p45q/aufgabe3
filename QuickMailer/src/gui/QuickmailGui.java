@@ -60,7 +60,13 @@ public class QuickmailGui extends JFrame {
 	private JTextArea mailPreview;
 	private ModelEmailTable mailTableModel;
 	private FolderTree mailFolders;
-	
+	private JMenuItem newFolder;
+	private JMenuItem newMail;
+    private JMenuItem newMailAccount;
+    private JMenuItem editAccount;
+    private JMenuItem removeAccount;
+    private JMenuItem editFolder;
+    private JMenuItem removeFolder;
 	private StorageService storageObj; 
 
 	public QuickmailGui(StorageService storageObj){
@@ -73,11 +79,58 @@ public class QuickmailGui extends JFrame {
 		buildMenu();
 		
 		addListeners();
+		
 	}
 
 	
 	private void addListeners() {
-
+		newFolder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("new folder");
+                
+                if(mailFolders.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
+				{
+					AccountFolder parrentFolder = (AccountFolder) mailFolders.getSelectionPath().getPathComponent(1);
+					
+					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
+					parrentFolder.getMailAccount().addFolder(new Folder("jada"));
+				}
+                
+                mailFolders.reloadTree();
+            }
+        });
+		newMail.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+		newMailAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+		
+	    editAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    removeAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    editFolder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+	    removeFolder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("You have clicked on the new action");
+            }
+        });
+		
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -117,6 +170,7 @@ public class QuickmailGui extends JFrame {
 			};
 			
 		});
+		
 
 	}
 	
@@ -348,9 +402,9 @@ public class QuickmailGui extends JFrame {
         JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
         // file menu children
-        JMenuItem newMail = new JMenuItem("New Mail");
-        JMenuItem newMailAccount = new JMenuItem("New Mail-Account");
-        JMenuItem newFolder = new JMenuItem("New Folder");
+        newMail = new JMenuItem("New Mail");
+        newMailAccount = new JMenuItem("New Mail-Account");
+        newFolder = new JMenuItem("New Folder");
         // add children to file menu
         fileMenu.add(newMail);
         fileMenu.add(newMailAccount);
@@ -360,10 +414,10 @@ public class QuickmailGui extends JFrame {
         JMenu editMenu = new JMenu("Edit");
         menuBar.add(editMenu);
         // edit menu children
-        JMenuItem editAccount = new JMenuItem("Edit Mail-Account");
-        JMenuItem removeAccount = new JMenuItem("Remove Mail-Account");
-        JMenuItem editFolder = new JMenuItem("Edit Folder");
-        JMenuItem removeFolder = new JMenuItem("Remove Folder");
+        editAccount = new JMenuItem("Edit Mail-Account");
+        removeAccount = new JMenuItem("Remove Mail-Account");
+        editFolder = new JMenuItem("Edit Folder");
+        removeFolder = new JMenuItem("Remove Folder");
         // add children to edit menu
         editMenu.add(editAccount);
         editMenu.add(removeAccount);
@@ -373,7 +427,7 @@ public class QuickmailGui extends JFrame {
         editMenu.add(removeFolder);
         
         
-
+        
 
         /*
         // Create and add simple menu item to one of the drop down menu
