@@ -4,11 +4,17 @@ package gui.tree;
 
 import mail.MailAccount;
 
+import gui.MailAccountForm;
+import gui.table.EmailTableStoreLoader;
+
 import java.awt.Component;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.swing.JFrame;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 public class FolderTree extends JTree {
@@ -54,6 +60,30 @@ public class FolderTree extends JTree {
   {
 	  treeModel.clean();
 	  new TreeLoader(this, true).execute();
+  }
+  
+  public AccountFolder getSelectedAccount() {
+	  if(getSelectionCount() > 0 ) {
+		  if(getSelectionPath().getPathComponent(1) instanceof AccountFolder) {
+				return (AccountFolder) getSelectionPath().getPathComponent(1);
+			}
+	  }
+	  
+	  return null;
+  }
+  
+  public Folder getSelectedFolder() {
+	  if(getSelectionCount() > 0 ) {
+		  TreePath path = getSelectionPath();
+		  
+          for (int i = 0; i < path.getPathCount(); i++) {
+        	  if(path.getPathComponent(i) instanceof Folder) {
+        		  return (Folder) path.getPathComponent(i);
+              }
+          }
+	  }
+	  
+	  return null;
   }
   
   static class FolderCellRenderer implements TreeCellRenderer {

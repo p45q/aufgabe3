@@ -105,15 +105,24 @@ public class QuickmailGui extends JFrame {
             }
         });
 		newMailAccount.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
+            public void actionPerformed(ActionEvent arg0) {				
+				JFrame f = new MailAccountForm(null);
+				f.pack();
+				f.setVisible(true);
             }
         });
 		
 	    editAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-            }
+            	
+            	AccountFolder selectedAccount = mailFolders.getSelectedAccount();
+            	if(selectedAccount != null)
+   				{   					
+   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount());
+   					f.pack();
+   					f.setVisible(true);
+   				}
+			}
         });
 	    removeAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
