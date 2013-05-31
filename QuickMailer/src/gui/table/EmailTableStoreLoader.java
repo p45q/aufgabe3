@@ -36,6 +36,9 @@ public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 		ArrayList<Mail> mailList = receiveMailObj.getAllMessages();
 	
 		addMailstoTable(mailList);
+		for (Mail mail : mailList) {
+			mailAccount.getDefaultFolder().addMail(mail);
+		}
 		
 		updateProgress("Posteingang wurde erfolgreich aktualisiert, " + mailList.size() +  " neue E-Mails");
 	}
