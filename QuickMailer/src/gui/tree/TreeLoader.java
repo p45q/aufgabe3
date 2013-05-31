@@ -23,9 +23,9 @@ public class TreeLoader extends SwingWorker<JTree, Folder>{
 	@Override
 	protected JTree doInBackground() throws Exception {
 		if(reloadTree) {
-			StorageService storageObj = new StorageService();
+			StorageService storageObj = StorageService.getInstance();
 			
-			ArrayList<MailAccount> mailAccounts = storageObj.getMailAccounts(true);
+			ArrayList<MailAccount> mailAccounts = storageObj.getMailAccounts();
 			for(MailAccount account : mailAccounts) {
 				tree.addAcount(account);
 			}

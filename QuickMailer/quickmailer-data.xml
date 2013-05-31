@@ -3,12 +3,147 @@
     <mailAccounts>
         <emailadress>quickmailerffhs@gmail.com</emailadress>
         <folders>
-            <mails/>
-            <label>Posteingang</label>
+            <mails>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@38666d83</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Kontakte und alte E-Mails importieren</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@1029f93b</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Holen Sie sich Gmail auf Ihr Mobiltelefon!</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@33a998c7</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Gestalten Sie Gmail mit Farben und Designs</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@3ab28980</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@1f61509b</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@2df30035</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@2c92af24</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@745bb9d</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Kontakte und alte E-Mails importieren</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@4b5a142f</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Holen Sie sich Gmail auf Ihr Mobiltelefon!</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@6e3404f</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Gestalten Sie Gmail mit Farben und Designs</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@2383e965</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@294ff81a</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@41298826</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@da99836</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@6ce7ce4c</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Kontakte und alte E-Mails importieren</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@4cd1ad08</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Holen Sie sich Gmail auf Ihr Mobiltelefon!</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@59b70f9e</body>
+                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
+                    <subject>Gestalten Sie Gmail mit Farben und Designs</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@38666d83</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@4c9fd062</body>
+                    <from>no-reply@accounts.google.com</from>
+                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@1029f93b</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@33a998c7</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <subject>Re: Re: sadasd</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@436d4b50</body>
+                    <from>Thierry Baumann &lt;thierry@swissmademarketing.com&gt;</from>
+                    <subject>test</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+            </mails>
+            <label>Inbox</label>
+            <restricted>true</restricted>
         </folders>
         <folders>
             <mails/>
-            <label>Postausgang</label>
+            <label>Outbox</label>
+            <restricted>true</restricted>
         </folders>
         <folders>
             <mails>
@@ -74,6 +209,7 @@
                 </mailList>
             </mails>
             <label>Meine Mails</label>
+            <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
         <pop3Host>pop.gmail.com</pop3Host>
@@ -82,79 +218,21 @@
         <smtpPort>587</smtpPort>
     </mailAccounts>
     <mailAccounts>
-        <emailadress>quickmailer2ffhs@gmail.com</emailadress>
+        <emailadress>quickmailer2222ffhs@gmail.com</emailadress>
         <folders>
             <mails/>
-            <label>Posteingang</label>
+            <label>Inbox</label>
+            <restricted>true</restricted>
         </folders>
         <folders>
             <mails/>
-            <label>Postausgang</label>
+            <label>Outbox</label>
+            <restricted>true</restricted>
         </folders>
         <folders>
-            <mails>
-                <mailList>
-                    <body>body0</body>
-                    <from>Deine 2 from0</from>
-                    <subject>subject0</subject>
-                    <to>to0</to>
-                </mailList>
-                <mailList>
-                    <body>body1</body>
-                    <from>Deine 2 from1</from>
-                    <subject>subject1</subject>
-                    <to>to1</to>
-                </mailList>
-                <mailList>
-                    <body>body2</body>
-                    <from>Deine 2 from2</from>
-                    <subject>subject2</subject>
-                    <to>to2</to>
-                </mailList>
-                <mailList>
-                    <body>body3</body>
-                    <from>Deine 2 from3</from>
-                    <subject>subject3</subject>
-                    <to>to3</to>
-                </mailList>
-                <mailList>
-                    <body>body4</body>
-                    <from>Deine 2 from4</from>
-                    <subject>subject4</subject>
-                    <to>to4</to>
-                </mailList>
-                <mailList>
-                    <body>body5</body>
-                    <from>Deine 2 from5</from>
-                    <subject>subject5</subject>
-                    <to>to5</to>
-                </mailList>
-                <mailList>
-                    <body>body6</body>
-                    <from>Deine 2 from6</from>
-                    <subject>subject6</subject>
-                    <to>to6</to>
-                </mailList>
-                <mailList>
-                    <body>body7</body>
-                    <from>Deine 2 from7</from>
-                    <subject>subject7</subject>
-                    <to>to7</to>
-                </mailList>
-                <mailList>
-                    <body>body8</body>
-                    <from>Deine 2 from8</from>
-                    <subject>subject8</subject>
-                    <to>to8</to>
-                </mailList>
-                <mailList>
-                    <body>body9</body>
-                    <from>Deine 2 from9</from>
-                    <subject>subject9</subject>
-                    <to>to9</to>
-                </mailList>
-            </mails>
-            <label>Deine Mails</label>
+            <mails/>
+            <label>test222</label>
+            <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
         <pop3Host>pop.asd.com</pop3Host>
@@ -163,35 +241,21 @@
         <smtpPort>587</smtpPort>
     </mailAccounts>
     <mailAccounts>
-        <emailadress>test</emailadress>
+        <emailadress>blub</emailadress>
         <folders>
             <mails/>
-            <label>Posteingang</label>
+            <label>Inbox</label>
+            <restricted>true</restricted>
         </folders>
         <folders>
             <mails/>
-            <label>Postausgang</label>
+            <label>Outbox</label>
+            <restricted>true</restricted>
         </folders>
-        <password>test</password>
-        <pop3Host>test</pop3Host>
-        <pop3Port>213</pop3Port>
-        <smtpHost>test</smtpHost>
-        <smtpPort>2134</smtpPort>
-    </mailAccounts>
-    <mailAccounts>
-        <emailadress>bieri</emailadress>
-        <folders>
-            <mails/>
-            <label>Posteingang</label>
-        </folders>
-        <folders>
-            <mails/>
-            <label>Postausgang</label>
-        </folders>
-        <password>asdasd</password>
+        <password>asd</password>
         <pop3Host>asd1</pop3Host>
-        <pop3Port>123</pop3Port>
-        <smtpHost>asd</smtpHost>
+        <pop3Port>22</pop3Port>
+        <smtpHost>asdasd</smtpHost>
         <smtpPort>123</smtpPort>
     </mailAccounts>
 </ns2:quickmailerData>

@@ -71,9 +71,9 @@ public class QuickmailGui extends JFrame {
     private JMenuItem removeFolder;
 	private StorageService storageObj; 
 
-	public QuickmailGui(StorageService storageObj){
+	public QuickmailGui(){
 		super("QuickMailer");
-		this.storageObj = storageObj;
+		StorageService storageObj = StorageService.getInstance();
 
 		setContentPane(createContentPane());
 		
@@ -108,7 +108,7 @@ public class QuickmailGui extends JFrame {
         });
 		newMailAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {				
-				JFrame f = new MailAccountForm(null);
+				JFrame f = new MailAccountForm(null, folderTree);
 				f.pack();
 				f.setVisible(true);
 				
@@ -122,7 +122,7 @@ public class QuickmailGui extends JFrame {
             	AccountFolder selectedAccount = folderTree.getSelectedAccount();
             	if(selectedAccount != null)
    				{   					
-   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount());
+   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount(), folderTree);
    					f.pack();
    					f.setVisible(true);
    				}
@@ -130,7 +130,13 @@ public class QuickmailGui extends JFrame {
         });
 	    removeAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
+            	AccountFolder selectedAccount = folderTree.getSelectedAccount();
+            	if(selectedAccount != null)
+   				{   
+                	StorageService.getInstance().removeMailAccount(selectedAccount.getMailAccount());
+    				folderTree.reloadTree();
+   				}
+            	
             }
         });
 	    editFolder.addActionListener(new ActionListener() {
@@ -146,19 +152,24 @@ public class QuickmailGui extends JFrame {
         });
 	    removeFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
+            	if(folderTree.getSelectedFolder() != null) {
+            		folderTree.getSelectedAccount().getMailAccount().removeFolder(folderTree.getSelectedFolder());
+    				folderTree.reloadTree();
+    				
+    				storageObj.saveQuickmailerData();
+            	}
             }
         });
 		
 		getnewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				if(folderTree.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
-				{
-					AccountFolder parrentFolder = (AccountFolder) folderTree.getSelectionPath().getPathComponent(1);
-					
+				AccountFolder selectedAccount = folderTree.getSelectedAccount();
+				
+				if(selectedAccount != null)
+				{					
 					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
-					tableStoreLoader.setMailAccount(parrentFolder.getMailAccount());
+					tableStoreLoader.setMailAccount(selectedAccount.getMailAccount());
 					tableStoreLoader.execute();				
 				}
 			};
@@ -167,30 +178,38 @@ public class QuickmailGui extends JFrame {
 		newmailButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				Mail dummyMail = new Mail(null, null, null, null);
+
+				AccountFolder selectedAccount = folderTree.getSelectedAccount();
 				
-				
-				JFrame f = new SendMail(dummyMail);
-				f.setSize(1200, 800); // oder: f.pack();
-				f.setVisible(true);
+				if(selectedAccount != null)
+				{	
+					JFrame f = new SendMail(null, selectedAccount.getMailAccount());
+					f.setSize(1200, 800); // oder: f.pack();
+					f.setVisible(true);
+				}				
 			};
 			
 		});
 		replyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				for (int c : mailTable.getSelectedRows()) {
-					Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+				AccountFolder selectedAccount = folderTree.getSelectedAccount();
 				
-				JFrame f = new SendMail(selectedMailObj);
-				f.setSize(1200, 800); // oder: f.pack();
-				f.setVisible(true);
-				}
+				if(selectedAccount != null)
+				{		
+					for (int c : mailTable.getSelectedRows()) {
+						Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+					
+						JFrame f = new SendMail(selectedMailObj, selectedAccount.getMailAccount());
+						f.setSize(1200, 800); // oder: f.pack();
+						f.setVisible(true);
+						
+						break;
+					}
+				}	
 			};
-			
 		});
 		
-
 	}
 	
 
@@ -246,9 +265,9 @@ public class QuickmailGui extends JFrame {
 				rightCol.add(progressLabel, BorderLayout.PAGE_END);
 		
 		//TEST ****		
-		MailAccount defaultAccount = storageObj.getDefaultAccount();
+	//	MailAccount defaultAccount = storageObj.getDefaultAccount();
 		
-		new EmailTableStoreLoader(defaultAccount.getDefaultFolder(), mailTableModel, progressLabel).execute();
+	//	new EmailTableStoreLoader(defaultAccount.getDefaultFolder(), mailTableModel, progressLabel).execute();
 		// *************
 		
 		// dummy inhalt TODO: weg von hier...

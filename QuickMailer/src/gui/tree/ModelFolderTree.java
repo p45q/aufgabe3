@@ -122,6 +122,18 @@ public class ModelFolderTree implements TreeModel
         return 0;
     }
 
+    
+    public int getIndexOfAccount(AccountFolder selectedAccount)
+    {
+        return mailAccounts.indexOf(selectedAccount);
+    }
+    
+    public int getIndexOfAccount(int accountIndex, Folder selectedFolder)
+    {
+        return mailAccounts.get(accountIndex).getMailAccount().getFolders().indexOf(selectedFolder);
+    }
+    
+    
     public void addTreeModelListener(TreeModelListener l)
     {
         listeners.add(l);

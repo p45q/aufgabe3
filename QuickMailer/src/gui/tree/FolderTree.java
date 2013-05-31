@@ -17,10 +17,14 @@ import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import storage.StorageService;
+
 public class FolderTree extends JTree {
   protected DefaultMutableTreeNode rootNode;
   protected ModelFolderTree treeModel;
   protected JTree tree;
+  private static FolderTree instance = null;
+
 
   public FolderTree() {
 	treeModel = new ModelFolderTree("mails");
@@ -30,11 +34,23 @@ public class FolderTree extends JTree {
 	setShowsRootHandles(true);
     getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     
+    instance = this;
     // Wurzel aufklappen 
     //expandAll();
   }
 
 
+
+	public static FolderTree getInstance()
+	{
+		if(instance == null) {
+			instance = new FolderTree();
+		}
+	    
+		return instance;
+	}
+	
+	
   private void expandAll() {
 	  for (int i = 0; i < getRowCount(); i++) {
 	         collapseRow(i);
@@ -64,12 +80,20 @@ public class FolderTree extends JTree {
   
   public AccountFolder getSelectedAccount() {
 	  if(getSelectionCount() > 0 ) {
-		  if(getSelectionPath().getPathComponent(1) instanceof AccountFolder) {
-				return (AccountFolder) getSelectionPath().getPathComponent(1);
+		  if(getSelectionPath().getPathComponent(1) instanceof AccountFolder) {			  
+			  return (AccountFolder) getSelectionPath().getPathComponent(1);
 			}
 	  }
 	  
 	  return null;
+  }
+  
+  public int getIndexOfAccount(AccountFolder selectedAccount) {
+	  if(selectedAccount == null) {
+		  selectedAccount = getSelectedAccount();
+	  }
+	  
+	  return treeModel.getIndexOfAccount(selectedAccount);
   }
   
   public Folder getSelectedFolder() {

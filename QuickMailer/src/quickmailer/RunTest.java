@@ -54,7 +54,7 @@ public class RunTest {
 			Mail mailTemp = new Mail("Deine 2 from" + i, "to" + i, "subject" + i, "body" + i);
 			testFolder2.addMail(mailTemp);
 		}	
-		
+		System.out.println("MAILS: " + testFolder.getMailList());
 		mailaccount.addFolder(testFolder);
 		mailaccount2.addFolder(testFolder2);
 		
@@ -73,7 +73,7 @@ public class RunTest {
 	    System.out.println();
 	    System.out.println("Output from our XML File: ");
 	    Unmarshaller um = context.createUnmarshaller();
-	    storage.datamanager.QuickmailerData bookstore2 = (QuickmailerData) um.unmarshal(new FileReader("./bookstore-jaxb.xml"));
+	    storage.datamanager.QuickmailerData bookstore2 = (QuickmailerData) um.unmarshal(new FileReader("./quickmailer-data.xml"));
 	    ArrayList<MailAccount> list = bookstore2.getMailAccounts();
 	    for (MailAccount mailAccount : list) {
 	      System.out.println("MailAccount: " + mailAccount.getEmailadress() + " host"

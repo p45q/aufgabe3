@@ -3,6 +3,7 @@ package storage.datamanager;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.SwingWorker;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -10,20 +11,17 @@ import javax.xml.bind.Marshaller;
 import mail.MailAccount;
 
 
-public class DataManagerMarshal {
-private final String outputXml;
+public class DataManagerMarshal extends SwingWorker {
+	private final String outputXml;
+	private final QuickmailerData quickmailerData;
 	
-	public DataManagerMarshal(String outputXml)
+	public DataManagerMarshal(String outputXml, QuickmailerData quickmailerData)
 	{
+		this.quickmailerData = quickmailerData;
 		this.outputXml = outputXml;
 	}
 	
-	
-	public void setQuickmailerData(QuickmailerData quickmailerData)
-	{
-		marshalQuickmailerData(quickmailerData);
-	}
-	
+		
 	public void marshalQuickmailerData(QuickmailerData settings) {
    		try {
 			// JAXB context erstellen und initialisierung des marshaller
@@ -39,5 +37,14 @@ private final String outputXml;
    		} catch (JAXBException e) {
    			e.printStackTrace();
    		}
+	}
+
+
+	@Override
+	protected Object doInBackground() throws Exception {
+
+		marshalQuickmailerData(quickmailerData);
+
+		return null;
 	}
 }

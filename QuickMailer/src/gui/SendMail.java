@@ -17,10 +17,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import mail.Mail;
+import mail.MailAccount;
 import mail.MailService;
 
 public class SendMail extends JFrame{
-	private Mail MailObj;
+	private Mail mailObj ;
+	private MailAccount mailAccount;
 
 	private JLabel labelTo;
 	private JLabel labelSubject;
@@ -30,15 +32,17 @@ public class SendMail extends JFrame{
 	private JTextArea textArea;
 	private boolean isreply;
 
-	public SendMail(Mail selectedMailObj){
+	public SendMail(Mail selectedMailObj, MailAccount mailAccount){
 		super("Email Verfassen");
-		MailObj = selectedMailObj;
+		mailObj = selectedMailObj;
+		this.mailAccount = mailAccount;
+		
 		setContentPane(createContentPane());
 		addListeners();
 	}
 	
 	private JPanel createContentPane() {
-		if(MailObj.getTo()!= null)
+		if(mailObj != null)
 		{
 			isreply = true;
 		}
@@ -58,7 +62,7 @@ public class SendMail extends JFrame{
 		JScrollPane scrollPane = new JScrollPane(textArea); 
 		textArea.setEditable(true);
 		if(isreply){
-			textArea.setText("\n\n Originale Nachricht: \n " +  MailObj.getBody());
+			textArea.setText("\n\n Originale Nachricht: \n " +  mailObj.getBody());
 		}
 		
 
@@ -69,7 +73,7 @@ public class SendMail extends JFrame{
 		panelto.setLayout(new FlowLayout());
 		labelTo = new JLabel("An: ");
 		panelto.add(labelTo);
-		textto = new JTextField(MailObj.getFrom(),30);
+		textto = new JTextField(mailObj.getFrom(),30);
 		panelto.add(textto);
 		infopane.add(panelto);
 		
@@ -79,7 +83,7 @@ public class SendMail extends JFrame{
 		labelSubject = new JLabel("Betreff: ");
 		panelsubject.add(labelSubject);
 		if(isreply){
-			textSubject = new JTextField("AW: "+ MailObj.getSubject(),30);
+			textSubject = new JTextField("AW: "+ mailObj.getSubject(),30);
 		}
 		else
 		{

@@ -2,20 +2,24 @@ package gui.tree;
 
 
 import java.util.ArrayList;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import storage.datamanager.adapters.FolderAdapter;
+import storage.datamanager.adapters.MailAccountAdapter;
+
+import storage.datamanager.adapters.FolderAdapter;
 import mail.Mail;
+@XmlJavaTypeAdapter(FolderAdapter.class)
+
 public class Folder implements TreeFolders{
 
 	private String label;
 	private Boolean restricted;
-	 @XmlElementWrapper(name = "mails")
 	private ArrayList<Mail> mailList;
 	
-	public Folder() {
-		
-	}
 	public Folder(String label) {
 		this(label, false);
 		this.mailList = new ArrayList<Mail>();
@@ -33,7 +37,8 @@ public class Folder implements TreeFolders{
 	}
 
 	public void setLabel(String label) {
-		this.label = label;
+		System.out.println("REST: " + restricted);
+		if(!restricted) this.label = label;
 	}
 
 	public ArrayList<Mail> getMailList() {
@@ -50,8 +55,9 @@ public class Folder implements TreeFolders{
 
 	public void addMail(Mail mail) {
 		mailList.add(mail);
-		
 	}
 
-
+	public void setRestricted(Boolean restricted) {
+		this.restricted = restricted;
+	}
 }

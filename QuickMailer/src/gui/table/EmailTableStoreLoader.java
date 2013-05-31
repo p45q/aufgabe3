@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import storage.StorageService;
+import storage.datamanager.QuickmailerData;
+
 import mail.Mail;
 import mail.MailAccount;
 import mail.ReceiveMail;
@@ -34,12 +37,15 @@ public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 		ReceiveMail receiveMailObj = new ReceiveMail(mailAccount);
 		
 		ArrayList<Mail> mailList = receiveMailObj.getAllMessages();
-	
+	System.out.println("mailList: " + mailList);
 		addMailstoTable(mailList);
+		
 		for (Mail mail : mailList) {
 			mailAccount.getDefaultFolder().addMail(mail);
 		}
 		
+		StorageService.getInstance().saveQuickmailerData();
+
 		updateProgress("Posteingang wurde erfolgreich aktualisiert, " + mailList.size() +  " neue E-Mails");
 	}
 	

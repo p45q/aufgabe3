@@ -1,25 +1,23 @@
 package gui;
+import gui.tree.FolderTree;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 
 import storage.StorageService;
 
-import mail.Mail;
 import mail.MailAccount;
-import mail.MailService;
 
 
 public class MailAccountForm extends JFrame{
@@ -33,11 +31,13 @@ public class MailAccountForm extends JFrame{
 	private JTextField pop3Port;
 	
 	private JButton saveButton;
-	private JButton deleteButton;
+	
+	private FolderTree folderTree;
 
-	public MailAccountForm(MailAccount editMailAccount){
+	public MailAccountForm(MailAccount editMailAccount, FolderTree folderTree){
 		super("MailAccount");
 		this.editMailAccount = editMailAccount;
+		this.folderTree = folderTree;
 		
 		setContentPane(createContentPane());
 		
@@ -97,11 +97,6 @@ public class MailAccountForm extends JFrame{
 		saveButton = new JButton("Save");
 		actionPanel.add(saveButton);
 		
-		if(editMailAccount != null) {
-			// button delte
-			deleteButton = new JButton("Delete");
-			actionPanel.add(deleteButton);
-		}
 		formWrapper.add(actionPanel);
 		
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
@@ -112,6 +107,8 @@ public class MailAccountForm extends JFrame{
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
+				
+				StorageService storageObj = StorageService.getInstance();
 				
 				if(editMailAccount != null) {
 					// edit selected mailaccount
@@ -126,21 +123,11 @@ public class MailAccountForm extends JFrame{
 					// save new mailaccount
 					MailAccount newMailAccount = new MailAccount(mailAdress.getText(), password.getText(), smtpHost.getText(), Integer.parseInt(smtpPort.getText()), pop3Host.getText(), Integer.parseInt(pop3Port.getText()));
 					
-					StorageService storageObj = new StorageService();
 					storageObj.addMailAccount(newMailAccount);
+					folderTree.reloadTree();
 				}
-					
-				
-				
-				/*SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						MailService mailcomobj = new mail.MailService();
-						mail.MailAccount mailaccount = new mail.MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
-						Mail mailobj1 = new Mail("quickmailerffhs@gmail.com",textto.getText(),textSubject.getText(),textArea.getText());
-						mailcomobj.sendMail(mailobj1, mailaccount);
-					}
-				});*/
+
+				storageObj.saveQuickmailerData();
 			};		
 		});
 	}

@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import storage.StorageService;
+import storage.datamanager.QuickmailerData;
+
 import mail.MailAccount;
 import gui.tree.Folder;
 import gui.tree.FolderTree;
@@ -21,6 +24,7 @@ public class RenameFolder extends JFrame{
 	private JTextField folderName;
 	private Folder selectedFolder;
 	private AccountFolder selectedAccount;
+	
 	private JButton saveButton;
 	private JButton deleteButton;
 	
@@ -28,6 +32,8 @@ public class RenameFolder extends JFrame{
 	public RenameFolder(Folder selectedFolder, AccountFolder selectedAccount){
 		super("Folder");
 		this.selectedFolder = selectedFolder;
+		this.selectedAccount = selectedAccount;
+
 		setContentPane(createContentPane());
 	//	addListeners();
 	}
@@ -57,19 +63,18 @@ public class RenameFolder extends JFrame{
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
 		saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                if(selectedFolder != null)
-                {
-                	selectedFolder.setLabel(folderName.getText());
+                if(selectedFolder != null) {
+                	selectedFolder.setLabel(folderName.getText());                		
                 }
-                else
-                {
-                	Folder newFolder = new Folder();
-                	newFolder.setLabel(folderName.getText());
+                else {
+                	Folder newFolder = new Folder(folderName.getText());
+                	
                 	selectedAccount.getMailAccount().addFolder(newFolder);
                 }
              
+                StorageService.getInstance().saveQuickmailerData();
                 
-             //   mailFolders.reloadTree();
+                FolderTree.getInstance().reloadTree();
                 
             }
         });

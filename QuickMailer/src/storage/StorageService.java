@@ -14,23 +14,30 @@ public class StorageService {
 	private static ArrayList<MailAccount> mailAccounts;
 	
 	private static final String QUICKMAIL_XML = "./quickmailer-data.xml";
+	private static StorageService instance = null;
 
+	
 	public StorageService()
-	{
+	{		
 		mailAccounts = new ArrayList<MailAccount>();
-		
+
 		loadMailAccounts();
+		
+		instance = this;
 	}
 	
 	
-	
-	public ArrayList<MailAccount> getMailAccounts(Boolean reloadData)
+	public static StorageService getInstance()
 	{
-		if(reloadData)
-		{
-			loadMailAccounts();
+		if(instance == null) {
+			instance = new StorageService();
 		}
+	    
+		return instance;
+	}
 	
+	public ArrayList<MailAccount> getMailAccounts()
+	{	
 		return mailAccounts;
 	}
 	
@@ -42,9 +49,10 @@ public class StorageService {
 		mailAccounts = unmashaler.getMailAccounts();
 	}
 	
+	
 	public MailAccount getDefaultAccount()
 	{
-		if(mailAccounts != null) {
+		if(mailAccounts == null) {
 			loadMailAccounts();
 		}
 		
@@ -59,13 +67,19 @@ public class StorageService {
 		saveQuickmailerData();
 	}
 	
-	private void saveQuickmailerData() {
-		DataManagerMarshal marshal = new DataManagerMarshal(QUICKMAIL_XML);
+	
+	public void removeMailAccount(MailAccount removeMailAccount)
+	{
+		mailAccounts.remove(removeMailAccount);
 		
+		saveQuickmailerData();
+	}
+	
+	public void saveQuickmailerData() {
 		QuickmailerData dataObj = new QuickmailerData();
 		dataObj.setMailAccounts(mailAccounts);
-
-		marshal.setQuickmailerData(dataObj);
+		
+		new DataManagerMarshal(QUICKMAIL_XML, dataObj).execute();
 	}
 		
 }

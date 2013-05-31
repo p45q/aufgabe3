@@ -21,7 +21,7 @@ public class MailAccount {
 	private final Integer DEFAULTPOP3PORT = 123;
 	private final Integer DEFAULTSMTPPORT = 123;
 	
-	private static final String DEFAULT_FOLDERLABEL = "Posteingang";
+	private static final String DEFAULT_FOLDERLABEL = "Inbox";
 	
 	@SuppressWarnings("serial")
 	public MailAccount(String emailadress, String password, String smtpHost, Integer smtpPort, String pop3Host, Integer pop3Port) {
@@ -41,8 +41,8 @@ public class MailAccount {
 		this.pop3Port = pop3Port;
 
 		folders = new CopyOnWriteArrayList<Folder>(){ {
-	        add(new Folder("Posteingang", true));
-	        add(new Folder("Postausgang", true));
+	        add(new Folder("Inbox", true));
+	        add(new Folder("Outbox", true));
 	    }};
 
 		
@@ -112,6 +112,14 @@ public class MailAccount {
 		if(!folder.isRestricted()) {
 			folders.remove(folder);
 		}
+	}
+	
+	public void updateFolder(Folder newFolder) {
+		System.out.println("TEST FOLDER: "+ newFolder + folders + " " + folders.contains(newFolder));
+		/*
+		if(!folders.get(folderIndex).isRestricted()) {
+			folders.add(folderIndex, newFolder);
+		}*/
 	}
 	
 	public Folder getDefaultFolder() {
