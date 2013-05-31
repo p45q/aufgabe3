@@ -91,20 +91,14 @@ public class QuickmailGui extends JFrame {
 		newFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 System.out.println("new folder");
-                
-                JFrame f = new RenameFolder();
-				f.pack();
-				f.setVisible(true);
-                
-                if(folderTree.getSelectionPath().getPathComponent(1) instanceof AccountFolder)
-				{
-					AccountFolder parrentFolder = (AccountFolder) folderTree.getSelectionPath().getPathComponent(1);
-					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
-					parrentFolder.getMailAccount().addFolder(new Folder("jada"));
-				}
-                
-                folderTree.reloadTree();
-                
+
+                if (folderTree.getSelectedAccount() != null)
+                {
+                	JFrame f = new RenameFolder(null, folderTree.getSelectedAccount());
+                	f.pack();
+                	f.setVisible(true);
+                	
+                }
             }
         });
 		newMail.addActionListener(new ActionListener() {
@@ -128,7 +122,7 @@ public class QuickmailGui extends JFrame {
             	AccountFolder selectedAccount = folderTree.getSelectedAccount();
             	if(selectedAccount != null)
    				{   					
-   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount(), folderTree);
+   	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount());
    					f.pack();
    					f.setVisible(true);
    				}
@@ -141,10 +135,13 @@ public class QuickmailGui extends JFrame {
         });
 	    editFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-                JFrame f = new RenameFolder();
-				f.pack();
-				f.setVisible(true);
+            	if(folderTree.getSelectedFolder() != null)
+            	{
+            		System.out.println("You have clicked on the new action");
+            		JFrame f = new RenameFolder(folderTree.getSelectedFolder(), folderTree.getSelectedAccount());
+            		f.pack();
+            		f.setVisible(true);
+            	}
             }
         });
 	    removeFolder.addActionListener(new ActionListener() {
