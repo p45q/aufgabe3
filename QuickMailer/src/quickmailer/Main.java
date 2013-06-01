@@ -20,7 +20,7 @@ public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-		StorageService storageObj = new StorageService();
+		StorageService storageObj = StorageService.getInstance();
 		storageObj.loadMailAccounts();
 		
 		JFrame f = new QuickmailFrame();

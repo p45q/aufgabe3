@@ -1,7 +1,7 @@
 package mail;
 
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -16,13 +16,14 @@ public class MailAccount {
 	private Integer smtpPort;
 	private String pop3Host;
 	private Integer pop3Port;
-	private CopyOnWriteArrayList<Folder> folders;
+	private CopyOnWriteArrayList<MailFolder> folders;
 
 	private final Integer DEFAULTPOP3PORT = 123;
 	private final Integer DEFAULTSMTPPORT = 123;
 	
-	private static final String DEFAULT_FOLDERLABEL = "Inbox";
-	
+	private static final String L_INBOX = "Inbox";
+	private static final String L_OUTBOX = "Inbox";
+
 	@SuppressWarnings("serial")
 	public MailAccount(String emailadress, String password, String smtpHost, Integer smtpPort, String pop3Host, Integer pop3Port) {
 		if(pop3Port == null) {
@@ -40,9 +41,9 @@ public class MailAccount {
 		this.pop3Host = pop3Host;
 		this.pop3Port = pop3Port;
 
-		folders = new CopyOnWriteArrayList<Folder>(){ {
-	        add(new Folder("Inbox", true));
-	        add(new Folder("Outbox", true));
+		folders = new CopyOnWriteArrayList<MailFolder>(){ {
+	        add(new MailFolder("Inbox", true));
+	        add(new MailFolder("Outbox", true));
 	    }};
 
 		
@@ -96,38 +97,53 @@ public class MailAccount {
 		this.smtpHost = smtphost;
 	}	
 	
-	public CopyOnWriteArrayList<Folder> getFolders() {
+	public CopyOnWriteArrayList<MailFolder> getFolders() {
 		return folders;
 	}
 	
-	public void setFolders(CopyOnWriteArrayList<Folder> folders) {
+	public void setFolders(CopyOnWriteArrayList<MailFolder> folders) {
 		this.folders = folders;
 	}
 	
-	public void addFolder(Folder folder) {
+	public void addFolder(MailFolder folder) {
 		folders.add(folder);
 	}
 	
-	public void removeFolder(Folder folder) {
+	public Boolean removeFolder(MailFolder folder) {
 		if(!folder.isRestricted()) {
 			folders.remove(folder);
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
-	public void updateFolder(Folder newFolder) {
-		System.out.println("TEST FOLDER: "+ newFolder + folders + " " + folders.contains(newFolder));
-		/*
-		if(!folders.get(folderIndex).isRestricted()) {
-			folders.add(folderIndex, newFolder);
-		}*/
+	public Boolean updateFolder(MailFolder newFolder) {
+		if(!newFolder.isRestricted()) {
+			folders.add(folders.indexOf(newFolder), newFolder);
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
-	public Folder getDefaultFolder() {
-		for (Folder folder : folders){
-			if(folder.getLabel().equals(DEFAULT_FOLDERLABEL)){
+	public MailFolder getInboxFolder() {
+		return searchFolder(L_INBOX);
+	}
+	
+	public MailFolder getOutboxFolder() {
+		return searchFolder(L_OUTBOX);
+	}
+	
+	private MailFolder searchFolder(String searchString) {
+		for (MailFolder folder : folders){
+			if(folder.getLabel().equals(searchString)){
 				return folder;
 			}
 		}
+		
 		return null;
 	}
 }

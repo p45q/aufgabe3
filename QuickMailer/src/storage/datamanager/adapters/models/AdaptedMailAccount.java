@@ -1,6 +1,6 @@
 package storage.datamanager.adapters.models;
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -13,7 +13,7 @@ public class AdaptedMailAccount {
 	private String pop3Host;
 	private Integer pop3Port;
 	 
-	private CopyOnWriteArrayList<Folder> folders;
+	private CopyOnWriteArrayList<MailFolder> folders;
 
 	private static final String DEFAULT_FOLDERLABEL = "Posteingang";
 
@@ -65,26 +65,26 @@ public class AdaptedMailAccount {
 		this.smtpHost = smtphost;
 	}	
 	
-	public CopyOnWriteArrayList<Folder> getFolders() {
+	public CopyOnWriteArrayList<MailFolder> getFolders() {
 		return folders;
 	}
 	
-	public void setFolders(CopyOnWriteArrayList<Folder> folders) {
+	public void setFolders(CopyOnWriteArrayList<MailFolder> folders) {
 		this.folders = folders;
 	}
 	
-	public void addFolder(Folder folder) {
+	public void addFolder(MailFolder folder) {
 		folders.add(folder);
 	}
 	
-	public void removeFolder(Folder folder) {
+	public void removeFolder(MailFolder folder) {
 		if(!folder.isRestricted()) {
 			folders.remove(folder);
 		}
 	}
 	
-	public Folder getDefaultFolder() {
-		for (Folder folder : folders){
+	public MailFolder getDefaultFolder() {
+		for (MailFolder folder : folders){
 			if(folder.getLabel().equals(DEFAULT_FOLDERLABEL)){
 				return folder;
 			}

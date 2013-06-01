@@ -3,16 +3,19 @@ package gui;
 import gui.table.ModelEmailTable;
 import gui.table.EmailTableStoreLoader;
 import gui.tree.AccountFolder;
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 import gui.tree.FolderTree;
 import gui.tree.TreeLoader;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
@@ -22,8 +25,10 @@ import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -38,6 +43,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 import javax.swing.tree.TreePath;
 
 import storage.StorageService;
@@ -51,11 +58,12 @@ public class QuickmailFrame extends JFrame {
 	private JButton newmailButton;
 	private JButton replyButton;
 	private JButton forewardButton;
-	private JButton replyallButton;
 	private JButton getnewButton;
 
 	private JLabel progressLabel;
 
+	private StorageService storageObj; 
+	
 	private Border blackline;
 
 	private JTable mailTable;
@@ -69,8 +77,12 @@ public class QuickmailFrame extends JFrame {
     private JMenuItem removeAccount;
     private JMenuItem editFolder;
     private JMenuItem removeFolder;
-	private StorageService storageObj; 
+	private JComboBox moveToFolderCombo;
 
+	private final String L_SELECTACCOUNT = "Please select your e-mail account";
+	private final String L_SELECTFOLDER = "Please select your folder";
+	private final String L_SELECTMAIL = "Please select e-mail";
+	
 	public QuickmailFrame(){
 		super("QuickMailer");
 		StorageService storageObj = StorageService.getInstance();
@@ -85,19 +97,16 @@ public class QuickmailFrame extends JFrame {
 
 	
 	private void addListeners() {
-		
-		
 		newFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                System.out.println("new folder");
-
-                if (folderTree.getSelectedAccount() != null)
-                {
+                if (folderTree.getSelectedAccount() != null) {
                 	JFrame f = new RenameFolder(null, folderTree.getSelectedAccount());
                 	f.pack();
-                	f.setVisible(true);
-                	
+                	f.setVisible(true);	
                 }
+                else {
+                	updateProgress(L_SELECTACCOUNT);
+                }	
             }
         });
 		
@@ -108,43 +117,44 @@ public class QuickmailFrame extends JFrame {
 				JFrame f = new MailAccountForm(null, folderTree);
 				f.pack();
 				f.setVisible(true);
-				
-				System.out.println("JUO");
-            }
+			}
         });
 		
 	    editAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-            	
             	AccountFolder selectedAccount = folderTree.getSelectedAccount();
-            	if(selectedAccount != null)
-   				{   					
+            	if(selectedAccount != null) {   					
    	            	JFrame f = new MailAccountForm(selectedAccount.getMailAccount(), folderTree);
    					f.pack();
    					f.setVisible(true);
-   				}
+   				} 
+            	else {
+                	updateProgress(L_SELECTACCOUNT);
+                }
 			}
         });
 	    removeAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
             	AccountFolder selectedAccount = folderTree.getSelectedAccount();
-            	if(selectedAccount != null)
-   				{   
+            	if(selectedAccount != null) {   
                 	StorageService.getInstance().removeMailAccount(selectedAccount.getMailAccount());
     				folderTree.reloadTree();
    				}
-            	
+            	else {
+                	updateProgress(L_SELECTACCOUNT);
+                }
             }
         });
 	    editFolder.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-            	if(folderTree.getSelectedFolder() != null)
-            	{
-            		System.out.println("You have clicked on the new action");
+            	if(folderTree.getSelectedFolder() != null) {
             		JFrame f = new RenameFolder(folderTree.getSelectedFolder(), folderTree.getSelectedAccount());
             		f.pack();
             		f.setVisible(true);
             	}
+            	else {
+                	updateProgress(L_SELECTFOLDER);
+                }
             }
         });
 	    removeFolder.addActionListener(new ActionListener() {
@@ -155,6 +165,9 @@ public class QuickmailFrame extends JFrame {
     				
     				storageObj.saveQuickmailerData();
             	}
+            	else {
+                	updateProgress(L_SELECTFOLDER);
+                }
             }
         });
 		
@@ -162,14 +175,13 @@ public class QuickmailFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				AccountFolder selectedAccount = folderTree.getSelectedAccount();
-				
 				if(selectedAccount != null) {	
-					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
+					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(folderTree.getSelectedFolder(), mailTableModel, progressLabel, true);
 					tableStoreLoader.setMailAccount(selectedAccount.getMailAccount());
 					tableStoreLoader.execute();	
 				}				
 				else {
-					updateProgress("Please select your e-mail account");
+					updateProgress(L_SELECTACCOUNT);
 				}
 			};
 		});
@@ -182,16 +194,22 @@ public class QuickmailFrame extends JFrame {
 				AccountFolder selectedAccount = folderTree.getSelectedAccount();
 
 				if(selectedAccount != null) {	
-					for (int c : mailTable.getSelectedRows()) {
-						Mail selectedMailObj = mailTableModel.getMailObjAt(c);
-					
-						JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 1);
-						f.setVisible(true);
-						break;
+					if(mailTable.getSelectedRowCount() > 0) {
+						for (int c : mailTable.getSelectedRows()) {
+							Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+						
+							JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 1);
+							f.setVisible(true);
+							break;
+						}
+					}
+					else
+					{
+						updateProgress(L_SELECTMAIL);						
 					}
 				}				
 				else {
-					updateProgress("Please select your e-mail account");
+					updateProgress(L_SELECTACCOUNT);
 				}	
 			};
 		});
@@ -202,16 +220,21 @@ public class QuickmailFrame extends JFrame {
 				AccountFolder selectedAccount = folderTree.getSelectedAccount();
 
 				if(selectedAccount != null) {	
-					for (int c : mailTable.getSelectedRows()) {
-						Mail selectedMailObj = mailTableModel.getMailObjAt(c);
-					
-						JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 2);
-						f.setVisible(true);
-						break;
+					if(mailTable.getSelectedRowCount() > 0) {
+						for (int c : mailTable.getSelectedRows()) {
+							Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+						
+							JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 2);
+							f.setVisible(true);
+							break;
+						}
+					}
+					else {
+						updateProgress(L_SELECTMAIL);						
 					}
 				}				
 				else {
-					updateProgress("Please select your e-mail account");
+					updateProgress(L_SELECTACCOUNT);
 				}	
 			};
 		});		
@@ -222,10 +245,7 @@ public class QuickmailFrame extends JFrame {
 		JPanel mainWrapper = new JPanel(new BorderLayout());
 		JPanel rightCol = new JPanel(new BorderLayout(15,0));
 		JPanel leftCol = new JPanel(new BorderLayout());
-		
-		// tree erstellen
-		//	FolderMailTree mailFolders = new FolderMailTree(200, 200);
-		
+			
 		folderTree = new FolderTree();
 		folderTree.getSelectionModel().addTreeSelectionListener(new TreeSelection());
         
@@ -249,6 +269,12 @@ public class QuickmailFrame extends JFrame {
 		forewardButton = new JButton("Forward");
 		actionPanel.add(forewardButton);
 
+		moveToFolderCombo = new JComboBox();
+		moveToFolderCombo.setRenderer( new FolderComboRenderer() );
+		moveToFolderCombo.addItemListener(new FolderComboListener());
+
+		actionPanel.add(moveToFolderCombo);
+
 		
 		mainWrapper.add(actionPanel, BorderLayout.PAGE_START);
 		
@@ -258,25 +284,13 @@ public class QuickmailFrame extends JFrame {
  
 		// JTable mit model initialisieren
 		mailTable = new JTable(mailTableModel);
-		
 		mailTable.getSelectionModel().addListSelectionListener(new RowListener());
 		mailTable.addMouseListener(new MouseAdapter());
+
 		// progresslabel 
-				progressLabel = new JLabel();
-				rightCol.add(progressLabel, BorderLayout.PAGE_END);
-		
-		//TEST ****		
-	//	MailAccount defaultAccount = storageObj.getDefaultAccount();
-		
-	//	new EmailTableStoreLoader(defaultAccount.getDefaultFolder(), mailTableModel, progressLabel).execute();
-		// *************
-		
-		/* dummy inhalt TODO: weg von hier...
-		for (int i = 0; i < 10; i++) {
-			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i);
-			mailTableModel.addMail(mailTemp);
-		}		
-		*/
+		progressLabel = new JLabel();
+		rightCol.add(progressLabel, BorderLayout.PAGE_END);
+	
  		JPanel tableWrapper = new JPanel(new BorderLayout());
 		JScrollPane tableScroll = new JScrollPane(mailTable);
 
@@ -285,8 +299,6 @@ public class QuickmailFrame extends JFrame {
 		
 		rightCol.add(tableWrapper, BorderLayout.NORTH);
 	
-		
-		
 		// mail preview 
 		mailPreview = new JTextArea();
 		JScrollPane previewScroll = new JScrollPane(mailPreview);
@@ -306,130 +318,9 @@ public class QuickmailFrame extends JFrame {
 		mainWrapper.add(leftCol, BorderLayout.CENTER);
 		
 		return mainWrapper;
-/*
-		
-		Panel mailWrapper = new JPanel(new BorderLayout(5,5));
-		JPanel treeWrapper = new JPanel(new BorderLayout());
-		JPanel mainWrapper = new JPanel(new BorderLayout());
-		
-		// tree erstllen
-		mailTree = new JList(new DefaultListModel());
-		JScrollPane treeScroll = new JScrollPane(mailTree);
-		treeScroll.setPreferredSize(new Dimension(200, 200)); 
-		
-		treeWrapper.add(treeScroll, BorderLayout.WEST);
-
-
-		// mail liste erstellen
-		mailList = new JList(new DefaultListModel());
-		JScrollPane mailScroll = new JScrollPane(mailList);
-		mailScroll.setPreferredSize(new Dimension(200, 200)); 
-		
-		mailWrapper.add(mailScroll, BorderLayout.CENTER);
-	
-		// mail detail ansicht
-		JList mailView = new JList(new DefaultListModel());
-		JScrollPane mailViewScroll = new JScrollPane(mailList);
-		mailViewScroll.setPreferredSize(new Dimension(200, 200)); 
-		
-		mailWrapper.add(mailView, BorderLayout.CENTER);
-
-		
-		// quick menu liste erstellen
-		JPanel actionPanel = new JPanel(new FlowLayout(0));
-		newmailButton = new JButton("Compose");
-		actionPanel.add(newmailButton);
-		readButton = new JButton("Read");
-		actionPanel.add(readButton);
-		replyButton = new JButton("Reply");
-		actionPanel.add(replyButton);
-		forewardButton = new JButton("Forward");
-		actionPanel.add(forewardButton);
-		replyallButton = new JButton("Replyall");
-		actionPanel.add(replyallButton);
-		
-		mailWrapper.add(actionPanel, BorderLayout.NORTH);
-		
-		
-		TitledBorder black;
-		blackline = BorderFactory.createLineBorder(Color.black);
-		black = BorderFactory.createTitledBorder(
-                blackline);
-		mailWrapper.setBorder(black);
-
-		treeWrapper.add(mailWrapper, BorderLayout.CENTER);
-		mainWrapper.add(treeWrapper,BorderLayout.CENTER);
-
-
-
-
-		// MENUBAR
-		// Creates a menubar for a JFrame
-        JMenuBar menuBar = new JMenuBar();
-        
-        // Add the menubar to the frame
-        setJMenuBar(menuBar);
-        
-        // Define and add two drop down menu to the menubar
-        JMenu fileMenu = new JMenu("File");
-        JMenu editMenu = new JMenu("Edit");
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
-        
-        // Create and add simple menu item to one of the drop down menu
-        JMenuItem newAction = new JMenuItem("New");
-        JMenuItem openAction = new JMenuItem("Open");
-        JMenuItem exitAction = new JMenuItem("Exit");
-        JMenuItem cutAction = new JMenuItem("Cut");
-        JMenuItem copyAction = new JMenuItem("Copy");
-        JMenuItem pasteAction = new JMenuItem("Paste");
-        
-        // Create and add CheckButton as a menu item to one of the drop down
-        // menu
-        JCheckBoxMenuItem checkAction = new JCheckBoxMenuItem("Check Action");
-        // Create and add Radio Buttons as simple menu items to one of the drop
-        // down menu
-        JRadioButtonMenuItem radioAction1 = new JRadioButtonMenuItem(
-                "Radio Button1");
-        JRadioButtonMenuItem radioAction2 = new JRadioButtonMenuItem(
-                "Radio Button2");
-        // Create a ButtonGroup and add both radio Button to it. Only one radio
-        // button in a ButtonGroup can be selected at a time.
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(radioAction1);
-        bg.add(radioAction2);
-        fileMenu.add(newAction);
-        fileMenu.add(openAction);
-        fileMenu.add(checkAction);
-        fileMenu.addSeparator();
-        fileMenu.add(exitAction);
-        editMenu.add(cutAction);
-        editMenu.add(copyAction);
-        editMenu.add(pasteAction);
-        editMenu.addSeparator();
-        editMenu.add(radioAction1);
-        editMenu.add(radioAction2);
-        // Add a listener to the New menu item. actionPerformed() method will
-        // invoked, if user triggred this menu item
-        newAction.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-            }
-        });
-		return mainWrapper;*/
-	}	
-	
-	
-	/*
-	 * private DefaultListModel getModel(JList list){
-		return ((DefaultListModel) list.getModel());
 	}
-
-	 */
 	
-	
-	private void buildMenu()
-	{
+	private void buildMenu() {
 		// Creates a menubar for a JFrame
         JMenuBar menuBar = new JMenuBar();
         
@@ -464,52 +355,6 @@ public class QuickmailFrame extends JFrame {
         editMenu.addSeparator();
         editMenu.add(editFolder);
         editMenu.add(removeFolder);
-        
-        
-        
-
-        /*
-        // Create and add simple menu item to one of the drop down menu
-        JMenuItem newAction = new JMenuItem("New");
-        JMenuItem openAction = new JMenuItem("Open");
-        JMenuItem exitAction = new JMenuItem("Exit");
-        JMenuItem cutAction = new JMenuItem("Cut");
-        JMenuItem copyAction = new JMenuItem("Copy");
-        JMenuItem pasteAction = new JMenuItem("Paste");
-        
-        // Create and add CheckButton as a menu item to one of the drop down
-        // menu
-        JCheckBoxMenuItem checkAction = new JCheckBoxMenuItem("Check Action");
-        // Create and add Radio Buttons as simple menu items to one of the drop
-        // down menu
-        JRadioButtonMenuItem radioAction1 = new JRadioButtonMenuItem(
-                "Radio Button1");
-        JRadioButtonMenuItem radioAction2 = new JRadioButtonMenuItem(
-                "Radio Button2");
-        // Create a ButtonGroup and add both radio Button to it. Only one radio
-        // button in a ButtonGroup can be selected at a time.
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(radioAction1);
-        bg.add(radioAction2);
-        fileMenu.add(newAction);
-        fileMenu.add(openAction);
-        fileMenu.add(checkAction);
-        fileMenu.addSeparator();
-        fileMenu.add(exitAction);
-        editMenu.add(cutAction);
-        editMenu.add(copyAction);
-        editMenu.add(pasteAction);
-        editMenu.addSeparator();
-        editMenu.add(radioAction1);
-        editMenu.add(radioAction2);
-        // Add a listener to the New menu item. actionPerformed() method will
-        // invoked, if user triggred this menu item
-        newAction.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-            }
-        });
-        */
 	}
 
 	private void updateProgress(final String progress) {
@@ -542,9 +387,8 @@ public class QuickmailFrame extends JFrame {
 				JFrame f = new MailFrame(null, selectedAccount.getMailAccount());
 				f.setVisible(true);
 			}				
-			else
-			{
-				updateProgress("Please select your e-mail account");
+			else {
+				updateProgress(L_SELECTACCOUNT);
 			}	
 		}
     };
@@ -555,18 +399,20 @@ public class QuickmailFrame extends JFrame {
             int pathCount = path.getPathCount();
             
             for (int i = 0; i < pathCount; i++) {
-                if(path.getPathComponent(i) instanceof Folder)
-                {
-//                	AccountFolder parrentFolder = (AccountFolder) path.getParentPath().getLastPathComponent();
-
-                	Folder selectedfolder = (Folder) path.getPathComponent(i);
+                if(path.getPathComponent(i) instanceof MailFolder) {
+                	MailFolder selectedfolder = (MailFolder) path.getPathComponent(i);
                 	
-                	new EmailTableStoreLoader(selectedfolder, mailTableModel, progressLabel).execute();
+                	moveToFolderCombo.removeAllItems();	
+                	moveToFolderCombo.addItem(new String("Move to Folder"));
+                	if(folderTree.getSelectedAccount() != null) {
+                		for(MailFolder folder : folderTree.getSelectedAccount().getFolders()) {
+                			moveToFolderCombo.addItem(folder);
+                		}
+                	}
+                		
+                	new EmailTableStoreLoader(selectedfolder, mailTableModel, progressLabel, false).execute();
                 }
-            }
-            
-            
-			//new TableStoreLoader(new Folder("Postausgang"), mailTableModel, progressLabel).execute();
+            }            
         }
     };
     
@@ -576,17 +422,15 @@ public class QuickmailFrame extends JFrame {
             	 for (int c : mailTable.getSelectedRows()) {
      				Mail selectedMailObj = mailTableModel.getMailObjAt(c);
      				mailPreview.setText(selectedMailObj.getBody());
-     				System.out.println("Doubleclick"+ selectedMailObj.getBody());
      				
      				JFrame f = new MailDetail(selectedMailObj);
 
      				f.setSize(1200, 800); // oder: f.pack();
      				f.setVisible(true);
      				
+     				break;
      			}
-                 
              } 
-
          }
 
 		@Override
@@ -612,6 +456,46 @@ public class QuickmailFrame extends JFrame {
 			// TODO Auto-generated method stub
 			
 		}
+    }
+    
+    
+    private class FolderComboListener implements ItemListener {
+    	 public void itemStateChanged(ItemEvent event) {
+    		 if (event.getStateChange() == ItemEvent.SELECTED && moveToFolderCombo.getSelectedIndex() > 0 && event.getItem() instanceof MailFolder) {
+    			 if(mailTable.getSelectedRowCount() > 0) {
+	    			 for (int c : mailTable.getSelectedRows()) {
+	    				 Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+	    				 MailFolder currentFolder = folderTree.getSelectedFolder();
+	    				 MailFolder targetFolder = (MailFolder)event.getItem();
+	
+	    				 currentFolder.removeMail(selectedMailObj);
+	    				 targetFolder.addMail(selectedMailObj);
+	    				 
+	    				 new EmailTableStoreLoader(currentFolder, mailTableModel, progressLabel, false).execute();
+	    				 
+	    				 StorageService.getInstance().saveQuickmailerData();
+		  			}
+    			 }
+    			 else {
+    				 updateProgress(L_SELECTMAIL);
+    			 }
+    			 
+    			 moveToFolderCombo.setSelectedIndex(0);
+    		 }
+	    }       
+    }
+   
+    
+   private class FolderComboRenderer extends BasicComboBoxRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+            if (value instanceof MailFolder) {
+            	MailFolder folder = (MailFolder)value;
+            	setText(folder.getLabel());
+            }
+            return this;
+        }
     }
 
 

@@ -2,7 +2,7 @@
 package storage.datamanager.adapters;
 
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
@@ -10,11 +10,11 @@ import mail.MailAccount;
 
 import storage.datamanager.adapters.models.AdaptedFolder;
 import storage.datamanager.adapters.models.AdaptedMailAccount;
-public class FolderAdapter extends XmlAdapter<AdaptedFolder, Folder> {
+public class FolderAdapter extends XmlAdapter<AdaptedFolder, MailFolder> {
 		
 		@Override
-	    public Folder unmarshal(AdaptedFolder adaptedFolder) throws Exception {
-	        Folder restoredFolder = new Folder(adaptedFolder.getLabel(), adaptedFolder.isRestricted());
+	    public MailFolder unmarshal(AdaptedFolder adaptedFolder) throws Exception {
+	        MailFolder restoredFolder = new MailFolder(adaptedFolder.getLabel(), adaptedFolder.isRestricted());
 	        
 	        restoredFolder.setMailsList(adaptedFolder.getMailList());
 	        
@@ -22,7 +22,7 @@ public class FolderAdapter extends XmlAdapter<AdaptedFolder, Folder> {
 	    }
 
 	    @Override
-	    public AdaptedFolder marshal(Folder folder) throws Exception {
+	    public AdaptedFolder marshal(MailFolder folder) throws Exception {
 	    	AdaptedFolder adaptedFolder = new AdaptedFolder();
 	    	
 	    	adaptedFolder.setLabel(folder.getLabel());

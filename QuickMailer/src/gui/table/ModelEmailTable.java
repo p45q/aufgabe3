@@ -25,7 +25,7 @@ public class ModelEmailTable extends AbstractTableModel{
 		int index = mails.size();
 		
 		//neues mailobj zur arrayliste hinzufügen
-		mails.add(mailObj);
+		mails.add(0, mailObj);
  
 		// zuerst ein event, "neue row an der stelle index" herstellen
 		TableModelEvent event = new TableModelEvent(this, index, index, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT);

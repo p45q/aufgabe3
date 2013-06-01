@@ -46,6 +46,9 @@ public class SendMail extends SwingWorker{
         transport.sendMessage(message, addresses);
         
         transport.close();
-        return "Message sent";
+        
+        mailAccount.getOutboxFolder().addMail(mailobj);
+       
+        return true;
 	}
 }

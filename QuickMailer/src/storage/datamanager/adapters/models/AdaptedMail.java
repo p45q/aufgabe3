@@ -14,8 +14,6 @@ public class AdaptedMail {
 		
 		private Date receiveDate;
 		private Date sendDate;
-
-		//private MailAccount mailaccount;
 		
 		public void setMessageId(String messageId)
 		{
@@ -79,12 +77,4 @@ public class AdaptedMail {
 		public void setBody(String body) {
 			this.body = body;
 		}
-	/*	public MailAccount getMailaccount() {
-			return mailaccount;
-		}
-		public void setMailaccount(MailAccount mailaccount) {
-			this.mailaccount = mailaccount;
-		}
-*/
-
 }

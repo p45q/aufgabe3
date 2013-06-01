@@ -11,7 +11,12 @@ public class MailAdapter extends XmlAdapter<AdaptedMail, Mail> {
 	
 	    @Override
 	    public Mail unmarshal(AdaptedMail adaptedMail) throws Exception {
-	        return new Mail(adaptedMail.getFrom(), adaptedMail.getTo(), adaptedMail.getSubject(), adaptedMail.getBody());
+	        Mail mail = new Mail(adaptedMail.getFrom(), adaptedMail.getTo(), adaptedMail.getSubject(), adaptedMail.getBody());
+	        mail.setReceiveDate(adaptedMail.getReceiveDate());
+	        mail.setSendDate(adaptedMail.getSendDate());
+	        mail.setMessageId(adaptedMail.getMessageId());
+	        
+	        return mail;
 	    }
 
 	    @Override
@@ -23,7 +28,10 @@ public class MailAdapter extends XmlAdapter<AdaptedMail, Mail> {
 	    	adaptedMail.setSubject(mail.getSubject());
 	    	adaptedMail.setBody(mail.getBody());
 	    	adaptedMail.setSubject(mail.getSubject());
-	  //  	adaptedMail.setMailaccount(mail.getMailaccount());	    	
+	    	adaptedMail.setMessageId(mail.getMessageId());	    	
+	    	adaptedMail.setReceiveDate(mail.getReceiveDate());	    	
+	    	adaptedMail.setSendDate(mail.getSendDate());	    	
+	    	
 	        return adaptedMail;
 	    }
 

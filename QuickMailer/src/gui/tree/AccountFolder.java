@@ -9,13 +9,13 @@ public class AccountFolder implements TreeFolders {
 
 	private String label;
 	private MailAccount mailAccount;
-	private CopyOnWriteArrayList<Folder> folders;
+	private CopyOnWriteArrayList<MailFolder> folders;
 	
 	public AccountFolder(MailAccount mailAccount) {
 		this.label = mailAccount.getEmailadress();
 		this.setMailAccount(mailAccount);
 
-		this.folders = new CopyOnWriteArrayList<Folder>();
+		this.folders = new CopyOnWriteArrayList<MailFolder>();
 	}
 	
 	public String getLabel() {
@@ -26,11 +26,11 @@ public class AccountFolder implements TreeFolders {
 		this.label = label;
 	}
 	
-	public CopyOnWriteArrayList<Folder> getFolders() {
+	public CopyOnWriteArrayList<MailFolder> getFolders() {
 		return folders;
 	}
 
-	public void setFolders(CopyOnWriteArrayList<Folder> folders) {
+	public void setFolders(CopyOnWriteArrayList<MailFolder> folders) {
 		this.folders = folders;
 	}
 

@@ -1,6 +1,6 @@
 package quickmailer;
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,13 +43,13 @@ public class RunTest {
 		mail.MailAccount mailaccount = new MailAccount("quickmailerffhs@gmail.com","ffhs12345","smtp.gmail.com",587,"pop.gmail.com",995);
 		mail.MailAccount mailaccount2 = new MailAccount("quickmailer2222ffhs@gmail.com","ffhs12345","smtp.asd.com",587,"pop.asd.com",995);
 		
-		Folder testFolder = new Folder("Meine Mails");
+		MailFolder testFolder = new MailFolder("Meine Mails");
 		for (int i = 0; i < 10; i++) {
 			Mail mailTemp = new Mail("Meine 1 from" + i, "to" + i, "subject" + i, "body" + i);
-			testFolder.addMail(mailTemp);
+			//testFolder.addMail(mailTemp);
 		}
 		
-		Folder testFolder2 = new Folder("Deine Mails");
+		MailFolder testFolder2 = new MailFolder("Deine Mails");
 		for (int i = 0; i < 10; i++) {
 			Mail mailTemp = new Mail("Deine 2 from" + i, "to" + i, "subject" + i, "body" + i);
 			testFolder2.addMail(mailTemp);
@@ -79,7 +79,7 @@ public class RunTest {
 	      System.out.println("MailAccount: " + mailAccount.getEmailadress() + " host"
 	          + mailAccount.getPop3Host());
 	      
-			System.out.println("DefaultFolder: " + mailAccount.getDefaultFolder());
+			System.out.println("DefaultFolder: " + mailAccount.getInboxFolder());
 
 	    }
 	}

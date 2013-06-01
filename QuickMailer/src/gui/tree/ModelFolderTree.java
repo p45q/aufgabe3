@@ -39,7 +39,7 @@ public class ModelFolderTree implements TreeModel
     	fireTreeStructureChanged();
     }
 
-    public void addFolder(AccountFolder accountFolder, Folder folder)
+    public void addFolder(AccountFolder accountFolder, MailFolder folder)
     {
         AccountFolder af = mailAccounts.get(mailAccounts.indexOf(accountFolder));
         af.getFolders().add(folder);
@@ -105,7 +105,7 @@ public class ModelFolderTree implements TreeModel
 
     public boolean isLeaf(Object node)
     {
-        return node instanceof Folder;
+        return node instanceof MailFolder;
     }
     
     public void valueForPathChanged(TreePath path, Object newValue)
@@ -128,7 +128,7 @@ public class ModelFolderTree implements TreeModel
         return mailAccounts.indexOf(selectedAccount);
     }
     
-    public int getIndexOfAccount(int accountIndex, Folder selectedFolder)
+    public int getIndexOfAccount(int accountIndex, MailFolder selectedFolder)
     {
         return mailAccounts.get(accountIndex).getMailAccount().getFolders().indexOf(selectedFolder);
     }

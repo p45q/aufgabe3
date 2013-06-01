@@ -107,7 +107,7 @@ public class MailAccountForm extends JFrame{
 		saveButton = new JButton("Save");
 		actionPanel.add(saveButton);
 		
-		formWrapper.add(actionPanel);
+		mainWrapper.add(actionPanel, BorderLayout.PAGE_START);
 		
 		mainWrapper.setBorder(new EmptyBorder(10, 10, 10, 10) );
 

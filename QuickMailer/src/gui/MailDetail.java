@@ -51,6 +51,7 @@ public class MailDetail extends JFrame{
 		replyallButton = new JButton("Replyall");
 		actionPanel.add(replyallButton);
 
+
 		
 		textArea = new JTextArea(5, 20);
 		JScrollPane scrollPane = new JScrollPane(textArea); 

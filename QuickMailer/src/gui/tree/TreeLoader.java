@@ -10,7 +10,7 @@ import mail.MailAccount;
 
 import storage.StorageService;
 
-public class TreeLoader extends SwingWorker<JTree, Folder>{
+public class TreeLoader extends SwingWorker<JTree, MailFolder>{
 	
 	private final FolderTree tree;
 	private final Boolean reloadTree;

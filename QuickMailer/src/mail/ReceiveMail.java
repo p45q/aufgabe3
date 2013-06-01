@@ -6,6 +6,7 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import javax.mail.FetchProfile;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Header;
 import javax.mail.Message;
@@ -14,7 +15,9 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
+import javax.mail.search.FlagTerm;
 
+import gui.tree.MailFolder;
 
 import com.sun.mail.pop3.POP3SSLStore;
 
@@ -86,28 +89,8 @@ public class ReceiveMail {
         store.close();
     }
     
-    
-    /*   
-    public void printAllMessageEnvelopes() throws Exception {
-         
-        // Attributes & Flags for all messages ..
-        Message[] msgs = folder.getMessages();
-         
-        // Use a suitable FetchProfile
-        FetchProfile fp = new FetchProfile();
-        fp.add(FetchProfile.Item.ENVELOPE);        
-        folder.fetch(msgs, fp);
-         
-        for (int i = 0; i < msgs.length; i++) {
-            System.out.println("--------------------------");
-            System.out.println("MESSAGE #" + (i + 1) + ":");
-            dumpEnvelope(msgs[i]);
-             
-        }
-         
-    }*/
-	     
-    public ArrayList<Mail> getAllMessages() throws Exception {
+   
+    public ArrayList<Mail> getAllNewMessages() throws Exception {
         ArrayList<Mail> mailList = new ArrayList<Mail>();
         
         try {
@@ -122,8 +105,8 @@ public class ReceiveMail {
 	         fp.add(FetchProfile.Item.ENVELOPE);        
 	         folder.fetch(msgs, fp);
 	          
-	         
 	         Message[] messages = folder.getMessages();
+             
 	 		 for (int i = 0; i < messages.length; i++) {
 	 			Message message = messages[i];
 	            String messageId = null;
@@ -136,24 +119,38 @@ public class ReceiveMail {
 	                	messageId = h.getValue();    	
 	                }
 	            }
-	            
-	            Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString()); //, mailAccount);
-	            tempMail.setMessageId(messageId);
-	            tempMail.setReceiveDate(message.getSentDate());
-
-	            mailList.add(tempMail);
+	            if(isNewMail(messageId)) {
+		            Mail tempMail = new Mail(message.getFrom()[0].toString(), mailAccount.getEmailadress(), message.getSubject(), message.getContent().toString()); //, mailAccount);
+		            tempMail.setMessageId(messageId);
+		            tempMail.setReceiveDate(message.getSentDate());
+	
+		            mailList.add(tempMail);
+	            }
 	 		 }     
 	 		 
+	 		 folder.setFlags(messages, new Flags(Flags.Flag.SEEN), true);
+
 	         closeFolder();
 	             
 	     } catch(Exception e) {
 	         e.printStackTrace();
-	        // System.exit(-1);
-	         System.out.println("FUCK: " + mailAccount.getEmailadress());
-	    }
+	         return null;
+	     }
     	  
    		return mailList;
 
+    }
+    
+    private Boolean isNewMail(String messageId) {
+    	for(MailFolder storedfolder : mailAccount.getFolders()) {
+    		for(Mail storedMail : storedfolder.getMailList()) {
+    			if(storedMail.getMessageId().equals(messageId)) {
+    				return false;
+    			}
+    		}
+    	}
+    
+    	return true;
     }
 	     
 	     /*

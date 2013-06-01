@@ -8,17 +8,17 @@ import java.util.Date;
 
 @XmlJavaTypeAdapter(MailAdapter.class)
 public class Mail {
-	String messageId;
+	private String messageId;
 
-	String from;
-	String to;
-	String subject;
-	String body;
+	private String from;
+	private String to;
+	private String subject;
+	private String body;
 	
-	Date receiveDate;
-	Date sendDate;
+	private Date receiveDate;
+	private Date sendDate;
 
-	MailAccount mailaccount;
+	private MailAccount mailaccount;
 	
 	public Mail(String from, String to, String subject, String body) {
 		this.from = from;
@@ -31,6 +31,7 @@ public class Mail {
 	{
 		this.messageId = messageId;
 	}
+	
 	public String getMessageId() {
 		return messageId;
 	}

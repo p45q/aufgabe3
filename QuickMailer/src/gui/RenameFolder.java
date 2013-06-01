@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,19 +18,19 @@ import storage.StorageService;
 import storage.datamanager.QuickmailerData;
 
 import mail.MailAccount;
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 import gui.tree.FolderTree;
 import gui.tree.AccountFolder;
 public class RenameFolder extends JFrame{
 	private JTextField folderName;
-	private Folder selectedFolder;
+	private MailFolder selectedFolder;
 	private AccountFolder selectedAccount;
-	
+	private JLabel progressLabel;
+
 	private JButton saveButton;
-	private JButton deleteButton;
 	
 
-	public RenameFolder(Folder selectedFolder, AccountFolder selectedAccount){
+	public RenameFolder(MailFolder selectedFolder, AccountFolder selectedAccount){
 		super("Folder");
 		this.selectedFolder = selectedFolder;
 		this.selectedAccount = selectedAccount;
@@ -56,26 +57,43 @@ public class RenameFolder extends JFrame{
 		// button save
 		saveButton = new JButton("Save");
 		actionPanel.add(saveButton);
-		
 	
 		formWrapper.add(actionPanel);
 		 
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
+		
+		progressLabel = new JLabel();
+		progressLabel.setPreferredSize(new Dimension(10, 15));
+
+		mainWrapper.add(progressLabel, BorderLayout.PAGE_END);
+		
 		saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
+            	Boolean formError = false;
                 if(selectedFolder != null) {
-                	selectedFolder.setLabel(folderName.getText());                		
+                	if(selectedFolder.setLabel(folderName.getText())){
+                		setVisible(false); 
+    					dispose();
+                	}
+                	else {
+                		formError = true;
+                		progressLabel.setText("This folder is restricted, can't change Label");
+                	}
                 }
                 else {
-                	Folder newFolder = new Folder(folderName.getText());
+                	MailFolder newFolder = new MailFolder(folderName.getText());
                 	
                 	selectedAccount.getMailAccount().addFolder(newFolder);
                 }
-             
-                StorageService.getInstance().saveQuickmailerData();
                 
-                FolderTree.getInstance().reloadTree();
-                
+                if(!formError) {
+                	setVisible(false); 
+    				dispose();
+                 
+                    StorageService.getInstance().saveQuickmailerData();
+                    
+                    FolderTree.getInstance().reloadTree();	
+                }  
             }
         });
 		return mainWrapper;

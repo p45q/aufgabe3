@@ -60,11 +60,11 @@ public class FolderTree extends JTree {
   public void addAcount(MailAccount mailAccount) {
 	  AccountFolder accountFolder = new AccountFolder(mailAccount);
 
-	  CopyOnWriteArrayList<Folder> subFolders = mailAccount.getFolders();
+	  CopyOnWriteArrayList<MailFolder> subFolders = mailAccount.getFolders();
 	  
 	  treeModel.addMailAccountFolder(accountFolder);
 
-	  for(Folder folder : subFolders)
+	  for(MailFolder folder : subFolders)
 	  {
 		  treeModel.addFolder(accountFolder, folder);	
 	  }	
@@ -96,13 +96,13 @@ public class FolderTree extends JTree {
 	  return treeModel.getIndexOfAccount(selectedAccount);
   }
   
-  public Folder getSelectedFolder() {
+  public MailFolder getSelectedFolder() {
 	  if(getSelectionCount() > 0 ) {
 		  TreePath path = getSelectionPath();
 		  
           for (int i = 0; i < path.getPathCount(); i++) {
-        	  if(path.getPathComponent(i) instanceof Folder) {
-        		  return (Folder) path.getPathComponent(i);
+        	  if(path.getPathComponent(i) instanceof MailFolder) {
+        		  return (MailFolder) path.getPathComponent(i);
               }
           }
 	  }

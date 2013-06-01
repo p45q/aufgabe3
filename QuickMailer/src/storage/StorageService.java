@@ -1,6 +1,6 @@
 package storage;
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 
 import java.util.ArrayList;
 
@@ -14,16 +14,12 @@ public class StorageService {
 	private static ArrayList<MailAccount> mailAccounts;
 	
 	private static final String QUICKMAIL_XML = "./quickmailer-data.xml";
-	private static StorageService instance = null;
+	private static StorageService instance = new StorageService();
 
 	
-	public StorageService()
+	private StorageService()
 	{		
 		mailAccounts = new ArrayList<MailAccount>();
-
-		loadMailAccounts();
-		
-		instance = this;
 	}
 	
 	

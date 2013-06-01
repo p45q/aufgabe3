@@ -1,6 +1,6 @@
 package gui.table;
 
-import gui.tree.Folder;
+import gui.tree.MailFolder;
 import java.util.ArrayList;
 
 
@@ -17,15 +17,17 @@ import mail.ReceiveMail;
 
 public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 	
-	private final Folder mailFolder;
+	private final MailFolder selectedFolder;
 	private final ModelEmailTable mailTableModel;
 	private final JLabel progressLabel;
 	private MailAccount mailAccount;
+	private Boolean getNew;
 	
-	public EmailTableStoreLoader(Folder folder, ModelEmailTable mailTableModel, JLabel progressLabel) {
-		this.mailFolder = folder;
+	public EmailTableStoreLoader(MailFolder selectedFolder, ModelEmailTable mailTableModel, JLabel progressLabel, Boolean getNew) {
+		this.selectedFolder = selectedFolder;
 		this.mailTableModel = mailTableModel;
 		this.progressLabel = progressLabel;
+		this.getNew = getNew;
 	}
 	
 	public void setMailAccount(MailAccount mailAccount)
@@ -36,26 +38,32 @@ public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 	private void getNewMails() throws Exception {
 		ReceiveMail receiveMailObj = new ReceiveMail(mailAccount);
 		
-		ArrayList<Mail> mailList = receiveMailObj.getAllMessages();
-	System.out.println("mailList: " + mailList);
-		addMailstoTable(mailList);
-		
-		for (Mail mail : mailList) {
-			mailAccount.getDefaultFolder().addMail(mail);
+		ArrayList<Mail> mailList = receiveMailObj.getAllNewMessages();
+		if(mailList ==  null) {
+			updateProgress("There is an error with your email account, please check your settings");
 		}
-		
-		StorageService.getInstance().saveQuickmailerData();
-
-		updateProgress("Posteingang wurde erfolgreich aktualisiert, " + mailList.size() +  " neue E-Mails");
+		else {
+			if(selectedFolder.equals(mailAccount.getInboxFolder())){
+				addMailstoTable(mailList);
+			}
+			
+			for (Mail mail : mailList) {
+				mailAccount.getInboxFolder().addMail(mail);
+			}
+			
+			StorageService.getInstance().saveQuickmailerData();
+	
+			updateProgress("Inbox has been updated successfully, " + mailList.size() +  " new e-mails");
+		}
 	}
 	
 	private void getMailFromFolder() {
 		mailTableModel.clearTable();
 	
-		ArrayList<Mail> mailList = mailFolder.getMailList();
+		ArrayList<Mail> mailList = selectedFolder.getMailList();
 		addMailstoTable(mailList);
 		
-		updateProgress("Order <" + mailFolder.getLabel() + "> wurde erfolgreich geladen");
+		updateProgress("Folder <" + selectedFolder.getLabel() + "> has been loaded successfully");
 	}
 	
 	
@@ -69,14 +77,14 @@ public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 	@Override
 	protected ModelEmailTable doInBackground() throws Exception {
 
-		if(mailFolder == null)
+		if(getNew)
 		{
-			updateProgress("Posteingang wird aktualisiert...");
+			updateProgress("Loading Inbox...");
 			getNewMails();
 		}
 		else
 		{
-			updateProgress("Ordner <" + mailFolder.getLabel() + "> wird geladen...");
+			updateProgress("Loading folder <" + selectedFolder.getLabel() + "> ...");
 			getMailFromFolder();
 		}
 		
