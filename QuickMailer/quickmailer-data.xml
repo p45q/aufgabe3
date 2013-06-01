@@ -5,7 +5,7 @@
         <folders>
             <mails>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@2340b8fd</body>
+                    <body>javax.mail.internet.MimeMultipart@4a4de3fe</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
                     <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
                     <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
@@ -13,7 +13,7 @@
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@51f88fbd</body>
+                    <body>javax.mail.internet.MimeMultipart@1915470e</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
                     <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
                     <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
@@ -21,7 +21,7 @@
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@3e7403c9</body>
+                    <body>javax.mail.internet.MimeMultipart@43ebf4ff</body>
                     <from>Donno Claudio &lt;corleone3013@gmail.com&gt;</from>
                     <messageId>&lt;CAD6RRaW7xgWD_ZWDCFTSTVPFA9hGrPdGOZ+SjnR57cmoOSJmmw@mail.gmail.com&gt;</messageId>
                     <receiveDate>2013-06-01T16:33:02+02:00</receiveDate>
@@ -29,13 +29,12 @@
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>ize
-
- Original message: 
- javax.mail.internet.MimeMultipart@3e7403c9</body>
-                    <from>quickmailerffhs@gmail.com</from>
+                    <body>javax.mail.internet.MimeMultipart@3821b42f</body>
+                    <from>Donno Claudio &lt;corleone3013@gmail.com&gt;</from>
+                    <messageId>&lt;CAD6RRaU5OesRQ-dOhcfoCba7bfa0mfaaxyrktAtQXiwuj4cOoA@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T16:58:07+02:00</receiveDate>
                     <subject>RE: Re: Ahoihoi</subject>
-                    <to>Donno Claudio &lt;corleone3013@gmail.com&gt;</to>
+                    <to>quickmailerffhs@gmail.com</to>
                 </mailList>
             </mails>
             <label>Inbox</label>
@@ -43,12 +42,17 @@
         </folders>
         <folders>
             <mails/>
-            <label>Outbox</label>
+            <label>Send</label>
             <restricted>true</restricted>
         </folders>
         <folders>
             <mails/>
-            <label>Meine Mails</label>
+            <label>Bitch Mails</label>
+            <restricted>false</restricted>
+        </folders>
+        <folders>
+            <mails/>
+            <label>TEST</label>
             <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
@@ -66,7 +70,7 @@
         </folders>
         <folders>
             <mails/>
-            <label>Outbox</label>
+            <label>Send</label>
             <restricted>true</restricted>
         </folders>
         <folders>
@@ -74,65 +78,75 @@
                 <mailList>
                     <body>body0</body>
                     <from>Deine 2 from0</from>
+                    <messageId></messageId>
                     <subject>subject0</subject>
                     <to>to0</to>
                 </mailList>
                 <mailList>
                     <body>body1</body>
                     <from>Deine 2 from1</from>
+                    <messageId></messageId>
                     <subject>subject1</subject>
                     <to>to1</to>
                 </mailList>
                 <mailList>
                     <body>body2</body>
                     <from>Deine 2 from2</from>
+                    <messageId></messageId>
                     <subject>subject2</subject>
                     <to>to2</to>
                 </mailList>
                 <mailList>
                     <body>body3</body>
                     <from>Deine 2 from3</from>
+                    <messageId></messageId>
                     <subject>subject3</subject>
                     <to>to3</to>
                 </mailList>
                 <mailList>
                     <body>body4</body>
                     <from>Deine 2 from4</from>
+                    <messageId></messageId>
                     <subject>subject4</subject>
                     <to>to4</to>
                 </mailList>
                 <mailList>
                     <body>body5</body>
                     <from>Deine 2 from5</from>
+                    <messageId></messageId>
                     <subject>subject5</subject>
                     <to>to5</to>
                 </mailList>
                 <mailList>
                     <body>body6</body>
                     <from>Deine 2 from6</from>
+                    <messageId></messageId>
                     <subject>subject6</subject>
                     <to>to6</to>
                 </mailList>
                 <mailList>
                     <body>body7</body>
                     <from>Deine 2 from7</from>
+                    <messageId></messageId>
                     <subject>subject7</subject>
                     <to>to7</to>
                 </mailList>
                 <mailList>
                     <body>body8</body>
                     <from>Deine 2 from8</from>
+                    <messageId></messageId>
                     <subject>subject8</subject>
                     <to>to8</to>
                 </mailList>
                 <mailList>
                     <body>body9</body>
                     <from>Deine 2 from9</from>
+                    <messageId></messageId>
                     <subject>subject9</subject>
                     <to>to9</to>
                 </mailList>
             </mails>
-            <label>Deine Mails</label>
+            <label>My Privat</label>
             <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
