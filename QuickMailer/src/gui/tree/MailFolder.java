@@ -13,7 +13,7 @@ import storage.datamanager.adapters.MailAccountAdapter;
 import storage.datamanager.adapters.FolderAdapter;
 import mail.Mail;
 @XmlJavaTypeAdapter(FolderAdapter.class)
-
+// Used to store Folders
 public class MailFolder implements TreeFolders{
 
 	private String label;

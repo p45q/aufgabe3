@@ -7,7 +7,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-
+// Model to form the tree
 public class ModelFolderTree implements TreeModel
 {
     private String root;

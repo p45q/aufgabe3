@@ -20,7 +20,7 @@ import javax.mail.search.FlagTerm;
 import gui.tree.MailFolder;
 
 import com.sun.mail.pop3.POP3SSLStore;
-
+// Class for Pop3 connection
 public class ReceiveMail {
 
 	private MailAccount mailAccount;

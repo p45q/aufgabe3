@@ -52,7 +52,7 @@ import storage.StorageService;
 import mail.Mail;
 import mail.MailAccount;
 
-
+// Main Window
 @SuppressWarnings("serial")
 public class QuickmailFrame extends JFrame {
 	private JButton newmailButton;
@@ -423,8 +423,8 @@ public class QuickmailFrame extends JFrame {
      				Mail selectedMailObj = mailTableModel.getMailObjAt(c);
      				mailPreview.setText(selectedMailObj.getBody());
      				
-     				JFrame f = new MailDetail(selectedMailObj);
-
+     				JFrame f = new MailDetail(selectedMailObj,folderTree.getSelectedAccount());
+     				
      				f.setSize(1200, 800); // oder: f.pack();
      				f.setVisible(true);
      				

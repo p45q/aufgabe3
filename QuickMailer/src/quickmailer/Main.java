@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import storage.StorageService;
-
+// Main method to start Application
 public class Main {
 
 	/**

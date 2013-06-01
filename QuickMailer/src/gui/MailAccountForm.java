@@ -27,7 +27,7 @@ import storage.StorageService;
 
 import mail.MailAccount;
 
-
+// Window to enter Account detail
 public class MailAccountForm extends JFrame{
 	private MailAccount editMailAccount;
 	private FolderTree folderTree;

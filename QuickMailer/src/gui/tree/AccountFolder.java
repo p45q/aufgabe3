@@ -4,7 +4,7 @@ package gui.tree;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import mail.MailAccount;
-
+// Class to use Folders
 public class AccountFolder implements TreeFolders {
 
 	private String label;

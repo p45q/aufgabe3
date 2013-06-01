@@ -8,7 +8,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 import mail.Mail;
-
+// Model of mail table
 public class ModelEmailTable extends AbstractTableModel{
 	private CopyOnWriteArrayList<Mail> mails;
 	private Vector<TableModelListener> listeners;

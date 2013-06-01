@@ -5,7 +5,7 @@ import storage.datamanager.adapters.MailAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+// Mail Class used to store and handle Mails
 @XmlJavaTypeAdapter(MailAdapter.class)
 public class Mail {
 	private String messageId;
@@ -18,7 +18,6 @@ public class Mail {
 	private Date receiveDate;
 	private Date sendDate;
 
-	private MailAccount mailaccount;
 	
 	public Mail(String from, String to, String subject, String body) {
 		this.from = from;

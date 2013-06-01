@@ -1,17 +1,22 @@
 package gui;
 
 
+import gui.tree.AccountFolder;
+
 import java.awt.BorderLayout;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 import javax.swing.*;
 
 
 import mail.Mail;
+import mail.MailAccount;
 
-
+// Mail detail on doubleclick
 public class MailDetail extends JFrame{
 	/**
 	 * 
@@ -26,13 +31,34 @@ public class MailDetail extends JFrame{
 	private JLabel labelReceivedate;
 	private JButton replyButton;
 	private JButton forewardButton;
-	private JButton replyallButton;
-	public MailDetail(Mail selectedMailObj){
+	private AccountFolder selectedMailAccount;
+	public MailDetail(Mail selectedMailObj, AccountFolder selectedMailAccount){
 		super(selectedMailObj.getSubject());
 		MailObj = selectedMailObj;
-		
+		this.selectedMailAccount = selectedMailAccount;
 		setContentPane(createContentPane());
+		addListeners();
 	}
+	
+	private void addListeners() {
+		replyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				JFrame f = new MailFrame(MailObj, selectedMailAccount.getMailAccount(), 1);
+				f.setVisible(true);
+			}
+        });
+		forewardButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame f = new MailFrame(MailObj, selectedMailAccount.getMailAccount(), 2);
+				f.setVisible(true);
+			}
+        });
+	}
+	
+	
 	
 	private JPanel createContentPane() {
 
@@ -46,8 +72,7 @@ public class MailDetail extends JFrame{
 		actionPanel.add(replyButton);
 		forewardButton = new JButton("Forward");
 		actionPanel.add(forewardButton);
-		replyallButton = new JButton("Replyall");
-		actionPanel.add(replyallButton);
+
 
 
 		
@@ -94,6 +119,8 @@ public class MailDetail extends JFrame{
 		
 		
 	}
+	
+	
 	private JTextArea textArea = new JTextArea(
 		 
 	);

@@ -7,7 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import storage.datamanager.adapters.MailAccountAdapter;
-
+// Stores Mail account settings
 @XmlJavaTypeAdapter(MailAccountAdapter.class)
 public class MailAccount {
 	private String emailadress;

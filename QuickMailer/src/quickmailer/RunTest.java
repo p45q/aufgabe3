@@ -16,7 +16,7 @@ import storage.datamanager.QuickmailerData;
 import mail.Mail;
 import mail.MailAccount;
 import mail.MailService;
-
+// Only for test purposes
 public class RunTest {
 	MailService mailcomobj;
 	

@@ -20,6 +20,23 @@
                     <subject>huhu</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
+                <mailList>
+                    <body>javax.mail.internet.MimeMultipart@3e7403c9</body>
+                    <from>Donno Claudio &lt;corleone3013@gmail.com&gt;</from>
+                    <messageId>&lt;CAD6RRaW7xgWD_ZWDCFTSTVPFA9hGrPdGOZ+SjnR57cmoOSJmmw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T16:33:02+02:00</receiveDate>
+                    <subject>Re: Ahoihoi</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+                <mailList>
+                    <body>ize
+
+ Original message: 
+ javax.mail.internet.MimeMultipart@3e7403c9</body>
+                    <from>quickmailerffhs@gmail.com</from>
+                    <subject>RE: Re: Ahoihoi</subject>
+                    <to>Donno Claudio &lt;corleone3013@gmail.com&gt;</to>
+                </mailList>
             </mails>
             <label>Inbox</label>
             <restricted>true</restricted>

@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionListener;
 import mail.Mail;
 import mail.MailAccount;
 import mail.MailService;
-
+//Window to send mails
 public class MailFrame extends JFrame{
 	private Mail selectedMailObj ;
 	private MailAccount mailAccount;
@@ -142,6 +142,8 @@ public class MailFrame extends JFrame{
 						MailService mailServiceObj = new MailService();
 						
 						mailServiceObj.sendMail(newMail, mailAccount);
+						setVisible(false); 
+						dispose(); 
 					}
 				});
 				

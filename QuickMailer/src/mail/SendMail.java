@@ -1,5 +1,5 @@
 package mail;
-
+// Class to send smtp mail
 import java.util.Properties;
 import javax.mail.Address;
 import javax.mail.Message;

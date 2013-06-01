@@ -7,7 +7,7 @@ import storage.datamanager.DataManagerUnmarshal;
 import storage.datamanager.QuickmailerData;
 
 import mail.MailAccount;
-
+// Service to hande loading and saving XML -> saveQuickmailerData
 public class StorageService {
 	private static ArrayList<MailAccount> mailAccounts;
 	

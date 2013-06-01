@@ -18,7 +18,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import storage.StorageService;
-
+// Left Tree
 public class FolderTree extends JTree {
   protected DefaultMutableTreeNode rootNode;
   protected ModelFolderTree treeModel;

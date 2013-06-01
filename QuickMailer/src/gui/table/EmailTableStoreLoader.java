@@ -14,7 +14,7 @@ import storage.datamanager.QuickmailerData;
 import mail.Mail;
 import mail.MailAccount;
 import mail.ReceiveMail;
-
+// Class to load Mails and update Progress bar
 public class EmailTableStoreLoader extends SwingWorker<ModelEmailTable, Mail>{
 	
 	private final MailFolder selectedFolder;
