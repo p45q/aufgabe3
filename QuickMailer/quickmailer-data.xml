@@ -5,98 +5,18 @@
         <folders>
             <mails>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@299481b2</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Kontakte und alte E-Mails importieren</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@5a749436</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Holen Sie sich Gmail auf Ihr Mobiltelefon!</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@1bae939f</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Gestalten Sie Gmail mit Farben und Designs</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@7dbd9d76</body>
-                    <from>no-reply@accounts.google.com</from>
-                    <subject>Passwort des Google-Kontos geändert</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@2bacee78</body>
-                    <from>no-reply@accounts.google.com</from>
-                    <subject>Passwort des Google-Kontos geändert</subject>
+                    <body>javax.mail.internet.MimeMultipart@eaecb09</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
+                    <subject>test</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
                     <body>javax.mail.internet.MimeMultipart@665c1eae</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <subject>Re: sadasd</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@29e26602</body>
-                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <subject>Re: Re: sadasd</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@4e9722c9</body>
-                    <from>Thierry Baumann &lt;thierry@swissmademarketing.com&gt;</from>
-                    <subject>test</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@3c870e2f</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Kontakte und alte E-Mails importieren</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@679b2faf</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Holen Sie sich Gmail auf Ihr Mobiltelefon!</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@7d57bf4c</body>
-                    <from>Gmail-Team &lt;mail-noreply@google.com&gt;</from>
-                    <subject>Gestalten Sie Gmail mit Farben und Designs</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@51f1e39b</body>
-                    <from>no-reply@accounts.google.com</from>
-                    <subject>Passwort des Google-Kontos geändert</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@5f95ff24</body>
-                    <from>no-reply@accounts.google.com</from>
-                    <subject>Passwort des Google-Kontos geändert</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@70a1c582</body>
-                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <subject>Re: sadasd</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@cae1393</body>
-                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <subject>Re: Re: sadasd</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@78871e65</body>
-                    <from>Thierry Baumann &lt;thierry@swissmademarketing.com&gt;</from>
+                    <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
                     <subject>test</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
@@ -105,74 +25,40 @@
             <restricted>true</restricted>
         </folders>
         <folders>
-            <mails/>
+            <mails>
+                <mailList>
+                    <body>new mail&#xD;
+</body>
+                    <from>Thierry Baumann &lt;thierry@swissmademarketing.com&gt;</from>
+                    <messageId>&lt;CAOA-HjxdEFA+RS3XZzkzhyMhaCDBN2LdzBZBzSzmwNxDBnr9mw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T14:21:40+02:00</receiveDate>
+                    <subject>new</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+            </mails>
             <label>Outbox</label>
             <restricted>true</restricted>
         </folders>
         <folders>
             <mails>
                 <mailList>
-                    <body>body0</body>
-                    <from>Meine 1 from0</from>
-                    <subject>subject0</subject>
-                    <to>to0</to>
+                    <body>javax.mail.internet.MimeMultipart@380199d8</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
+                    <subject>huhu</subject>
+                    <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>body1</body>
-                    <from>Meine 1 from1</from>
-                    <subject>subject1</subject>
-                    <to>to1</to>
-                </mailList>
-                <mailList>
-                    <body>body2</body>
-                    <from>Meine 1 from2</from>
-                    <subject>subject2</subject>
-                    <to>to2</to>
-                </mailList>
-                <mailList>
-                    <body>body3</body>
-                    <from>Meine 1 from3</from>
-                    <subject>subject3</subject>
-                    <to>to3</to>
-                </mailList>
-                <mailList>
-                    <body>body4</body>
-                    <from>Meine 1 from4</from>
-                    <subject>subject4</subject>
-                    <to>to4</to>
-                </mailList>
-                <mailList>
-                    <body>body5</body>
-                    <from>Meine 1 from5</from>
-                    <subject>subject5</subject>
-                    <to>to5</to>
-                </mailList>
-                <mailList>
-                    <body>body6</body>
-                    <from>Meine 1 from6</from>
-                    <subject>subject6</subject>
-                    <to>to6</to>
-                </mailList>
-                <mailList>
-                    <body>body7</body>
-                    <from>Meine 1 from7</from>
-                    <subject>subject7</subject>
-                    <to>to7</to>
-                </mailList>
-                <mailList>
-                    <body>body8</body>
-                    <from>Meine 1 from8</from>
-                    <subject>subject8</subject>
-                    <to>to8</to>
-                </mailList>
-                <mailList>
-                    <body>body9</body>
-                    <from>Meine 1 from9</from>
-                    <subject>subject9</subject>
-                    <to>to9</to>
+                    <body>javax.mail.internet.MimeMultipart@4e9722c9</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
+                    <subject>huhu</subject>
+                    <to>quickmailerffhs@gmail.com</to>
                 </mailList>
             </mails>
-            <label>Meine Mails</label>
+            <label>Meine Mails22</label>
             <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
@@ -184,7 +70,14 @@
     <mailAccounts>
         <emailadress>quickmailer2222ffhs@gmail.com</emailadress>
         <folders>
-            <mails/>
+            <mails>
+                <mailList>
+                    <body>body7</body>
+                    <from>Deine 2 from7</from>
+                    <subject>subject7</subject>
+                    <to>to7</to>
+                </mailList>
+            </mails>
             <label>Inbox</label>
             <restricted>true</restricted>
         </folders>
@@ -236,12 +129,6 @@
                     <from>Deine 2 from6</from>
                     <subject>subject6</subject>
                     <to>to6</to>
-                </mailList>
-                <mailList>
-                    <body>body7</body>
-                    <from>Deine 2 from7</from>
-                    <subject>subject7</subject>
-                    <to>to7</to>
                 </mailList>
                 <mailList>
                     <body>body8</body>
