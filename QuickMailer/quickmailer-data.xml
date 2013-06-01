@@ -265,4 +265,22 @@
         <smtpHost>smtp.asd.com</smtpHost>
         <smtpPort>587</smtpPort>
     </mailAccounts>
+    <mailAccounts>
+        <emailadress>test</emailadress>
+        <folders>
+            <mails/>
+            <label>Inbox</label>
+            <restricted>true</restricted>
+        </folders>
+        <folders>
+            <mails/>
+            <label>Outbox</label>
+            <restricted>true</restricted>
+        </folders>
+        <password>sef</password>
+        <pop3Host>ewf</pop3Host>
+        <pop3Port>2341</pop3Port>
+        <smtpHost>esf</smtpHost>
+        <smtpPort>23</smtpPort>
+    </mailAccounts>
 </ns2:quickmailerData>
