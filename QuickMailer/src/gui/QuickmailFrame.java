@@ -32,6 +32,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -46,9 +47,8 @@ import mail.MailAccount;
 
 
 @SuppressWarnings("serial")
-public class QuickmailGui extends JFrame {
+public class QuickmailFrame extends JFrame {
 	private JButton newmailButton;
-	private JButton readButton;
 	private JButton replyButton;
 	private JButton forewardButton;
 	private JButton replyallButton;
@@ -71,13 +71,12 @@ public class QuickmailGui extends JFrame {
     private JMenuItem removeFolder;
 	private StorageService storageObj; 
 
-	public QuickmailGui(){
+	public QuickmailFrame(){
 		super("QuickMailer");
 		StorageService storageObj = StorageService.getInstance();
 
 		setContentPane(createContentPane());
 		
-
 		buildMenu();
 		
 		addListeners();
@@ -101,11 +100,9 @@ public class QuickmailGui extends JFrame {
                 }
             }
         });
-		newMail.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                System.out.println("You have clicked on the new action");
-            }
-        });
+		
+		newMail.addActionListener(new NewMailButtonListener());
+	    
 		newMailAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {				
 				JFrame f = new MailAccountForm(null, folderTree);
@@ -166,52 +163,59 @@ public class QuickmailGui extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				AccountFolder selectedAccount = folderTree.getSelectedAccount();
 				
-				if(selectedAccount != null)
-				{					
+				if(selectedAccount != null) {	
 					EmailTableStoreLoader tableStoreLoader = new EmailTableStoreLoader(null, mailTableModel, progressLabel);
 					tableStoreLoader.setMailAccount(selectedAccount.getMailAccount());
-					tableStoreLoader.execute();				
+					tableStoreLoader.execute();	
+				}				
+				else {
+					updateProgress("Please select your e-mail account");
 				}
 			};
-			
 		});
-		newmailButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-
-				AccountFolder selectedAccount = folderTree.getSelectedAccount();
-				
-				if(selectedAccount != null)
-				{	
-					JFrame f = new SendMail(null, selectedAccount.getMailAccount());
-					f.setSize(1200, 800); // oder: f.pack();
-					f.setVisible(true);
-				}				
-			};
-			
-		});
+		
+		newmailButton.addActionListener(new NewMailButtonListener());
+	    
 		replyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				AccountFolder selectedAccount = folderTree.getSelectedAccount();
-				
-				if(selectedAccount != null)
-				{		
+
+				if(selectedAccount != null) {	
 					for (int c : mailTable.getSelectedRows()) {
 						Mail selectedMailObj = mailTableModel.getMailObjAt(c);
 					
-						JFrame f = new SendMail(selectedMailObj, selectedAccount.getMailAccount());
-						f.setSize(1200, 800); // oder: f.pack();
+						JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 1);
 						f.setVisible(true);
-						
 						break;
 					}
+				}				
+				else {
+					updateProgress("Please select your e-mail account");
 				}	
 			};
 		});
 		
+		forewardButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				AccountFolder selectedAccount = folderTree.getSelectedAccount();
+
+				if(selectedAccount != null) {	
+					for (int c : mailTable.getSelectedRows()) {
+						Mail selectedMailObj = mailTableModel.getMailObjAt(c);
+					
+						JFrame f = new MailFrame(selectedMailObj, selectedAccount.getMailAccount(), 2);
+						f.setVisible(true);
+						break;
+					}
+				}				
+				else {
+					updateProgress("Please select your e-mail account");
+				}	
+			};
+		});		
 	}
-	
 
 	
 	private JPanel createContentPane() {
@@ -240,14 +244,11 @@ public class QuickmailGui extends JFrame {
 		actionPanel.add(getnewButton);
 		newmailButton = new JButton("Compose");
 		actionPanel.add(newmailButton);
-		readButton = new JButton("Read");
-		actionPanel.add(readButton);
 		replyButton = new JButton("Reply");
 		actionPanel.add(replyButton);
 		forewardButton = new JButton("Forward");
 		actionPanel.add(forewardButton);
-		replyallButton = new JButton("Replyall");
-		actionPanel.add(replyallButton);
+
 		
 		mainWrapper.add(actionPanel, BorderLayout.PAGE_START);
 		
@@ -270,12 +271,12 @@ public class QuickmailGui extends JFrame {
 	//	new EmailTableStoreLoader(defaultAccount.getDefaultFolder(), mailTableModel, progressLabel).execute();
 		// *************
 		
-		// dummy inhalt TODO: weg von hier...
+		/* dummy inhalt TODO: weg von hier...
 		for (int i = 0; i < 10; i++) {
 			Mail mailTemp = new Mail("from" + i, "to" + i, "subject" + i, "body" + i);
 			mailTableModel.addMail(mailTemp);
 		}		
-		
+		*/
  		JPanel tableWrapper = new JPanel(new BorderLayout());
 		JScrollPane tableScroll = new JScrollPane(mailTable);
 
@@ -511,6 +512,14 @@ public class QuickmailGui extends JFrame {
         */
 	}
 
+	private void updateProgress(final String progress) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				progressLabel.setText(progress);
+			}
+		});
+	}
 	
     private class RowListener implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent event) {
@@ -524,7 +533,21 @@ public class QuickmailGui extends JFrame {
 			}
         }
     }
-    
+
+    private class NewMailButtonListener implements ActionListener {
+ 	   public void actionPerformed(ActionEvent arg0) {
+			AccountFolder selectedAccount = folderTree.getSelectedAccount();
+			
+			if(selectedAccount != null) {	
+				JFrame f = new MailFrame(null, selectedAccount.getMailAccount());
+				f.setVisible(true);
+			}				
+			else
+			{
+				updateProgress("Please select your e-mail account");
+			}	
+		}
+    };
     
     private class TreeSelection implements TreeSelectionListener {
         public void valueChanged(TreeSelectionEvent e) {

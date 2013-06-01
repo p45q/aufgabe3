@@ -22,7 +22,6 @@ public class Folder implements TreeFolders{
 	
 	public Folder(String label) {
 		this(label, false);
-		this.mailList = new ArrayList<Mail>();
 
 	}
 	

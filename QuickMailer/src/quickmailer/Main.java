@@ -1,6 +1,6 @@
 package quickmailer;
 
-import gui.QuickmailGui;
+import gui.QuickmailFrame;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -23,7 +23,7 @@ public class Main {
 		StorageService storageObj = new StorageService();
 		storageObj.loadMailAccounts();
 		
-		JFrame f = new QuickmailGui();
+		JFrame f = new QuickmailFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // wichtig!
 		f.setSize(1200, 800); // oder: f.pack();
 		f.setVisible(true);

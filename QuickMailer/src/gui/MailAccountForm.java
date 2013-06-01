@@ -3,16 +3,24 @@ import gui.tree.FolderTree;
 
 import java.awt.BorderLayout;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 
 import storage.StorageService;
@@ -22,7 +30,8 @@ import mail.MailAccount;
 
 public class MailAccountForm extends JFrame{
 	private MailAccount editMailAccount;
-	
+	private FolderTree folderTree;
+
 	private JTextField mailAdress;
 	private JTextField password;
 	private JTextField smtpHost;
@@ -31,9 +40,8 @@ public class MailAccountForm extends JFrame{
 	private JTextField pop3Port;
 	
 	private JButton saveButton;
+	private JLabel progressLabel;
 	
-	private FolderTree folderTree;
-
 	public MailAccountForm(MailAccount editMailAccount, FolderTree folderTree){
 		super("MailAccount");
 		this.editMailAccount = editMailAccount;
@@ -46,11 +54,13 @@ public class MailAccountForm extends JFrame{
 		}
 		
 		addListeners();
+
+		setResizable(false);
 	}
 	
 	private void setEditContent() {
 		mailAdress.setText(editMailAccount.getEmailadress());
-		password.setText(editMailAccount.getEmailadress());
+		password.setText(editMailAccount.getPassword());
 		smtpHost.setText(editMailAccount.getSmtpHost());
 		smtpPort.setText(editMailAccount.getSmtpPort().toString());
 		pop3Host.setText(editMailAccount.getPop3Host());
@@ -73,7 +83,7 @@ public class MailAccountForm extends JFrame{
 		
 		// smtphost
 		formWrapper.add(new JLabel("SMTP-Host:"));
-		smtpHost = new JTextField(20);
+		smtpHost = new JTextField(40);
 		formWrapper.add(smtpHost);
 		
 		// smtpport
@@ -99,36 +109,76 @@ public class MailAccountForm extends JFrame{
 		
 		formWrapper.add(actionPanel);
 		
+		mainWrapper.setBorder(new EmptyBorder(10, 10, 10, 10) );
+
+		progressLabel = new JLabel();
+		progressLabel.setPreferredSize(new Dimension(10, 15));
+
+		mainWrapper.add(progressLabel, BorderLayout.PAGE_END);
+
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
 		return mainWrapper;
 	}
-	
+
+	public Boolean checkInputFields() {
+		try {
+			try {
+				Integer.parseInt(smtpPort.getText());
+			} catch (NumberFormatException e) {
+				progressLabel.setText("Smtp-Port should only contain numbers");
+				return false;
+			}
+			
+			try {
+			 	Integer.parseInt(pop3Port.getText());
+			} catch (NumberFormatException e) {
+				progressLabel.setText("Pop3-Port should only contain numbers");
+				return false;
+			}
+			
+			if(smtpHost.getText().isEmpty() || pop3Host.getText().isEmpty()  || 
+				mailAdress.getText().isEmpty()  || password.getText().isEmpty() )  {
+				progressLabel.setText("Please check your input, all fields are required");
+				return false;
+			}
+			
+		} catch (NullPointerException ne) {
+			progressLabel.setText("Please check your input, all fields are required");
+			return false;
+		}
+		
+		return true;
+  }
 	private void addListeners() {
 		saveButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-				
-				StorageService storageObj = StorageService.getInstance();
-				
-				if(editMailAccount != null) {
-					// edit selected mailaccount
-					editMailAccount.setEmailadress(mailAdress.getText());
-					editMailAccount.setPassword(password.getText());
-					editMailAccount.setSmtpHost(smtpHost.getText());
-					editMailAccount.setSmtpPort(Integer.parseInt(smtpPort.getText()));
-					editMailAccount.setPop3Host(pop3Host.getText());
-					editMailAccount.setPop3Port(Integer.parseInt(pop3Port.getText()));
-				}
-				else {
-					// save new mailaccount
-					MailAccount newMailAccount = new MailAccount(mailAdress.getText(), password.getText(), smtpHost.getText(), Integer.parseInt(smtpPort.getText()), pop3Host.getText(), Integer.parseInt(pop3Port.getText()));
+				if(checkInputFields()) {
+					StorageService storageObj = StorageService.getInstance();
 					
-					storageObj.addMailAccount(newMailAccount);
-					folderTree.reloadTree();
-				}
-
-				storageObj.saveQuickmailerData();
-			};		
+					if(editMailAccount != null) {
+						// edit selected mailaccount
+						editMailAccount.setEmailadress(mailAdress.getText());
+						editMailAccount.setPassword(password.getText());
+						editMailAccount.setSmtpHost(smtpHost.getText());
+						editMailAccount.setSmtpPort(Integer.parseInt(smtpPort.getText()));
+						editMailAccount.setPop3Host(pop3Host.getText());
+						editMailAccount.setPop3Port(Integer.parseInt(pop3Port.getText()));
+					}
+					else {
+						// save new mailaccount
+						MailAccount newMailAccount = new MailAccount(mailAdress.getText(), password.getText(), smtpHost.getText(), Integer.parseInt(smtpPort.getText()), pop3Host.getText(), Integer.parseInt(pop3Port.getText()));
+						
+						storageObj.addMailAccount(newMailAccount);
+						folderTree.reloadTree();
+					}
+	
+					storageObj.saveQuickmailerData();
+				
+					setVisible(false); 
+					dispose(); 
+				}	
+			};	
 		});
 	}
 	
