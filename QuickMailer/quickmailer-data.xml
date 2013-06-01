@@ -5,7 +5,7 @@
         <folders>
             <mails>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@eaecb09</body>
+                    <body>javax.mail.internet.MimeMultipart@2340b8fd</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
                     <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
                     <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
@@ -13,11 +13,11 @@
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@665c1eae</body>
+                    <body>javax.mail.internet.MimeMultipart@51f88fbd</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
-                    <subject>test</subject>
+                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
+                    <subject>huhu</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
             </mails>
@@ -25,40 +25,13 @@
             <restricted>true</restricted>
         </folders>
         <folders>
-            <mails>
-                <mailList>
-                    <body>new mail&#xD;
-</body>
-                    <from>Thierry Baumann &lt;thierry@swissmademarketing.com&gt;</from>
-                    <messageId>&lt;CAOA-HjxdEFA+RS3XZzkzhyMhaCDBN2LdzBZBzSzmwNxDBnr9mw@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T14:21:40+02:00</receiveDate>
-                    <subject>new</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-            </mails>
+            <mails/>
             <label>Outbox</label>
             <restricted>true</restricted>
         </folders>
         <folders>
-            <mails>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@380199d8</body>
-                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
-                    <subject>huhu</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@4e9722c9</body>
-                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
-                    <subject>huhu</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-            </mails>
-            <label>Meine Mails22</label>
+            <mails/>
+            <label>Meine Mails</label>
             <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
@@ -70,14 +43,7 @@
     <mailAccounts>
         <emailadress>quickmailer2222ffhs@gmail.com</emailadress>
         <folders>
-            <mails>
-                <mailList>
-                    <body>body7</body>
-                    <from>Deine 2 from7</from>
-                    <subject>subject7</subject>
-                    <to>to7</to>
-                </mailList>
-            </mails>
+            <mails/>
             <label>Inbox</label>
             <restricted>true</restricted>
         </folders>
@@ -129,6 +95,12 @@
                     <from>Deine 2 from6</from>
                     <subject>subject6</subject>
                     <to>to6</to>
+                </mailList>
+                <mailList>
+                    <body>body7</body>
+                    <from>Deine 2 from7</from>
+                    <subject>subject7</subject>
+                    <to>to7</to>
                 </mailList>
                 <mailList>
                     <body>body8</body>

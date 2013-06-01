@@ -99,7 +99,7 @@ public class MailFrame extends JFrame{
 		infopane.setLayout(new BoxLayout(infopane, BoxLayout.Y_AXIS));
 		// panel for to 
 		JPanel panelto = new JPanel(new FlowLayout());
-		labelTo = new JLabel("To: ");
+		labelTo = new JLabel("To:          ");
 		panelto.add(labelTo);
 		textTo = new JTextField(30);
 		panelto.add(textTo);

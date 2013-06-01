@@ -1,7 +1,5 @@
 package storage;
 
-import gui.tree.MailFolder;
-
 import java.util.ArrayList;
 
 import storage.datamanager.DataManagerMarshal;

@@ -2,24 +2,22 @@ package gui;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 
 import mail.Mail;
 
 
 public class MailDetail extends JFrame{
+	/**
+	 * 
+	 */
+
+
 	private Mail MailObj;
 
 	private JLabel labelFrom;

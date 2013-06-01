@@ -253,7 +253,7 @@ public class QuickmailFrame extends JFrame {
 
 		
 		JScrollPane treeScroll = new JScrollPane(folderTree);
-		treeScroll.setPreferredSize(new Dimension(200, 200)); 
+		treeScroll.setPreferredSize(new Dimension(300, 200)); 
 		
 		leftCol.add(treeScroll, BorderLayout.WEST);
 		
