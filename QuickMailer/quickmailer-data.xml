@@ -5,66 +5,37 @@
         <folders>
             <mails>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@4a4de3fe</body>
+                    <body>Pour-over YOLO iPhone viral, swag art party non actually letterpress&#xD;
+duis biodiesel. Anim farm-to-table labore american apparel pour-over,&#xD;
+umami 3 wolf moon Schlitz. Direct trade laborum et, fanny pack raw&#xD;
+denim Tonx polaroid narwhal culpa.&#xD;
+</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <messageId>&lt;CAOSCEtJKisL=xJggS4KGJ+OSgq2r5V355K_ePSNmCLehA6zZGw@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T13:40:23+02:00</receiveDate>
-                    <subject>test</subject>
+                    <messageId>&lt;CAOSCEt+Z_Ut7WB2OvWozAb1aZqDF1BDXCeRHLwoGRAULMyF6MQ@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T19:42:16+02:00</receiveDate>
+                    <subject>Demo1</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@1915470e</body>
+                    <body>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam&#xD;
+nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,&#xD;
+sed diam voluptua.</body>
                     <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
-                    <messageId>&lt;CAOSCEtLVznau63YwrX2a5265QCOpsgDYzPhLxRshyq4E8tZrhA@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T13:45:43+02:00</receiveDate>
-                    <subject>huhu</subject>
+                    <messageId>&lt;CAOSCEtK0cTJT5Zjrv1fe2wc6=D6rBjw1jEKCJYToyEn+doxOfw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T19:43:09+02:00</receiveDate>
+                    <subject>Demo2</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
                 <mailList>
-                    <body>javax.mail.internet.MimeMultipart@43ebf4ff</body>
-                    <from>Donno Claudio &lt;corleone3013@gmail.com&gt;</from>
-                    <messageId>&lt;CAD6RRaW7xgWD_ZWDCFTSTVPFA9hGrPdGOZ+SjnR57cmoOSJmmw@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T16:33:02+02:00</receiveDate>
-                    <subject>Re: Ahoihoi</subject>
-                    <to>quickmailerffhs@gmail.com</to>
-                </mailList>
-                <mailList>
-                    <body>javax.mail.internet.MimeMultipart@3821b42f</body>
-                    <from>Donno Claudio &lt;corleone3013@gmail.com&gt;</from>
-                    <messageId>&lt;CAD6RRaU5OesRQ-dOhcfoCba7bfa0mfaaxyrktAtQXiwuj4cOoA@mail.gmail.com&gt;</messageId>
-                    <receiveDate>2013-06-01T16:58:07+02:00</receiveDate>
-                    <subject>RE: Re: Ahoihoi</subject>
+                    <body>the fox jumps over the lazy brown dog&#xD;
+</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEt+jh6JHG4JW4=VnLgmFzOfYAt=CDkdTMyoZGiG7J1scaw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T19:43:25+02:00</receiveDate>
+                    <subject>Demo3</subject>
                     <to>quickmailerffhs@gmail.com</to>
                 </mailList>
             </mails>
-            <label>Inbox</label>
-            <restricted>true</restricted>
-        </folders>
-        <folders>
-            <mails/>
-            <label>Send</label>
-            <restricted>true</restricted>
-        </folders>
-        <folders>
-            <mails/>
-            <label>Bitch Mails</label>
-            <restricted>false</restricted>
-        </folders>
-        <folders>
-            <mails/>
-            <label>TEST</label>
-            <restricted>false</restricted>
-        </folders>
-        <password>ffhs12345</password>
-        <pop3Host>pop.gmail.com</pop3Host>
-        <pop3Port>995</pop3Port>
-        <smtpHost>smtp.gmail.com</smtpHost>
-        <smtpPort>587</smtpPort>
-    </mailAccounts>
-    <mailAccounts>
-        <emailadress>quickmailer2222ffhs@gmail.com</emailadress>
-        <folders>
-            <mails/>
             <label>Inbox</label>
             <restricted>true</restricted>
         </folders>
@@ -76,83 +47,40 @@
         <folders>
             <mails>
                 <mailList>
-                    <body>body0</body>
-                    <from>Deine 2 from0</from>
-                    <messageId></messageId>
-                    <subject>subject0</subject>
-                    <to>to0</to>
-                </mailList>
-                <mailList>
-                    <body>body1</body>
-                    <from>Deine 2 from1</from>
-                    <messageId></messageId>
-                    <subject>subject1</subject>
-                    <to>to1</to>
-                </mailList>
-                <mailList>
-                    <body>body2</body>
-                    <from>Deine 2 from2</from>
-                    <messageId></messageId>
-                    <subject>subject2</subject>
-                    <to>to2</to>
-                </mailList>
-                <mailList>
-                    <body>body3</body>
-                    <from>Deine 2 from3</from>
-                    <messageId></messageId>
-                    <subject>subject3</subject>
-                    <to>to3</to>
-                </mailList>
-                <mailList>
-                    <body>body4</body>
-                    <from>Deine 2 from4</from>
-                    <messageId></messageId>
-                    <subject>subject4</subject>
-                    <to>to4</to>
-                </mailList>
-                <mailList>
-                    <body>body5</body>
-                    <from>Deine 2 from5</from>
-                    <messageId></messageId>
-                    <subject>subject5</subject>
-                    <to>to5</to>
-                </mailList>
-                <mailList>
-                    <body>body6</body>
-                    <from>Deine 2 from6</from>
-                    <messageId></messageId>
-                    <subject>subject6</subject>
-                    <to>to6</to>
-                </mailList>
-                <mailList>
-                    <body>body7</body>
-                    <from>Deine 2 from7</from>
-                    <messageId></messageId>
-                    <subject>subject7</subject>
-                    <to>to7</to>
-                </mailList>
-                <mailList>
-                    <body>body8</body>
-                    <from>Deine 2 from8</from>
-                    <messageId></messageId>
-                    <subject>subject8</subject>
-                    <to>to8</to>
-                </mailList>
-                <mailList>
-                    <body>body9</body>
-                    <from>Deine 2 from9</from>
-                    <messageId></messageId>
-                    <subject>subject9</subject>
-                    <to>to9</to>
+                    <body>Pour-over YOLO iPhone viral, swag art party non actually letterpress&#xD;
+duis biodiesel. Anim farm-to-table labore american apparel pour-over,&#xD;
+umami 3 wolf moon Schlitz. Direct trade laborum et, fanny pack raw&#xD;
+denim Tonx polaroid narwhal culpa.&#xD;
+</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEtJOt4GnGXLyg2q+caO=LW88O7A1VzEpo+=ktiw6ZK+AiA@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T19:39:32+02:00</receiveDate>
+                    <subject>Demo4</subject>
+                    <to>quickmailerffhs@gmail.com</to>
                 </mailList>
             </mails>
-            <label>My Privat</label>
+            <label>Demo</label>
+            <restricted>false</restricted>
+        </folders>
+        <folders>
+            <mails>
+                <mailList>
+                    <body>the fox jumps over the lazy brown dog&#xD;
+</body>
+                    <from>Thierry Baumann &lt;baumannthierry@gmail.com&gt;</from>
+                    <messageId>&lt;CAOSCEtKY4UWv0kKYcbCd6E8ii41oa=vaMKS=QioyD8b=B-vuXw@mail.gmail.com&gt;</messageId>
+                    <receiveDate>2013-06-01T19:41:45+02:00</receiveDate>
+                    <subject>Demo</subject>
+                    <to>quickmailerffhs@gmail.com</to>
+                </mailList>
+            </mails>
+            <label>Business</label>
             <restricted>false</restricted>
         </folders>
         <password>ffhs12345</password>
-        <pop3Host>pop.asd.com</pop3Host>
+        <pop3Host>pop.gmail.com</pop3Host>
         <pop3Port>995</pop3Port>
-        <smtpHost>smtp.asd.com</smtpHost>
+        <smtpHost>smtp.gmail.com</smtpHost>
         <smtpPort>587</smtpPort>
     </mailAccounts>
 </ns2:quickmailerData>

@@ -42,6 +42,7 @@ import ch.ffhs.ftoop.quickmailer.gui.tree.FolderTree;
 import ch.ffhs.ftoop.quickmailer.gui.tree.MailFolder;
 import ch.ffhs.ftoop.quickmailer.gui.tree.TreeLoader;
 import ch.ffhs.ftoop.quickmailer.mail.Mail;
+import ch.ffhs.ftoop.quickmailer.mail.MailAccount;
 import ch.ffhs.ftoop.quickmailer.storage.StorageService;
 
 
@@ -422,13 +423,16 @@ public class QuickmailFrame extends JFrame {
 					if (folderTree.getSelectedAccount() != null) {
 						for (MailFolder folder : folderTree
 								.getSelectedAccount().getFolders()) {
-							moveToFolderCombo.addItem(folder);
+							if(!folder.isRestricted()) {
+								moveToFolderCombo.addItem(folder);	
+							}
 						}
 					}
 
 					new EmailTableStoreLoader(selectedfolder, mailTableModel,
 							progressLabel, false).execute();
-
+					
+					mailPreview.setText("");
 					break;
 				}
 			}
