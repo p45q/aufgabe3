@@ -59,7 +59,7 @@ public class RenameFolder extends JFrame{
 		
 	
 		formWrapper.add(actionPanel);
-		
+		 
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
 		saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
