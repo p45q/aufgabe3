@@ -40,7 +40,15 @@ sed diam voluptua.</body>
             <restricted>true</restricted>
         </folders>
         <folders>
-            <mails/>
+            <mails>
+                <mailList>
+                    <body>huhu</body>
+                    <from>quickmailerffhs@gmail.com</from>
+                    <messageId></messageId>
+                    <subject>test windows</subject>
+                    <to>thierry@swissmademarketing.com</to>
+                </mailList>
+            </mails>
             <label>Send</label>
             <restricted>true</restricted>
         </folders>

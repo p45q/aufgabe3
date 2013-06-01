@@ -80,7 +80,8 @@ public class QuickmailFrame extends JFrame {
 	private final String L_SELECTACCOUNT = "Please select your e-mail account";
 	private final String L_SELECTFOLDER = "Please select your folder";
 	private final String L_SELECTMAIL = "Please select e-mail";
-
+	private final String L_FOLDERRESTRICTED = "The selected folder is restricted, can't change or delete";
+	
 	public QuickmailFrame() {
 		super("QuickMailer");
 		storageObj = StorageService.getInstance();
@@ -145,10 +146,15 @@ public class QuickmailFrame extends JFrame {
 		editFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (folderTree.getSelectedFolder() != null) {
-					JFrame f = new FolderFrame(folderTree.getSelectedFolder(),
-							folderTree.getSelectedAccount());
-					f.pack();
-					f.setVisible(true);
+					MailFolder selectedFolder = folderTree.getSelectedFolder();
+					if(!selectedFolder.isRestricted()) {
+						JFrame f = new FolderFrame(selectedFolder,
+						folderTree.getSelectedAccount());
+						f.pack();
+						f.setVisible(true);
+					} else {
+						updateProgress(L_FOLDERRESTRICTED);						
+					}
 				} else {
 					updateProgress(L_SELECTFOLDER);
 				}
@@ -157,11 +163,17 @@ public class QuickmailFrame extends JFrame {
 		removeFolder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (folderTree.getSelectedFolder() != null) {
-					folderTree.getSelectedAccount().getMailAccount()
-							.removeFolder(folderTree.getSelectedFolder());
-					folderTree.reloadTree();
+					MailFolder selectedFolder = folderTree.getSelectedFolder();
+					if(!selectedFolder.isRestricted()) {
+						folderTree.getSelectedAccount().getMailAccount()
+						.removeFolder(selectedFolder);
+						
+						folderTree.reloadTree();
 
-					storageObj.saveQuickmailerData();
+						storageObj.saveQuickmailerData();
+					} else {
+						updateProgress(L_FOLDERRESTRICTED);						
+					}
 				} else {
 					updateProgress(L_SELECTFOLDER);
 				}

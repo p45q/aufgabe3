@@ -18,9 +18,6 @@ import ch.ffhs.ftoop.quickmailer.gui.tree.FolderTree;
 import ch.ffhs.ftoop.quickmailer.gui.tree.MailFolder;
 import ch.ffhs.ftoop.quickmailer.storage.StorageService;
 
-
-
-
 /**
  * FolderFrame Class
  * 
@@ -31,7 +28,6 @@ public class FolderFrame extends JFrame {
 	private JTextField folderName;
 	private MailFolder selectedFolder;
 	private AccountFolder selectedAccount;
-	private JLabel progressLabel;
 
 	private JButton saveButton;
 
@@ -65,37 +61,24 @@ public class FolderFrame extends JFrame {
 
 		mainWrapper.add(formWrapper, BorderLayout.WEST);
 
-		progressLabel = new JLabel();
-		progressLabel.setPreferredSize(new Dimension(10, 15));
-
-		mainWrapper.add(progressLabel, BorderLayout.PAGE_END);
-
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Boolean formError = false;
 				if (selectedFolder != null) {
-					if (selectedFolder.setLabel(folderName.getText())) {
-						setVisible(false);
-						dispose();
-					} else {
-						formError = true;
-						progressLabel
-								.setText("This folder is restricted, can't change Label");
-					}
+					selectedFolder.setLabel(folderName.getText());
+					setVisible(false);
+					dispose();
 				} else {
 					MailFolder newFolder = new MailFolder(folderName.getText());
 
 					selectedAccount.getMailAccount().addFolder(newFolder);
 				}
 
-				if (!formError) {
-					setVisible(false);
-					dispose();
+				setVisible(false);
+				dispose();
 
-					StorageService.getInstance().saveQuickmailerData();
+				StorageService.getInstance().saveQuickmailerData();
 
-					FolderTree.getInstance().reloadTree();
-				}
+				FolderTree.getInstance().reloadTree();
 			}
 		});
 		return mainWrapper;
